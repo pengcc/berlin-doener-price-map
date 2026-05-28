@@ -2,10 +2,11 @@
 
 ## Cost and External Services
 
-The project has no meaningful revenue, so keep recurring costs at zero or near-zero.
+The project has no meaningful revenue, so the target recurring cost is zero. Near-zero/free-tier services are acceptable only when they do not create surprise billing risk and are explicitly justified.
 
 - Prefer static hosting and static files.
-- Do not introduce paid APIs by default.
+- Do not introduce paid APIs, paid services, billing-enabled accounts, usage-based services, or features with possible overage charges by default.
+- If any action can create costs now or later, warn the user first, explain the cost/risk surface, and get explicit confirmation before proceeding.
 - Environment-gate map tile providers and form links.
 - Keep optional service setup documented but not required for local development.
 - Do not commit API keys, form admin URLs, private submission data, or personal contact details from submitters.
@@ -72,6 +73,15 @@ Use a saved local plan for substantial implementation work. The local workflow i
 3. `berlin-doener-sync-guideline` promotes confirmed recurring lessons from the completed plan into the project guideline.
 
 Do not require a saved plan for trivial edits, documentation cleanup, or one-file changes unless the user asks. Keep `dev_locals/` ignored by git unless the user explicitly chooses to version plans.
+
+## Git Workflow for Saved Plans
+
+For saved plan execution, the agreed default is:
+
+- Create or switch to a plan-specific branch before implementation when not already on an appropriate branch.
+- Commit related changes after successful execution or a coherent checkpoint, unless the user asks not to commit.
+- Do not push to a remote unless the user explicitly asks to push.
+- Do not revert unrelated user changes. Work around them or pause only if they make the plan impossible.
 
 ## Verification Checklist
 

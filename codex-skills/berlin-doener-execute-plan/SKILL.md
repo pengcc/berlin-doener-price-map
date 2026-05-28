@@ -37,6 +37,18 @@ For each implementation step:
 
 Use the project guideline's normal coding rules: `pnpm`, Biome, TypeScript strictness, static data first, no database for MVP, no unapproved external service expansion.
 
+## Git Workflow
+
+Use this default workflow for saved plan execution:
+
+1. Check the current branch and working tree.
+2. Create or switch to a plan-specific branch when not already on an appropriate branch.
+3. Execute the plan and update the plan file as reality changes.
+4. Commit related changes after successful execution or a coherent checkpoint, unless the user asks not to commit.
+5. Do not push to a remote unless the user explicitly asks to push.
+
+If the working tree contains unrelated user changes, do not revert them. Work around them where possible and mention them in the plan or final summary if they affect execution.
+
 ## Plan Synchronization
 
 The plan must reflect reality after each meaningful work chunk.

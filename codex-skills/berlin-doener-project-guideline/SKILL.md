@@ -27,7 +27,7 @@ Before changing code, docs, data, dependencies, scripts, or architecture:
 
 - Build an MVP around static CSV/JSON data, not a database.
 - Support German, English, and Chinese UI/content. Do not hardcode user-facing strings in components once i18n is introduced.
-- Keep costs at zero or near-zero. Any paid/free-tier external service must be optional, documented, and configured by environment variable.
+- Keep recurring costs at zero by default. If any action can create costs now or later, warn the user, explain the cost/risk surface, and get explicit confirmation before proceeding.
 - Keep the product focused: map, price list, rankings, district statistics, submission links, methodology, and project/about content.
 - Do not add auth, admin dashboard, Prisma, PostgreSQL/Supabase, OCR, crawler, complex geocoding, payment, user accounts, or Google Maps API unless the user explicitly requests that expansion.
 - Treat data quality as a core feature: validate data at build/CI time, show sample counts and recency, and avoid implying precision that the dataset cannot support.
@@ -54,6 +54,12 @@ For substantial work that may span multiple files, sessions, or architectural ch
 - `codex-skills/berlin-doener-sync-guideline/SKILL.md` to sync confirmed learnings back into this guideline after execution.
 
 Saved plans live under `dev_locals/plans/`, which is local working memory and ignored by git by default.
+
+When executing a saved plan, use the agreed git workflow:
+
+- Create or switch to a plan-specific branch before implementation when not already on an appropriate branch.
+- Commit related changes after successful execution or a coherent checkpoint.
+- Do not push to a remote unless the user explicitly asks to push.
 
 ## Reference Map
 
