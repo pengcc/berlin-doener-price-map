@@ -1,0 +1,4 @@
+interface:
+  display_name: "Berlin Döner Sync Guideline"
+  short_description: "Sync completed plan learnings into project guidelines."
+  default_prompt: "Review completed plan learnings and update the project guideline deliberately."

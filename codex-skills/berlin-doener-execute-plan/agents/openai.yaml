@@ -1,0 +1,4 @@
+interface:
+  display_name: "Berlin Döner Execute Plan"
+  short_description: "Execute saved implementation plans with status tracking."
+  default_prompt: "Execute a saved implementation plan and keep it synchronized with reality."

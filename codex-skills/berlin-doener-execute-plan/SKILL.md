@@ -1,0 +1,75 @@
+---
+name: berlin-doener-execute-plan
+description: Execute a saved Berlin Döner Price Map implementation plan with strict scope control and progress tracking. Use when the user asks to implement, continue, resume, run, or execute a plan saved under dev_locals/plans. Updates the plan with step status, deviations, bugs, test results, and execution history while keeping project guidelines unchanged.
+---
+
+# Berlin Döner Execute Plan
+
+## Overview
+
+Use this skill to turn a saved implementation plan into working code. The plan is the execution source of truth.
+
+Do not silently redesign architecture, invent new scope, or skip plan updates when reality changes.
+
+## Required Context
+
+Before executing:
+
+1. Read `codex-skills/berlin-doener-project-guideline/SKILL.md`.
+2. Read the relevant files under `codex-skills/berlin-doener-project-guideline/references/`.
+3. Load the target plan from `dev_locals/plans/`.
+4. Inspect files affected by the current step before editing.
+
+If the user does not specify a plan, use the newest plan in `dev_locals/plans/_index.md` only when it is unambiguous. Otherwise ask for the target plan path.
+
+## Execution Process
+
+For each implementation step:
+
+1. Mark the step `In Progress` in the plan before starting.
+2. Execute only the work described by that step.
+3. If the step changes, mark it `Modified` and record the reason and impact.
+4. If blocked, mark it `Blocked`, record the blocker, and identify what input or state change is needed.
+5. If completed, mark it `Completed` and record important files changed.
+6. Update risks, mitigations, and the execution log when new issues appear.
+7. Run the validation listed in the plan as soon as it is meaningful.
+8. Record test failures and fixes in the plan. Do not hide failing checks.
+
+Use the project guideline's normal coding rules: `pnpm`, Biome, TypeScript strictness, static data first, no database for MVP, no unapproved external service expansion.
+
+## Plan Synchronization
+
+The plan must reflect reality after each meaningful work chunk.
+
+Update the plan's:
+
+- Step statuses.
+- Execution log.
+- Testing and validation results.
+- Risks and mitigations.
+- Open questions.
+- Project Guideline Updates Required when execution reveals missing or stale guidance.
+
+Do not modify `codex-skills/berlin-doener-project-guideline/` while using this skill unless the user's task explicitly is to update guidelines. Record needed guideline changes in the plan instead.
+
+## Validation
+
+Run the closest available checks from the plan and current project scripts. Prefer:
+
+- `pnpm check`
+- `pnpm typecheck`
+- `pnpm test:run`
+- `pnpm validate:data`
+- `pnpm build`
+- Playwright smoke tests when relevant and available
+
+If a command is missing because the project stage has not reached it, record that fact in the plan instead of pretending it ran.
+
+## Output
+
+Return:
+
+- The plan path.
+- Steps completed or blocked.
+- Checks run and results.
+- Any guideline updates that should later be handled by `berlin-doener-sync-guideline`.

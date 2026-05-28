@@ -1,0 +1,62 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+next-env.d.ts
+
+# Build outputs
+dist/
+build/
+*.tsbuildinfo
+
+# Environment files
+.env
+.env.*
+!.env.example
+!.env.local.example
+
+# Vercel
+.vercel/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-debug.log*
+*.pem
+
+# Tests and coverage
+coverage/
+.nyc_output/
+test-results/
+playwright-report/
+blob-report/
+
+# Tool caches
+.turbo/
+.cache/
+.eslintcache
+.parcel-cache/
+
+# Local agent working memory
+dev_locals/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Package manager artifacts from unsupported managers
+package-lock.json
+npm-shrinkwrap.json
+yarn.lock

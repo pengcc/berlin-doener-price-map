@@ -1,0 +1,4 @@
+interface:
+  display_name: "Berlin Döner Project Guideline"
+  short_description: "Project guardrails for Berlin Döner Price Map."
+  default_prompt: "Use this skill before planning or changing Berlin Döner Price Map code, docs, or data."

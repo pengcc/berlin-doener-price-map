@@ -1,0 +1,4 @@
+interface:
+  display_name: "Berlin Döner Plan With Context"
+  short_description: "Create context-grounded implementation plans."
+  default_prompt: "Create a project-grounded implementation plan and save it under dev_locals/plans."
