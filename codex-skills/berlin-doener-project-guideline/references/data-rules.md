@@ -30,6 +30,29 @@ price_001,ruyada-gemuese-kebab-schoeneberg,2026-05-20,700,standard_doener,user_s
 
 `/data/districts.json` should contain district/Ortsteil metadata only when needed for filtering, display order, or map bounds.
 
+Initial production data may be empty. For the data foundation stage, `shops.json` and `districts.json` may be empty arrays, and `price-records.csv` may contain only its canonical header:
+
+```csv
+id,shopId,observedAt,priceCents,productType,sourceType,confidence,sourceUrl,notes
+```
+
+Do not add fake public shops or fake public prices to make the product look populated. Verified seed data belongs in a separate data-seeding plan with source and provenance decisions. Test fixtures should stay in test files unless they are clearly separated from public production data.
+
+## Current Data Implementation
+
+Current data foundation modules:
+
+- `src/lib/validation/schemas.ts`: Zod schemas, enums, and inferred TypeScript types.
+- `src/lib/data/read-data-file.ts`: repository-local `/data` file reading helper.
+- `src/lib/data/load-shops.ts`: JSON shop loader.
+- `src/lib/data/load-districts.ts`: JSON district metadata loader.
+- `src/lib/data/load-price-records.ts`: CSV price record loader.
+- `src/lib/data/load-data.ts`: combined dataset loader.
+- `src/lib/validation/validate-data.ts`: pure dataset validation.
+- `scripts/validate-data.ts`: CLI validation entrypoint for `pnpm validate:data`.
+
+Use `csv-parse/sync` for price CSV ingestion with explicit header validation. Header-only price CSV files are valid and should load as an empty record array.
+
 ## Required Shop Fields
 
 - `id`: stable slug, unique.
@@ -125,17 +148,22 @@ Always show sample count. Treat low sample counts as a caveat, not a definitive 
 
 ## Validation Requirements
 
-Validation scripts should fail on:
+Validation scripts must fail on:
 
 - Duplicate ids.
 - Price records referencing missing shops.
 - Invalid dates, coordinates, status, product type, source type, confidence, or price cents.
 - Missing required fields.
+- Malformed or non-canonical CSV headers.
+- CSV rows with inconsistent column counts.
 - Impossible prices unless explicitly documented for test fixtures.
 
-Validation should warn, not necessarily fail, on:
+Validation should warn, not fail, on:
 
 - Missing optional shop name.
 - Missing district/borough if the address and coordinates are present.
 - Stale prices.
 - Potential duplicate shops by nearby coordinates or similar addresses.
+- Future `observedAt` dates until the real submission/review workflow defines stricter behavior.
+
+The CLI should print errors and warnings separately. Any validation error exits non-zero. Warning-only runs exit zero so stale or incomplete-but-usable data can remain visible during early collection.
