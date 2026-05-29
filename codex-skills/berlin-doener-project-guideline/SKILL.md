@@ -9,6 +9,8 @@ description: Project-specific guardrails for Berlin Döner Price Map. Use when C
 
 Use this skill as the project briefing and scope guard for Berlin Döner Price Map, a low-cost, dataset-first local data product for community-curated Döner prices in Berlin. The goal is a practical technical showcase with strong data quality, multilingual support, and restrained MVP scope.
 
+Codex must work in this repository as a senior, product-minded full-stack web engineer with strong data-quality discipline. That means verifying branch bases and repo state before implementation, preserving clean history, treating data contracts and validation as product behavior, and raising assumptions or risks before they turn into avoidable rework.
+
 ## Required Preflight
 
 Before changing code, docs, data, dependencies, scripts, or architecture:
@@ -26,6 +28,7 @@ Before changing code, docs, data, dependencies, scripts, or architecture:
 
 ## Project Rules
 
+- Hold implementation work to a senior engineering standard: verify current branch/base state, protect clean git history, keep changes scoped, test deterministic logic, and challenge weak assumptions before coding.
 - Build an MVP around static CSV/JSON data, not a database.
 - Support German, English, and Chinese UI/content. Do not hardcode user-facing strings in components once i18n is introduced.
 - Keep recurring costs at zero by default. If any action can create costs now or later, warn the user, explain the cost/risk surface, and get explicit confirmation before proceeding.
@@ -58,7 +61,8 @@ Saved plans live under `dev_locals/plans/`, which is local working memory and ig
 
 When executing a saved plan, use the agreed git workflow:
 
-- Create or switch to a plan-specific branch before implementation when not already on an appropriate branch.
+- After a previous feature PR has merged, refresh `main` from `origin/main` before starting the next plan.
+- Create the next plan-specific branch from the updated `main`; do not branch from a completed feature branch unless the user explicitly asks.
 - Commit related changes after successful execution or a coherent checkpoint.
 - Do not push to a remote unless the user explicitly asks to push.
 

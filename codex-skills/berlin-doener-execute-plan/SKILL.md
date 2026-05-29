@@ -11,6 +11,8 @@ Use this skill to turn a saved implementation plan into working code. The plan i
 
 Do not silently redesign architecture, invent new scope, or skip plan updates when reality changes.
 
+Execute plans with senior engineering discipline: verify branch base and working tree state before implementation, keep history clean, record deviations immediately, and treat validation/test gaps as real project risk rather than bookkeeping.
+
 ## Required Context
 
 Before executing:
@@ -43,10 +45,11 @@ Use the project guideline's normal coding rules: `pnpm`, Biome, TypeScript stric
 Use this default workflow for saved plan execution:
 
 1. Check the current branch and working tree.
-2. Create or switch to a plan-specific branch when not already on an appropriate branch.
-3. Execute the plan and update the plan file as reality changes.
-4. Commit related changes after successful execution or a coherent checkpoint, unless the user asks not to commit.
-5. Do not push to a remote unless the user explicitly asks to push.
+2. If a previous feature PR has merged, refresh local `main` from `origin/main` and base the next plan-specific branch on that updated `main`.
+3. Create or switch to a plan-specific branch when not already on an appropriate branch; do not branch from a completed feature branch unless the user explicitly asks.
+4. Execute the plan and update the plan file as reality changes.
+5. Commit related changes after successful execution or a coherent checkpoint, unless the user asks not to commit.
+6. Do not push to a remote unless the user explicitly asks to push.
 
 If the working tree contains unrelated user changes, do not revert them. Work around them where possible and mention them in the plan or final summary if they affect execution.
 

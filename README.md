@@ -10,7 +10,7 @@ The project is designed as a practical technical showcase: a low-cost Next.js ap
 
 ## Status
 
-This repository has a runnable Next.js scaffold with locale-prefixed placeholder routes for German, English, and Chinese. Product data, map features, rankings, district statistics, and submission workflows are planned but not implemented yet.
+This repository has a runnable Next.js scaffold with locale-prefixed placeholder routes for German, English, and Chinese. Static data files, validation, tests, and pure read-model utilities are implemented. Product pages, map features, and submission workflows are planned but not implemented yet.
 
 Current local project guidance lives in:
 
@@ -114,8 +114,8 @@ Initial localized routes:
 ## Roadmap
 
 1. Done: project scaffold with Next.js, TypeScript, Tailwind v4, Biome, pnpm, mise, `next-intl`, and base localized routes.
-2. Data foundation: schemas, sample data files, CSV loading, Zod validation, data validation script.
-3. Core calculations: latest prices, ranking rules, confidence/freshness labels, district statistics.
+2. Done: data foundation with schemas, empty public data files, CSV loading, Zod validation, tests, and data validation script.
+3. Done: core calculations for latest prices, ranking rules, confidence/freshness labels, district statistics, and summary data.
 4. First product pages without map: homepage, prices, ranking, districts, methodology.
 5. Map MVP: React Leaflet map, MapTiler configuration, price markers, popups, filters.
 6. Contribution flow: submit page, external form links, GitHub issue template, review workflow docs.
