@@ -20,6 +20,10 @@ For substantial work, use the local workflow skills:
 - `codex-skills/berlin-doener-execute-plan/SKILL.md` to execute and update a saved plan.
 - `codex-skills/berlin-doener-sync-guideline/SKILL.md` to sync confirmed plan learnings back into the project guideline.
 
+When the user says `publish-current-branch`, use:
+
+- `codex-skills/berlin-doener-publish-current-branch/SKILL.md` to push the current branch, create a PR to `main`, and enable auto-merge only when CI protection makes that safe. Do not delete the branch.
+
 Saved plans live in `dev_locals/plans/`, which is local working memory and ignored by git by default.
 
 When executing saved plans, create or switch to a plan-specific branch, commit related changes after a coherent checkpoint, and do not push unless the user explicitly asks.
