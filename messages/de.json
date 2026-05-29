@@ -1,0 +1,13 @@
+{
+  "HomePage": {
+    "dataLabel": "Daten",
+    "dataValue": "Statische CSV/JSON-Daten folgen.",
+    "eyebrow": "Berlin Döner Price Map",
+    "intro": "Ein mehrsprachiges, datenorientiertes Next.js-Projekt für community-kuratierte Dönerpreise in Berlin. Die Anwendung ist gerade im Scaffold-Status.",
+    "nextLabel": "Nächster Schritt",
+    "nextValue": "Datenmodell und Validierung.",
+    "statusLabel": "Status",
+    "statusValue": "Scaffold in Arbeit",
+    "title": "Dönerpreise in Berlin finden und vergleichen"
+  }
+}

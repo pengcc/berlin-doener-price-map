@@ -1,0 +1,13 @@
+{
+  "HomePage": {
+    "dataLabel": "Data",
+    "dataValue": "Static CSV/JSON data will follow.",
+    "eyebrow": "Berlin Döner Price Map",
+    "intro": "A multilingual, dataset-first Next.js project for community-curated Döner prices in Berlin. The application is currently at the scaffold stage.",
+    "nextLabel": "Next step",
+    "nextValue": "Data model and validation.",
+    "statusLabel": "Status",
+    "statusValue": "Scaffold in progress",
+    "title": "Find and compare Döner prices in Berlin"
+  }
+}
