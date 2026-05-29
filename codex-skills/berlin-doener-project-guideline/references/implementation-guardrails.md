@@ -74,6 +74,19 @@ Use a saved local plan for substantial implementation work. The local workflow i
 
 Do not require a saved plan for trivial edits, documentation cleanup, or one-file changes unless the user asks. Keep `dev_locals/` ignored by git unless the user explicitly chooses to version plans.
 
+## Work Time Tracking
+
+Track project work time in `dev_locals/work-log.md`. Keep actual time entries out of the project guideline because they are local project-management history, not reusable engineering rules.
+
+Use approximate wall-clock time rounded to minutes. Record date, start/end time, duration, timezone, and a short activity summary. Append new sessions as work happens, and keep a running total when practical.
+
+For substantial tasks and saved-plan execution, automatically track a work session:
+
+- Start when execution begins.
+- Close when the task completes, pauses, is interrupted, or switches to another task.
+- If the session is interrupted and resumed later, record an approximate entry and mark it `estimated` when needed.
+- If the user says not to count a discussion or task, exclude it from the work log.
+
 ## Git Workflow for Saved Plans
 
 For saved plan execution, the agreed default is:
