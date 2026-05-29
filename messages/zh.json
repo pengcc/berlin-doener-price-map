@@ -1,0 +1,13 @@
+{
+  "HomePage": {
+    "dataLabel": "数据",
+    "dataValue": "后续会加入静态 CSV/JSON 数据。",
+    "eyebrow": "Berlin Döner Price Map",
+    "intro": "一个多语言、以数据集为核心的 Next.js 项目，用于展示社区维护的柏林 Döner 价格。当前应用处于脚手架阶段。",
+    "nextLabel": "下一步",
+    "nextValue": "数据模型和校验。",
+    "statusLabel": "状态",
+    "statusValue": "脚手架进行中",
+    "title": "在柏林查找并比较 Döner 价格"
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Berlin Döner Publish Branch"
+  short_description: "Push the current branch and prepare a PR safely."
+  default_prompt: "publish-current-branch"

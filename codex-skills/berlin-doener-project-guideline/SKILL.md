@@ -19,6 +19,7 @@ Before changing code, docs, data, dependencies, scripts, or architecture:
    - `references/architecture.md` for stack, directory shape, and dependency choices.
    - `references/data-rules.md` before changing data loading, schemas, validation, rankings, confidence, or statistics.
    - `references/implementation-guardrails.md` before adding dependencies, components, tests, or external services.
+   - `references/permission-policy.md` before requesting escalated commands or tool approvals.
 3. Inspect the current repository state. Prefer existing patterns over rewriting structure.
 4. Use `pnpm` for all package and script commands. Do not use `npm`, `yarn`, or lockfiles from those tools.
 5. If current technical behavior matters and official documentation exists, check official docs first, especially for Next.js, React, next-intl, Biome, React Leaflet, Leaflet, MapTiler, shadcn/ui, TanStack Table, Zod, Vitest, and Playwright.
@@ -67,6 +68,7 @@ When executing a saved plan, use the agreed git workflow:
 - Technical architecture: `references/architecture.md`
 - Data model and calculations: `references/data-rules.md`
 - Engineering guardrails: `references/implementation-guardrails.md`
+- Permission policy: `references/permission-policy.md`
 
 ## Escalation Rules
 

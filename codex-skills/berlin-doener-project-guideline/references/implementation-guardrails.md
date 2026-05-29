@@ -96,6 +96,8 @@ For saved plan execution, the agreed default is:
 - Do not push to a remote unless the user explicitly asks to push.
 - Do not revert unrelated user changes. Work around them or pause only if they make the plan impossible.
 
+Read `references/permission-policy.md` before requesting escalated commands or saved command prefix approvals. Treat that file as the project source of truth for safe prefixes, always-ask actions, and forbidden actions.
+
 ## Verification Checklist
 
 Before finishing changes, run the closest available checks:
