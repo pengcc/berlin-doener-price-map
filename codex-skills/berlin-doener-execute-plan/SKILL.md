@@ -17,8 +17,9 @@ Before executing:
 
 1. Read `codex-skills/berlin-doener-project-guideline/SKILL.md`.
 2. Read the relevant files under `codex-skills/berlin-doener-project-guideline/references/`.
-3. Load the target plan from `dev_locals/plans/`.
-4. Inspect files affected by the current step before editing.
+3. Read `codex-skills/berlin-doener-project-guideline/references/permission-policy.md` before requesting escalated commands or saved command approvals.
+4. Load the target plan from `dev_locals/plans/`.
+5. Inspect files affected by the current step before editing.
 
 If the user does not specify a plan, use the newest plan in `dev_locals/plans/_index.md` only when it is unambiguous. Otherwise ask for the target plan path.
 
