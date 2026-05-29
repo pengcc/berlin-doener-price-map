@@ -89,16 +89,19 @@ pnpm dev
 pnpm check
 pnpm check:fix
 pnpm typecheck
+pnpm test
+pnpm test:run
+pnpm validate:data
 pnpm build
 ```
 
 Deferred until later phases:
 
 ```bash
-pnpm test:run
 pnpm test:e2e
-pnpm validate:data
 ```
+
+The initial public data files are intentionally empty/header-only until verified seed data is added. See [docs/data-schema.md](./docs/data-schema.md).
 
 Initial localized routes:
 
