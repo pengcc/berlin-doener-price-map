@@ -1,13 +1,172 @@
 {
+  "Common": {
+    "emptyValue": "—"
+  },
+  "Labels": {
+    "confidence": {
+      "high": "High",
+      "low": "Low",
+      "medium": "Medium",
+      "outdated": "Outdated"
+    },
+    "productTypes": {
+      "chicken_doener": "Chicken Döner",
+      "doener_box": "Döner box",
+      "dueruem": "Dürüm",
+      "gemuese_doener": "Gemüse Döner",
+      "standard_doener": "Standard Döner",
+      "vegan_doener": "Vegan Döner",
+      "veal_doener": "Veal Döner"
+    }
+  },
+  "Navigation": {
+    "brand": "Berlin Döner Price Map",
+    "districts": "Districts",
+    "home": "Overview",
+    "methodology": "Methodology",
+    "navLabel": "Primary navigation",
+    "prices": "Prices",
+    "ranking": "Ranking",
+    "submit": "Submit",
+    "tagline": "Community-curated Döner prices"
+  },
   "HomePage": {
-    "dataLabel": "Data",
-    "dataValue": "Static CSV/JSON data will follow.",
+    "contribute": {
+      "body": "New observations will be manually reviewed before they become public. The first contribution paths are intentionally simple.",
+      "methodologyLink": "Read methodology",
+      "submitLink": "Submit a price",
+      "title": "Contribute reviewed prices"
+    },
+    "districtPreview": {
+      "emptyBody": "District statistics will appear after reviewed current standard Döner prices exist.",
+      "emptyTitle": "No district samples yet",
+      "samples": "{count} samples",
+      "title": "District snapshot"
+    },
     "eyebrow": "Berlin Döner Price Map",
-    "intro": "A multilingual, dataset-first Next.js project for community-curated Döner prices in Berlin. The application is currently at the scaffold stage.",
-    "nextLabel": "Next step",
-    "nextValue": "Data model and validation.",
-    "statusLabel": "Status",
-    "statusValue": "Scaffold in progress",
+    "intro": "A practical local data tool for comparing Döner prices by shop, district, and freshness. The public dataset is still empty until reviewed observations are added.",
+    "mapPreview": {
+      "body": "The map MVP is a later step. This first product surface prepares the data views before adding map tiles or browser-only map code.",
+      "title": "Map preview"
+    },
+    "metrics": {
+      "activeShops": "Active shops",
+      "averagePrice": "Berlin average",
+      "currentPrices": "Current prices",
+      "lastUpdated": "Last update"
+    },
+    "pricePreview": {
+      "emptyBody": "The app is ready for reviewed records, but no public current prices have been published yet.",
+      "emptyTitle": "No reviewed prices yet",
+      "link": "Open ranking",
+      "meta": "Current sample: {count}",
+      "title": "Price preview"
+    },
     "title": "Find and compare Döner prices in Berlin"
+  },
+  "PricesPage": {
+    "empty": {
+      "body": "The production dataset is intentionally empty until reviewed shop observations are available.",
+      "title": "No current prices yet"
+    },
+    "eyebrow": "Prices",
+    "intro": "A server-rendered list of the latest non-outdated prices per shop and product type.",
+    "table": {
+      "confidence": "Confidence",
+      "district": "District",
+      "observed": "Observed",
+      "price": "Price",
+      "product": "Product",
+      "shop": "Shop"
+    },
+    "title": "Current Döner prices"
+  },
+  "RankingPage": {
+    "empty": {
+      "body": "Rankings need reviewed current standard Döner prices. Demo data will only be added later if it is clearly marked.",
+      "title": "No ranking data yet"
+    },
+    "eyebrow": "Ranking",
+    "intro": "Cheapest, most expensive, recently updated, and best-confidence views use the latest non-outdated standard Döner prices.",
+    "notUpdated": "not available",
+    "sections": {
+      "bestConfidence": "Best confidence",
+      "cheapest": "Cheapest",
+      "mostExpensive": "Most expensive",
+      "recentlyUpdated": "Recently updated"
+    },
+    "summary": "{count} current {product} samples. Last update: {updated}.",
+    "title": "Berlin price rankings"
+  },
+  "DistrictsPage": {
+    "caveat": "District statistics are descriptive only. Low sample counts are a caveat, not a definitive ranking.",
+    "empty": {
+      "body": "District rows will appear once reviewed current standard Döner prices are available.",
+      "title": "No district statistics yet"
+    },
+    "eyebrow": "Districts",
+    "intro": "Compare average, median, minimum, and maximum prices by district or neighborhood once reviewed data exists.",
+    "table": {
+      "average": "Average",
+      "district": "District",
+      "max": "Max",
+      "median": "Median",
+      "min": "Min",
+      "samples": "Samples",
+      "updated": "Updated"
+    },
+    "title": "District price statistics"
+  },
+  "MethodologyPage": {
+    "eyebrow": "Methodology",
+    "intro": "How prices are collected, reviewed, ranked, and marked as stale.",
+    "sections": {
+      "districts": {
+        "body": "District statistics use latest non-outdated standard Döner prices and show average, median, minimum, maximum, sample count, and last update.",
+        "title": "District statistics"
+      },
+      "freshness": {
+        "body": "Prices older than 180 days are marked outdated and excluded from default rankings. Confidence is adjusted by data age.",
+        "title": "Freshness and confidence"
+      },
+      "limitations": {
+        "body": "The dataset is currently empty. If generated demo records are added later, they must be visibly marked as unverified and kept distinguishable from verified observations.",
+        "title": "Limitations"
+      },
+      "rankings": {
+        "body": "Default rankings use standard Döner only, select the latest price per shop, and exclude outdated observations.",
+        "title": "Ranking rules"
+      },
+      "review": {
+        "body": "Submissions are manually reviewed before publication. The MVP does not publish real-time user submissions.",
+        "title": "Manual review"
+      },
+      "sources": {
+        "body": "The app reads static CSV and JSON files at build or server-render time. Public data should contain only reviewed information safe to publish.",
+        "title": "Static sources"
+      }
+    },
+    "title": "Methodology and data caveats"
+  },
+  "SubmitPage": {
+    "corrections": {
+      "body": "A public correction contact path will be configured later without exposing private submitter details.",
+      "status": "Not configured yet",
+      "title": "Corrections"
+    },
+    "eyebrow": "Submit",
+    "form": {
+      "body": "A public form can be connected later for non-technical contributors. No external form service is configured in this plan.",
+      "status": "Form deferred",
+      "title": "Public form"
+    },
+    "github": {
+      "body": "Technical contributors can suggest data corrections or schema improvements through GitHub.",
+      "link": "Open GitHub issue",
+      "title": "GitHub issue"
+    },
+    "intro": "Contribution paths are intentionally simple and manually reviewed before publication.",
+    "reviewNotice": "Submitted prices should include a date, shop address, product type, and source context. Nothing becomes public without review.",
+    "title": "Submit a Döner price"
   }
 }
