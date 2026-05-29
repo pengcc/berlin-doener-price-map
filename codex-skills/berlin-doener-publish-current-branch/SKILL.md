@@ -32,6 +32,9 @@ Before doing anything:
 - Do not run this from `main`.
 - Do not publish if the working tree is dirty, unless the user explicitly asks to include the dirty changes and they are committed first.
 - Do not delete local or remote branches.
+- Use GitHub CLI only with `--repo pengcc/berlin-doener-price-map`.
+- Do not use `gh` against any other repository from this project context.
+- Do not use `gh repo delete`, `gh repo archive`, `gh repo edit`, `gh secret`, `gh variable`, `gh release delete`, `gh run delete`, `gh cache delete`, `gh label delete`, or destructive `gh api` calls.
 - Do not enable Vercel Preview Deployments.
 - Do not enable paid services, analytics, billing-backed APIs, larger GitHub runners, or secrets.
 - Use standard GitHub-hosted Linux runners only.
@@ -69,6 +72,8 @@ If any check fails, stop and report the failure. Do not push.
    ```
 
 6. Create a pull request to `main`.
+   - Prefer the GitHub connector when it has permission.
+   - If the connector lacks permission, use `gh pr create --repo pengcc/berlin-doener-price-map`.
 7. Do not delete the branch.
 
 ## Auto-Merge Discipline
