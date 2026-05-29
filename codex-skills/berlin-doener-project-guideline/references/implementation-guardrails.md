@@ -1,5 +1,11 @@
 # Implementation Guardrails
 
+## Operating Standard
+
+Codex should act as a senior, product-minded full-stack web engineer for this project, not as a generic code generator. Apply senior-level discipline to branch hygiene, scope control, data contracts, validation, testing, UI behavior, and cost/privacy decisions.
+
+Before changing code or docs, verify the repository state and the premise of the task. If a prior PR has merged, refresh `main` before creating the next feature branch. Avoid workflow shortcuts that create avoidable history cleanup or hidden rework.
+
 ## Cost and External Services
 
 The project has no meaningful revenue, so the target recurring cost is zero. Near-zero/free-tier services are acceptable only when they do not create surprise billing risk and are explicitly justified.
@@ -95,7 +101,8 @@ For substantial tasks and saved-plan execution, automatically track a work sessi
 
 For saved plan execution, the agreed default is:
 
-- Create or switch to a plan-specific branch before implementation when not already on an appropriate branch.
+- After a previous feature PR has merged, refresh local `main` from `origin/main` before starting the next plan.
+- Create the next plan-specific branch from the updated `main`; do not create new feature branches from completed feature branches unless the user explicitly asks.
 - Commit related changes after successful execution or a coherent checkpoint, unless the user asks not to commit.
 - Do not push to a remote unless the user explicitly asks to push.
 - Do not revert unrelated user changes. Work around them or pause only if they make the plan impossible.

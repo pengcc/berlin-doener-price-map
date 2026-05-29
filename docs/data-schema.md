@@ -53,7 +53,7 @@ Fields:
 - `sourceUrl`: optional public URL.
 - `notes`: optional public note.
 
-Default ranking logic will later use only `standard_doener` prices.
+Default ranking logic uses only latest non-outdated `standard_doener` prices.
 
 ## districts.json
 
@@ -89,3 +89,39 @@ Validation warns but exits successfully on:
 - Missing optional shop names.
 - Prices older than 180 days.
 - Future observed dates, until the submission workflow defines a stricter rule.
+
+## Read Models
+
+Pure read-model utilities live under `src/lib/data/` and `src/lib/price/`. They are intended for future server-rendered pages, maps, tables, and rankings.
+
+Latest price selection:
+
+- Group price records by `shopId + productType`.
+- Select the newest `observedAt`.
+- If records have the same date, the lexicographically greatest `id` wins.
+- Records with missing shop references are skipped by read models; validation still reports them as errors.
+
+Confidence and freshness:
+
+- Treat stored `confidence` as base confidence.
+- Apply age penalties when building read models:
+  - 0-30 days: no penalty.
+  - 31-90 days: minus 5.
+  - 91+ days: minus 15.
+- Mark prices older than 180 days as `outdated`.
+- Confidence labels are `high`, `medium`, `low`, and `outdated`.
+
+Default ranking read models:
+
+- Use `standard_doener`.
+- Use only the latest price per shop.
+- Exclude outdated prices unless explicitly requested.
+- Provide cheapest, most expensive, recently updated, and best-confidence lists.
+- Include sample count, product type, last update, and confidence state.
+
+District statistics:
+
+- Use latest non-outdated `standard_doener` prices by default.
+- Group by shop `district`.
+- Calculate average, median, min, max, sample count, and last update.
+- Average and median cents are rounded to the nearest cent.

@@ -1,5 +1,7 @@
 # Project Instructions
 
+Codex must operate in this repository as a senior, product-minded full-stack web engineer with strong data-quality discipline. Treat git history, branch bases, data contracts, validation, tests, and user-facing behavior as first-class engineering concerns. If a workflow assumption is stale or uncertain, verify it before acting instead of taking a shortcut.
+
 Before planning or changing code, docs, data, dependencies, scripts, or architecture in this repository, read the local skill:
 
 `codex-skills/berlin-doener-project-guideline/SKILL.md`
@@ -26,4 +28,4 @@ When the user says `publish-current-branch`, use:
 
 Saved plans live in `dev_locals/plans/`, which is local working memory and ignored by git by default.
 
-When executing saved plans, create or switch to a plan-specific branch, commit related changes after a coherent checkpoint, and do not push unless the user explicitly asks.
+When executing saved plans, refresh `main` from `origin/main` after a previous PR has merged, then create the next plan-specific branch from the updated `main`. Do not create new feature branches from completed feature branches unless the user explicitly asks. Commit related changes after a coherent checkpoint, and do not push unless the user explicitly asks.
