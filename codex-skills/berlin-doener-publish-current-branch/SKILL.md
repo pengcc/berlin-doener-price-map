@@ -32,7 +32,8 @@ Before doing anything:
 - Do not run this from `main`.
 - Do not publish if the working tree is dirty, unless the user explicitly asks to include the dirty changes and they are committed first.
 - Do not delete local or remote branches.
-- Use GitHub CLI only with `--repo pengcc/berlin-doener-price-map`.
+- Use `gh` CLI by default for PR creation and auto-merge in this project, always scoped with `--repo pengcc/berlin-doener-price-map`.
+- Use the GitHub connector for read/context operations only, or as a fallback when `gh` is unavailable and the connector has the needed permission.
 - Do not use `gh` against any other repository from this project context.
 - Do not use `gh repo delete`, `gh repo archive`, `gh repo edit`, `gh secret`, `gh variable`, `gh release delete`, `gh run delete`, `gh cache delete`, `gh label delete`, or destructive `gh api` calls.
 - Do not enable Vercel Preview Deployments.
@@ -72,8 +73,8 @@ If any check fails, stop and report the failure. Do not push.
    ```
 
 6. Create a pull request to `main`.
-   - Prefer the GitHub connector when it has permission.
-   - If the connector lacks permission, use `gh pr create --repo pengcc/berlin-doener-price-map`.
+   - Use `gh pr create --repo pengcc/berlin-doener-price-map` by default.
+   - Do not try the GitHub connector first for PR creation; prior project experience showed connector permissions can fail even when `gh` is authorized.
 7. Do not delete the branch.
 
 ## Auto-Merge Discipline
@@ -84,6 +85,8 @@ Enable auto-merge only when one of these is true:
 - The PR's latest CI check has already completed successfully and the user explicitly confirms merging now.
 
 If CI exists but is not required by GitHub, do not assume `auto-merge` will wait for CI. Create the PR, report that required checks are not enforced, and ask whether to configure branch protection or wait for CI manually.
+
+Before reporting auto-merge as blocked by repository settings, verify the live setting through `gh api repos/pengcc/berlin-doener-price-map --jq '.allow_auto_merge'`. If the repository allows auto-merge and required checks are enforced, use `gh pr merge <number> --auto --squash --repo pengcc/berlin-doener-price-map`.
 
 Prefer squash merge for small plan branches unless the user asks for a different merge method.
 

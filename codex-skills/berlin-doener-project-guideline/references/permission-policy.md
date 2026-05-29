@@ -53,6 +53,8 @@ Allowed `gh` usage:
 - Enable auto-merge only when the publish skill's CI-safety rules are satisfied.
 - View workflow runs and logs for this repository.
 
+For this project, `publish-current-branch` should use `gh` CLI by default for PR creation and auto-merge because it is repo-scoped and matches the established workflow. Use the GitHub connector for PR creation only as a fallback when `gh` is unavailable or the user explicitly asks for the connector.
+
 Always ask before `gh` commands that create, update, merge, close, or otherwise mutate GitHub state.
 
 Never use `gh` for other repositories from this project context. If a command output indicates a different repository, stop and ask the user.
