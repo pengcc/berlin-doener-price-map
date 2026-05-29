@@ -52,6 +52,8 @@ When implementation depends on library behavior, consult official docs first. Th
 - Treat delivery platform prices as lower confidence because they may differ from in-store prices.
 - Avoid scraping or republishing third-party content without checking terms.
 - Make uncertainty visible through confidence labels, outdated states, and methodology text.
+- Keep initial production data empty/header-only until verified seed data is added through a separate plan with source and provenance decisions.
+- Do not add fake public shops, fake public prices, or demo records to production `/data` files.
 
 ## Code Quality
 
@@ -59,6 +61,8 @@ When implementation depends on library behavior, consult official docs first. Th
 - Use Biome for formatting, linting, and import organization. Do not add Prettier, ESLint, or Tailwind Prettier plugins unless the user explicitly changes the tooling decision.
 - Prefer `pnpm check` / `pnpm check:fix` as the main local quality command once scripts exist.
 - Use Zod at file and input boundaries; infer TypeScript types from schemas where practical.
+- Keep Zod-backed data validation deterministic: schema and referential-integrity errors fail, while stale or incomplete optional metadata can warn until the submission workflow requires stricter handling.
+- `tsx` is acceptable for running TypeScript scripts, but it does not replace `pnpm typecheck`.
 - Keep pure calculation functions deterministic and covered by unit tests.
 - Prefer small modules with direct names over premature abstractions.
 - Add shadcn/ui components selectively; do not generate a large component set before it is needed.
@@ -141,6 +145,8 @@ Use lightweight GitHub Actions once the project is pushed to GitHub. CI should r
 - `pnpm test:run`
 - `pnpm validate:data`
 - `pnpm build`
+
+Keep the GitHub Actions job/check name `Quality` stable because branch protection uses that required check.
 
 Add Playwright smoke tests to CI after the first stable UI/map implementation. Do not block early project setup on full e2e coverage.
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Berlin Döner Feature Scope Grill"
+  short_description: "Clarify ambiguous or risky feature scope before planning."
+  default_prompt: "Clarify this feature scope one question at a time before creating an implementation plan."

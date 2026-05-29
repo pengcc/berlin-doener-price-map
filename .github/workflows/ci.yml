@@ -48,5 +48,11 @@ jobs:
       - name: Typecheck
         run: pnpm typecheck
 
+      - name: Test
+        run: pnpm test:run
+
+      - name: Validate data
+        run: pnpm validate:data
+
       - name: Build
         run: pnpm build

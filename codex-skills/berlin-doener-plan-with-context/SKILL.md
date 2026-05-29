@@ -20,6 +20,25 @@ Before planning:
 3. Inspect the current repository state and existing files affected by the request.
 4. Check official documentation first when the plan depends on current behavior of Next.js, React, Biome, pnpm, next-intl, MapTiler, React Leaflet, shadcn/ui, Zod, Vitest, or Playwright.
 
+## Scope Clarification Gate
+
+Before creating a saved plan, decide whether the request is clear enough.
+
+Use `codex-skills/berlin-doener-feature-scope-grill/SKILL.md` first when:
+
+- The requirement has multiple plausible product interpretations.
+- The feature affects cost, privacy, data model, external services, auth, deployment, user submissions, or public data provenance.
+- The user asks for a broad page, app area, workflow, or architecture change rather than a narrow implementation.
+- A plan would otherwise need many assumptions.
+- The choice is hard to reverse or has high-friction consequences.
+
+Do not grill when:
+
+- The task is mechanical or narrow.
+- The user already gave precise scope and constraints.
+- Existing project guidelines already settle the decision.
+- The answer can be found by reading the repository or project guidelines.
+
 ## When to Persist a Plan
 
 Persist a plan for:

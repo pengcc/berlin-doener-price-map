@@ -171,15 +171,26 @@ Data should be loaded from static files at build/server time. Keep parsing, join
 
 Use `csv-parse` for CSV ingestion in Node/TypeScript scripts and server-side data loading. Do not hand-write CSV parsing with string splitting.
 
-Recommended modules:
+Current data foundation modules:
 
-- `lib/data/load-shops.ts`
-- `lib/data/load-price-records.ts`
-- `lib/data/get-latest-prices.ts`
-- `lib/data/calculate-district-stats.ts`
-- `lib/price/confidence.ts`
-- `lib/price/format-price.ts`
-- `lib/validation/schemas.ts`
+- `src/lib/data/read-data-file.ts`
+- `src/lib/data/load-shops.ts`
+- `src/lib/data/load-price-records.ts`
+- `src/lib/data/load-districts.ts`
+- `src/lib/data/load-data.ts`
+- `src/lib/validation/schemas.ts`
+- `src/lib/validation/validate-data.ts`
+- `scripts/validate-data.ts`
+- `vitest.config.ts`
+
+Future data modules should follow the same pure-utility style:
+
+- `src/lib/data/get-latest-prices.ts`
+- `src/lib/data/calculate-district-stats.ts`
+- `src/lib/price/confidence.ts`
+- `src/lib/price/format-price.ts`
+
+Use `vitest.config.ts` with the Node test environment for pure data and validation utilities. Browser behavior belongs in Playwright once UI routes exist.
 
 ## Dependency Policy
 
@@ -190,3 +201,17 @@ Do not add commit hooks such as lefthook, Husky, or lint-staged during the MVP u
 ## Licensing
 
 If the project is published as open source, use MIT for code unless the user chooses a different license. Document data provenance and reuse separately because the dataset may combine user submissions, manual observations, and referenced public sources with different expectations.
+
+## CI Architecture
+
+The GitHub Actions workflow check name `Quality` is part of the repository merge gate. Preserve that check name when editing `.github/workflows/ci.yml`, because branch protection depends on it.
+
+The current `Quality` workflow should run:
+
+- `pnpm check`
+- `pnpm typecheck`
+- `pnpm test:run`
+- `pnpm validate:data`
+- `pnpm build`
+
+Add Playwright smoke checks later, after the first stable browser-facing routes and map implementation exist.
