@@ -6,6 +6,18 @@ Codex should act as a senior, product-minded full-stack web engineer for this pr
 
 Before changing code or docs, verify the repository state and the premise of the task. If a prior PR has merged, refresh `main` before creating the next feature branch. Avoid workflow shortcuts that create avoidable history cleanup or hidden rework.
 
+## Mode and Skill Selection
+
+Use the lightest workflow that still protects quality, cost, security, data contracts, and clean history.
+
+- Saved local plans are the durable project memory for substantial work. Use them for multi-file implementation, architecture, data rules, routing, i18n, CI, deployment, roadmap, or workflow/guideline changes.
+- Plan Mode is a collaboration aid for high-impact planning. Recommend it selectively for project guideline/workflow changes, architecture decisions, project-wide planning, roadmap changes, and decisions with long-term cost, security, privacy, deployment, or data-quality impact.
+- Plan Mode does not replace `berlin-doener-plan-with-context`. If already in Plan Mode, still use the project planning skill to ground the plan in repository facts and save the plan under `dev_locals/plans/`.
+- Do not recommend Plan Mode for every saved plan. Trivial edits, narrow bug fixes, simple documentation cleanup, and execution of already confirmed plans should stay lightweight unless the user asks.
+- Use Goal only when the user explicitly asks to create a Goal, requests token-budgeted long-running tracking, or otherwise clearly opts into that mechanism. Do not convert ordinary implementation tasks into Goals.
+- Use code-review stance when the user asks for a review. For normal implementation, use a lightweight self-review gate before substantial commits instead of producing a full formal review every time.
+- Use `berlin-doener-publish-current-branch` when the user says `publish-current-branch`; that workflow uses `gh` CLI by default for PR creation and auto-merge, scoped to `pengcc/berlin-doener-price-map`.
+
 ## Cost and External Services
 
 The project has no meaningful revenue, so the target recurring cost is zero. Near-zero/free-tier services are acceptable only when they do not create surprise billing risk and are explicitly justified.
@@ -84,6 +96,13 @@ Use a saved local plan for substantial implementation work. The local workflow i
 
 Do not require a saved plan for trivial edits, documentation cleanup, or one-file changes unless the user asks. Keep `dev_locals/` ignored by git unless the user explicitly chooses to version plans.
 
+For project-wide planning and roadmap maintenance:
+
+- Create or update a saved local plan instead of rewriting completed historical plans.
+- Treat completed plans as historical records. Do not edit them for style consistency or hindsight cleanup unless the user explicitly asks.
+- Promote only confirmed, recurring lessons into the project guideline through `berlin-doener-sync-guideline`.
+- Keep one-off execution details, time tracking, and failed experiments in `dev_locals/`, not in durable guideline references.
+
 When a saved plan is already in execution or has been marked completed and a meaningful change is needed, analyze before editing code. This applies to changes in scope, architecture, routes, data contracts, external service or cost surface, validation behavior, or user-facing product behavior. The required sequence is:
 
 1. Analyze the alternatives and tradeoffs, including static vs dynamic rendering, cost, data-quality, and UX implications when relevant.
@@ -91,6 +110,8 @@ When a saved plan is already in execution or has been marked completed and a mea
 3. Then implement the code change.
 
 If implementation reveals an unexpected issue before the plan is updated, stop as soon as the issue is understood, record the analysis and revised decision in the plan, then continue. Do not let code drift ahead of the saved plan for substantial changes.
+
+Before committing substantial changes, perform a lightweight self-review and record the result in the plan when a saved plan exists. Check for behavioral bugs, branch-base mistakes, test gaps, cost/security/privacy implications, data-quality risks, and intentional omissions. This does not replace formal code review when the user explicitly asks for one.
 
 ## Work Time Tracking
 

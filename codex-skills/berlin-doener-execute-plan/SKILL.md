@@ -40,6 +40,18 @@ For each implementation step:
 
 Use the project guideline's normal coding rules: `pnpm`, Biome, TypeScript strictness, static data first, no database for MVP, no unapproved external service expansion.
 
+## Lightweight Self-Review Gate
+
+Before committing substantial changes, perform a short self-review and record the result in the plan. Keep it concise and focused on engineering risk:
+
+- Behavioral bugs or regressions checked.
+- Branch-base and scope alignment checked.
+- Test, validation, and browser-verification gaps.
+- Cost, security, privacy, and data-quality implications.
+- Intentional omissions or deferred follow-ups.
+
+This is not required for trivial edits. If the user explicitly asks for a review, switch to a formal code-review stance with findings first.
+
 ## Git Workflow
 
 Use this default workflow for saved plan execution:
