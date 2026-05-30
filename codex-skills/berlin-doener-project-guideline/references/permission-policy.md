@@ -18,6 +18,8 @@ These prefixes are reasonable to request as saved approvals because they support
 - `["git", "switch"]`
 - `["git", "status"]`
 - `["git", "branch", "--show-current"]`
+- `["git", "fetch"]`
+- `["git", "merge", "--ff-only"]`
 - `["git", "add"]`
 - `["git", "commit"]`
 - `["mise", "install"]`
@@ -101,7 +103,8 @@ The user may reply from mobile. Text confirmation is enough for conversational d
 When executing saved plans:
 
 - Read this policy before requesting escalated commands.
-- Create or switch to a plan-specific branch when appropriate.
+- After a prior PR has merged, switch to `main` and fast-forward it from `origin/main` before starting next-stage planning or implementation.
+- Create or switch to a plan-specific branch from refreshed `main` when appropriate.
 - Commit coherent checkpoints if the plan succeeds or reaches a useful pause point.
 - Do not push unless explicitly asked.
 - Record permission-related blockers in the plan execution log.

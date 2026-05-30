@@ -16,7 +16,7 @@ publish-current-branch
 This phrase means:
 
 ```txt
-Push current branch, create a PR to main, enable auto-merge after CI passes when safely enforceable, and do not delete the branch.
+Push current branch, create a PR to main, enable auto-merge after CI passes when safely enforceable, do not delete the branch, and after a verified merge return the local repo to refreshed main.
 ```
 
 ## Required Context
@@ -76,6 +76,15 @@ If any check fails, stop and report the failure. Do not push.
    - Use `gh pr create --repo pengcc/berlin-doener-price-map` by default.
    - Do not try the GitHub connector first for PR creation; prior project experience showed connector permissions can fail even when `gh` is authorized.
 7. Do not delete the branch.
+8. After a merge is verified, switch back to `main`, fetch `origin/main`, and fast-forward local `main` before any next-stage planning or implementation.
+
+   ```txt
+   git switch main
+   git fetch origin main
+   git merge --ff-only origin/main
+   ```
+
+   If auto-merge is enabled but the PR is still pending, do not start the next-stage plan from the feature branch. Report that next-stage planning should wait until the merge is verified and local `main` is refreshed.
 
 ## Auto-Merge Discipline
 
@@ -97,5 +106,7 @@ Report:
 - Branch pushed.
 - PR URL.
 - Whether auto-merge was enabled, skipped, or blocked.
+- Whether local `main` was refreshed after a verified merge, or whether next-stage work must wait for the pending merge.
 - Which checks passed.
 - Any manual follow-up required.
+- A final `Recommended next step` section placed last, unless a stricter output format takes precedence.

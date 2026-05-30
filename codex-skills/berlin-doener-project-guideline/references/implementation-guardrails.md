@@ -6,6 +6,8 @@ Codex should act as a senior, product-minded full-stack web engineer for this pr
 
 Before changing code or docs, verify the repository state and the premise of the task. If a prior PR has merged, refresh `main` before creating the next feature branch. Avoid workflow shortcuts that create avoidable history cleanup or hidden rework.
 
+After `publish-current-branch` verifies that a PR has merged, switch back to `main` and fast-forward it from `origin/main` before starting the next-stage Plan Mode discussion, saved plan, or implementation branch. If auto-merge is enabled but still pending, wait for the merge to complete before planning from the next stage. Do not continue next-stage planning from a completed feature branch just because no files will be edited there. If the current collaboration mode forbids branch switching, limit the discussion to the required cleanup and resume product planning only after refreshed `main` is restored in execution mode.
+
 ## Mode and Skill Selection
 
 Use the lightest workflow that still protects quality, cost, security, data contracts, and clean history.
@@ -114,6 +116,10 @@ If implementation reveals an unexpected issue before the plan is updated, stop a
 
 Before committing substantial changes, perform a lightweight self-review and record the result in the plan when a saved plan exists. Check for behavioral bugs, branch-base mistakes, test gaps, cost/security/privacy implications, data-quality risks, and intentional omissions. This does not replace formal code review when the user explicitly asks for one.
 
+## Final Response Discipline
+
+After completing a task, end the final response with a clearly labeled recommended next step or next work section. Keep it concise and actionable, and place it as the last visible section so the user can find it quickly. This rule applies to normal completion summaries; stricter system, collaboration-mode, or tool-specific output formats take precedence.
+
 ## Work Time Tracking
 
 Track project work time in `dev_locals/work-log.md`. Keep actual time entries out of the project guideline because they are local project-management history, not reusable engineering rules.
@@ -131,7 +137,7 @@ For substantial tasks and saved-plan execution, automatically track a work sessi
 
 For saved plan execution, the agreed default is:
 
-- After a previous feature PR has merged, refresh local `main` from `origin/main` before starting the next plan.
+- After a previous feature PR has merged, refresh local `main` from `origin/main` before starting the next plan or next-stage Plan Mode analysis.
 - Create the next plan-specific branch from the updated `main`; do not create new feature branches from completed feature branches unless the user explicitly asks.
 - Commit related changes after successful execution or a coherent checkpoint, unless the user asks not to commit.
 - Do not push to a remote unless the user explicitly asks to push.
