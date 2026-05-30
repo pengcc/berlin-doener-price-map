@@ -26,7 +26,8 @@ When the user says `publish-current-branch`, use:
 
 - `codex-skills/berlin-doener-publish-current-branch/SKILL.md` to push the current branch, create a PR to `main`, and enable auto-merge only when CI protection makes that safe. Do not delete the branch.
 - For that workflow, use `gh` CLI by default for PR creation and auto-merge, always scoped to `pengcc/berlin-doener-price-map`; do not try the GitHub connector first for PR creation.
+- After the PR is verified merged, switch back to `main` and refresh it from `origin/main` before starting any next-stage Plan Mode discussion, saved plan, or implementation work. If auto-merge is still pending, wait for the merge and refreshed `main` before next-stage planning.
 
 Saved plans live in `dev_locals/plans/`, which is local working memory and ignored by git by default.
 
-When executing saved plans, refresh `main` from `origin/main` after a previous PR has merged, then create the next plan-specific branch from the updated `main`. Do not create new feature branches from completed feature branches unless the user explicitly asks. Commit related changes after a coherent checkpoint, and do not push unless the user explicitly asks.
+When executing saved plans, refresh `main` from `origin/main` after a previous PR has merged, then create the next plan-specific branch from the updated `main`. New next-stage planning should also start from refreshed `main`, not from the completed feature branch. Do not create new feature branches from completed feature branches unless the user explicitly asks. Commit related changes after a coherent checkpoint, and do not push unless the user explicitly asks.

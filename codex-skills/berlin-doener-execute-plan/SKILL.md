@@ -57,7 +57,7 @@ This is not required for trivial edits. If the user explicitly asks for a review
 Use this default workflow for saved plan execution:
 
 1. Check the current branch and working tree.
-2. If a previous feature PR has merged, refresh local `main` from `origin/main` and base the next plan-specific branch on that updated `main`.
+2. If a previous feature PR has merged, refresh local `main` from `origin/main` and base the next plan-specific branch on that updated `main`. Do this before next-stage planning or execution, even if the planning conversation was started from a completed feature branch.
 3. Create or switch to a plan-specific branch when not already on an appropriate branch; do not branch from a completed feature branch unless the user explicitly asks.
 4. Execute the plan and update the plan file as reality changes.
 5. Commit related changes after successful execution or a coherent checkpoint, unless the user asks not to commit.

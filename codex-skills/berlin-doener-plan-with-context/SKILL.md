@@ -18,7 +18,8 @@ Before planning:
 1. Read `codex-skills/berlin-doener-project-guideline/SKILL.md`.
 2. Read the relevant files under `codex-skills/berlin-doener-project-guideline/references/`.
 3. Inspect the current repository state and existing files affected by the request.
-4. Check official documentation first when the plan depends on current behavior of Next.js, React, Biome, pnpm, next-intl, MapTiler, React Leaflet, shadcn/ui, Zod, Vitest, or Playwright.
+4. If the current branch is a completed or published feature branch and the prior PR has merged, switch to refreshed `main` before next-stage planning. Plan Mode analysis should see the current project state from `main`, not the completed feature branch. If the active collaboration mode forbids switching branches, stop next-stage planning and report that the branch refresh must happen first in execution mode.
+5. Check official documentation first when the plan depends on current behavior of Next.js, React, Biome, pnpm, next-intl, MapTiler, React Leaflet, shadcn/ui, Zod, Vitest, or Playwright.
 
 ## Plan Mode Recommendation Gate
 
