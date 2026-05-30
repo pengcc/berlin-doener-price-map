@@ -109,3 +109,4 @@ Report:
 - Whether local `main` was refreshed after a verified merge, or whether next-stage work must wait for the pending merge.
 - Which checks passed.
 - Any manual follow-up required.
+- A final `Recommended next step` section placed last, unless a stricter output format takes precedence.

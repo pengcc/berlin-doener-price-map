@@ -31,3 +31,5 @@ When the user says `publish-current-branch`, use:
 Saved plans live in `dev_locals/plans/`, which is local working memory and ignored by git by default.
 
 When executing saved plans, refresh `main` from `origin/main` after a previous PR has merged, then create the next plan-specific branch from the updated `main`. New next-stage planning should also start from refreshed `main`, not from the completed feature branch. Do not create new feature branches from completed feature branches unless the user explicitly asks. Commit related changes after a coherent checkpoint, and do not push unless the user explicitly asks.
+
+After completing a task, end the final response with a clearly labeled recommended next step or next work section. Put that recommendation last so it is easy to find, unless a stricter system, mode, or tool output format requires otherwise.

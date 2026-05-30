@@ -101,3 +101,4 @@ Return:
 - Steps completed or blocked.
 - Checks run and results.
 - Any guideline updates that should later be handled by `berlin-doener-sync-guideline`.
+- A final `Recommended next step` section placed last, unless a stricter output format takes precedence.

@@ -116,6 +116,10 @@ If implementation reveals an unexpected issue before the plan is updated, stop a
 
 Before committing substantial changes, perform a lightweight self-review and record the result in the plan when a saved plan exists. Check for behavioral bugs, branch-base mistakes, test gaps, cost/security/privacy implications, data-quality risks, and intentional omissions. This does not replace formal code review when the user explicitly asks for one.
 
+## Final Response Discipline
+
+After completing a task, end the final response with a clearly labeled recommended next step or next work section. Keep it concise and actionable, and place it as the last visible section so the user can find it quickly. This rule applies to normal completion summaries; stricter system, collaboration-mode, or tool-specific output formats take precedence.
+
 ## Work Time Tracking
 
 Track project work time in `dev_locals/work-log.md`. Keep actual time entries out of the project guideline because they are local project-management history, not reusable engineering rules.
