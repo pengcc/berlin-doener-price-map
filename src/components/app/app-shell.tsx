@@ -13,6 +13,7 @@ type Props = {
 
 const navItems = [
   { href: "/", key: "home" },
+  { href: "/map", key: "map" },
   { href: "/prices", key: "prices" },
   { href: "/ranking", key: "ranking" },
   { href: "/districts", key: "districts" },

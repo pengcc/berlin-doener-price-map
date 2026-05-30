@@ -23,6 +23,7 @@
     "brand": "Berlin Döner Price Map",
     "districts": "Districts",
     "home": "Overview",
+    "map": "Map",
     "methodology": "Methodology",
     "navLabel": "Primary navigation",
     "prices": "Prices",
@@ -57,7 +58,8 @@
     "eyebrow": "Berlin Döner Price Map",
     "intro": "A practical local data tool for comparing Döner prices by shop, district, and freshness. The public dataset is still empty until reviewed observations are added.",
     "mapPreview": {
-      "body": "The map MVP is a later step. This first product surface prepares the data views before adding map tiles or browser-only map code.",
+      "body": "Open the map to compare current prices by district, product type, confidence, and price range.",
+      "link": "Open map",
       "title": "Map preview"
     },
     "metrics": {
@@ -74,6 +76,46 @@
       "title": "Price preview"
     },
     "title": "Find and compare Döner prices in Berlin"
+  },
+  "MapPage": {
+    "empty": {
+      "body": "The production dataset is intentionally empty until reviewed shop observations are available.",
+      "title": "No mappable prices yet"
+    },
+    "eyebrow": "Map",
+    "filters": {
+      "allConfidence": "All confidence levels",
+      "allDistricts": "All districts",
+      "allProducts": "All products",
+      "anyMaxPrice": "Any maximum",
+      "anyMinPrice": "Any minimum",
+      "confidence": "Confidence",
+      "district": "District",
+      "maxPrice": "Maximum price",
+      "minPrice": "Minimum price",
+      "product": "Product",
+      "reset": "Reset",
+      "summary": "{shown} of {total} markers visible",
+      "title": "Map filters"
+    },
+    "intro": "Explore latest non-outdated prices as shop markers. Filters run in the browser while the data stays static.",
+    "noResults": {
+      "body": "No current prices match these filters. Reset filters or broaden the price range.",
+      "title": "No matching markers"
+    },
+    "popup": {
+      "confidence": "Confidence",
+      "district": "District",
+      "observed": "Observed",
+      "price": "Price",
+      "product": "Product"
+    },
+    "tile": {
+      "localFallback": "Local development uses OpenStreetMap tiles when no MapTiler key is configured.",
+      "missingBody": "Set NEXT_PUBLIC_MAPTILER_API_KEY to load production map tiles. No external fallback tiles are loaded in production without that key.",
+      "title": "Map tiles are not configured"
+    },
+    "title": "Berlin Döner price map"
   },
   "PricesPage": {
     "empty": {

@@ -115,10 +115,17 @@ export default async function DemoHomePage({ params }: Props) {
 
         <div className="border border-neutral-900/10 bg-white p-5">
           <h2 className="font-semibold text-2xl">{t("mapPreview.title")}</h2>
-          <div className="mt-4 flex min-h-56 items-center justify-center border border-neutral-900/10 bg-[#dde8df] p-6 text-center">
+          <div className="mt-4 flex min-h-56 flex-col items-center justify-center gap-4 border border-neutral-900/10 bg-[#dde8df] p-6 text-center">
             <p className="max-w-sm text-neutral-700 text-sm leading-6">
               {t("mapPreview.body")}
             </p>
+            <Link
+              className="inline-flex min-h-10 items-center bg-neutral-950 px-4 font-medium text-sm text-white"
+              href={getPathForDataMode("/map", dataMode)}
+              locale={locale}
+            >
+              {t("mapPreview.link")}
+            </Link>
           </div>
         </div>
       </section>
