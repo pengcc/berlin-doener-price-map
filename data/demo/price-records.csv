@@ -1,0 +1,25 @@
+id,shopId,observedAt,priceCents,productType,sourceType,confidence,sourceUrl,notes
+demo-price-01,demo-mitte-doener-01,2026-05-29,700,standard_doener,unknown,40,,Unverified generated demo record; not a real observed price.
+demo-price-02,demo-wedding-doener-02,2026-05-29,600,standard_doener,unknown,40,,Unverified generated demo record; not a real observed price.
+demo-price-03,demo-friedrichshain-doener-03,2026-05-29,850,standard_doener,unknown,40,,Unverified generated demo record; not a real observed price.
+demo-price-04,demo-kreuzberg-doener-04,2026-05-29,750,standard_doener,unknown,40,,Unverified generated demo record; not a real observed price.
+demo-price-05,demo-prenzlauer-berg-doener-05,2026-05-29,650,standard_doener,unknown,40,,Unverified generated demo record; not a real observed price.
+demo-price-06,demo-pankow-doener-06,2026-05-29,900,standard_doener,unknown,40,,Unverified generated demo record; not a real observed price.
+demo-price-07,demo-charlottenburg-doener-07,2026-05-29,800,standard_doener,unknown,40,,Unverified generated demo record; not a real observed price.
+demo-price-08,demo-wilmersdorf-doener-08,2026-05-29,700,standard_doener,unknown,40,,Unverified generated demo record; not a real observed price.
+demo-price-09,demo-spandau-doener-09,2026-05-29,600,standard_doener,unknown,40,,Unverified generated demo record; not a real observed price.
+demo-price-10,demo-siemensstadt-doener-10,2026-05-29,850,standard_doener,unknown,40,,Unverified generated demo record; not a real observed price.
+demo-price-11,demo-steglitz-doener-11,2026-05-29,750,standard_doener,unknown,40,,Unverified generated demo record; not a real observed price.
+demo-price-12,demo-zehlendorf-doener-12,2026-05-29,650,standard_doener,unknown,40,,Unverified generated demo record; not a real observed price.
+demo-price-13,demo-schoneberg-doener-13,2026-05-29,900,standard_doener,unknown,40,,Unverified generated demo record; not a real observed price.
+demo-price-14,demo-tempelhof-doener-14,2026-05-29,800,standard_doener,unknown,40,,Unverified generated demo record; not a real observed price.
+demo-price-15,demo-neukolln-doener-15,2026-05-29,700,standard_doener,unknown,40,,Unverified generated demo record; not a real observed price.
+demo-price-16,demo-britz-doener-16,2026-05-29,600,standard_doener,unknown,40,,Unverified generated demo record; not a real observed price.
+demo-price-17,demo-alt-treptow-doener-17,2026-05-29,850,standard_doener,unknown,40,,Unverified generated demo record; not a real observed price.
+demo-price-18,demo-kopenick-doener-18,2026-05-29,750,standard_doener,unknown,40,,Unverified generated demo record; not a real observed price.
+demo-price-19,demo-marzahn-doener-19,2026-05-29,650,standard_doener,unknown,40,,Unverified generated demo record; not a real observed price.
+demo-price-20,demo-hellersdorf-doener-20,2026-05-29,900,standard_doener,unknown,40,,Unverified generated demo record; not a real observed price.
+demo-price-21,demo-lichtenberg-doener-21,2026-05-29,800,standard_doener,unknown,40,,Unverified generated demo record; not a real observed price.
+demo-price-22,demo-friedrichsfelde-doener-22,2026-05-29,700,standard_doener,unknown,40,,Unverified generated demo record; not a real observed price.
+demo-price-23,demo-reinickendorf-doener-23,2026-05-29,600,standard_doener,unknown,40,,Unverified generated demo record; not a real observed price.
+demo-price-24,demo-tegel-doener-24,2026-05-29,850,standard_doener,unknown,40,,Unverified generated demo record; not a real observed price.

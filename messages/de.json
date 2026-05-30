@@ -30,6 +30,17 @@
     "submit": "Einreichen",
     "tagline": "Community-kuratierte Dönerpreise"
   },
+  "DataMode": {
+    "demo": {
+      "body": "Diese Ansicht nutzt generierte Mock-Daten für Präsentationszwecke. Shopnamen, Adressen, Koordinaten und Preise sind nicht verifizierte Beobachtungen.",
+      "title": "Nicht verifizierte Demo-Daten"
+    },
+    "selector": {
+      "demo": "Demo-Daten",
+      "label": "Datenmodus",
+      "real": "Echte Daten"
+    }
+  },
   "HomePage": {
     "contribute": {
       "body": "Neue Beobachtungen werden manuell geprüft, bevor sie öffentlich erscheinen. Die ersten Beitragswege bleiben bewusst einfach.",

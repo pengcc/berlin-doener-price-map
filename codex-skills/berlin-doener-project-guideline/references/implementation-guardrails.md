@@ -84,6 +84,14 @@ Use a saved local plan for substantial implementation work. The local workflow i
 
 Do not require a saved plan for trivial edits, documentation cleanup, or one-file changes unless the user asks. Keep `dev_locals/` ignored by git unless the user explicitly chooses to version plans.
 
+When a saved plan is already in execution or has been marked completed and a meaningful change is needed, analyze before editing code. This applies to changes in scope, architecture, routes, data contracts, external service or cost surface, validation behavior, or user-facing product behavior. The required sequence is:
+
+1. Analyze the alternatives and tradeoffs, including static vs dynamic rendering, cost, data-quality, and UX implications when relevant.
+2. Update the saved plan with the changed decision, rationale, expected files, risks, and validation impact.
+3. Then implement the code change.
+
+If implementation reveals an unexpected issue before the plan is updated, stop as soon as the issue is understood, record the analysis and revised decision in the plan, then continue. Do not let code drift ahead of the saved plan for substantial changes.
+
 ## Work Time Tracking
 
 Track project work time in `dev_locals/work-log.md`. Keep actual time entries out of the project guideline because they are local project-management history, not reusable engineering rules.

@@ -30,6 +30,17 @@
     "submit": "Submit",
     "tagline": "Community-curated Döner prices"
   },
+  "DataMode": {
+    "demo": {
+      "body": "This view is using generated mock records for presentation. Shop names, addresses, coordinates, and prices are not verified observations.",
+      "title": "Unverified demo data"
+    },
+    "selector": {
+      "demo": "Demo data",
+      "label": "Data mode",
+      "real": "Real data"
+    }
+  },
   "HomePage": {
     "contribute": {
       "body": "New observations will be manually reviewed before they become public. The first contribution paths are intentionally simple.",

@@ -1,0 +1,242 @@
+[
+  {
+    "id": "demo-mitte-doener-01",
+    "name": "Demo Doener Mitte",
+    "address": "Demoallee 1, 10115 Berlin",
+    "district": "Mitte",
+    "borough": "Mitte",
+    "lat": 52.52,
+    "lng": 13.405,
+    "status": "active"
+  },
+  {
+    "id": "demo-wedding-doener-02",
+    "name": "Demo Doener Wedding",
+    "address": "Demoallee 2, 13353 Berlin",
+    "district": "Wedding",
+    "borough": "Mitte",
+    "lat": 52.548,
+    "lng": 13.36,
+    "status": "active"
+  },
+  {
+    "id": "demo-friedrichshain-doener-03",
+    "name": "Demo Doener Friedrichshain",
+    "address": "Demoallee 3, 10245 Berlin",
+    "district": "Friedrichshain",
+    "borough": "Friedrichshain-Kreuzberg",
+    "lat": 52.515,
+    "lng": 13.454,
+    "status": "active"
+  },
+  {
+    "id": "demo-kreuzberg-doener-04",
+    "name": "Demo Doener Kreuzberg",
+    "address": "Demoallee 4, 10999 Berlin",
+    "district": "Kreuzberg",
+    "borough": "Friedrichshain-Kreuzberg",
+    "lat": 52.499,
+    "lng": 13.421,
+    "status": "active"
+  },
+  {
+    "id": "demo-prenzlauer-berg-doener-05",
+    "name": "Demo Doener Prenzlauer Berg",
+    "address": "Demoallee 5, 10405 Berlin",
+    "district": "Prenzlauer Berg",
+    "borough": "Pankow",
+    "lat": 52.539,
+    "lng": 13.424,
+    "status": "active"
+  },
+  {
+    "id": "demo-pankow-doener-06",
+    "name": "Demo Doener Pankow",
+    "address": "Demoallee 6, 13187 Berlin",
+    "district": "Pankow",
+    "borough": "Pankow",
+    "lat": 52.569,
+    "lng": 13.402,
+    "status": "active"
+  },
+  {
+    "id": "demo-charlottenburg-doener-07",
+    "name": "Demo Doener Charlottenburg",
+    "address": "Demoallee 7, 10625 Berlin",
+    "district": "Charlottenburg",
+    "borough": "Charlottenburg-Wilmersdorf",
+    "lat": 52.516,
+    "lng": 13.304,
+    "status": "active"
+  },
+  {
+    "id": "demo-wilmersdorf-doener-08",
+    "name": "Demo Doener Wilmersdorf",
+    "address": "Demoallee 8, 10707 Berlin",
+    "district": "Wilmersdorf",
+    "borough": "Charlottenburg-Wilmersdorf",
+    "lat": 52.487,
+    "lng": 13.32,
+    "status": "active"
+  },
+  {
+    "id": "demo-spandau-doener-09",
+    "name": "Demo Doener Spandau",
+    "address": "Demoallee 9, 13597 Berlin",
+    "district": "Spandau",
+    "borough": "Spandau",
+    "lat": 52.535,
+    "lng": 13.201,
+    "status": "active"
+  },
+  {
+    "id": "demo-siemensstadt-doener-10",
+    "name": "Demo Doener Siemensstadt",
+    "address": "Demoallee 10, 13629 Berlin",
+    "district": "Siemensstadt",
+    "borough": "Spandau",
+    "lat": 52.54,
+    "lng": 13.264,
+    "status": "active"
+  },
+  {
+    "id": "demo-steglitz-doener-11",
+    "name": "Demo Doener Steglitz",
+    "address": "Demoallee 11, 12163 Berlin",
+    "district": "Steglitz",
+    "borough": "Steglitz-Zehlendorf",
+    "lat": 52.456,
+    "lng": 13.322,
+    "status": "active"
+  },
+  {
+    "id": "demo-zehlendorf-doener-12",
+    "name": "Demo Doener Zehlendorf",
+    "address": "Demoallee 12, 14163 Berlin",
+    "district": "Zehlendorf",
+    "borough": "Steglitz-Zehlendorf",
+    "lat": 52.433,
+    "lng": 13.258,
+    "status": "active"
+  },
+  {
+    "id": "demo-schoneberg-doener-13",
+    "name": "Demo Doener Schöneberg",
+    "address": "Demoallee 13, 10827 Berlin",
+    "district": "Schöneberg",
+    "borough": "Tempelhof-Schöneberg",
+    "lat": 52.483,
+    "lng": 13.35,
+    "status": "active"
+  },
+  {
+    "id": "demo-tempelhof-doener-14",
+    "name": "Demo Doener Tempelhof",
+    "address": "Demoallee 14, 12101 Berlin",
+    "district": "Tempelhof",
+    "borough": "Tempelhof-Schöneberg",
+    "lat": 52.466,
+    "lng": 13.385,
+    "status": "active"
+  },
+  {
+    "id": "demo-neukolln-doener-15",
+    "name": "Demo Doener Neukölln",
+    "address": "Demoallee 15, 12047 Berlin",
+    "district": "Neukölln",
+    "borough": "Neukölln",
+    "lat": 52.477,
+    "lng": 13.439,
+    "status": "active"
+  },
+  {
+    "id": "demo-britz-doener-16",
+    "name": "Demo Doener Britz",
+    "address": "Demoallee 16, 12347 Berlin",
+    "district": "Britz",
+    "borough": "Neukölln",
+    "lat": 52.448,
+    "lng": 13.449,
+    "status": "active"
+  },
+  {
+    "id": "demo-alt-treptow-doener-17",
+    "name": "Demo Doener Alt-Treptow",
+    "address": "Demoallee 17, 12435 Berlin",
+    "district": "Alt-Treptow",
+    "borough": "Treptow-Köpenick",
+    "lat": 52.488,
+    "lng": 13.459,
+    "status": "active"
+  },
+  {
+    "id": "demo-kopenick-doener-18",
+    "name": "Demo Doener Köpenick",
+    "address": "Demoallee 18, 12555 Berlin",
+    "district": "Köpenick",
+    "borough": "Treptow-Köpenick",
+    "lat": 52.445,
+    "lng": 13.574,
+    "status": "active"
+  },
+  {
+    "id": "demo-marzahn-doener-19",
+    "name": "Demo Doener Marzahn",
+    "address": "Demoallee 19, 12681 Berlin",
+    "district": "Marzahn",
+    "borough": "Marzahn-Hellersdorf",
+    "lat": 52.543,
+    "lng": 13.558,
+    "status": "active"
+  },
+  {
+    "id": "demo-hellersdorf-doener-20",
+    "name": "Demo Doener Hellersdorf",
+    "address": "Demoallee 20, 12627 Berlin",
+    "district": "Hellersdorf",
+    "borough": "Marzahn-Hellersdorf",
+    "lat": 52.536,
+    "lng": 13.604,
+    "status": "active"
+  },
+  {
+    "id": "demo-lichtenberg-doener-21",
+    "name": "Demo Doener Lichtenberg",
+    "address": "Demoallee 21, 10365 Berlin",
+    "district": "Lichtenberg",
+    "borough": "Lichtenberg",
+    "lat": 52.52,
+    "lng": 13.48,
+    "status": "active"
+  },
+  {
+    "id": "demo-friedrichsfelde-doener-22",
+    "name": "Demo Doener Friedrichsfelde",
+    "address": "Demoallee 22, 10315 Berlin",
+    "district": "Friedrichsfelde",
+    "borough": "Lichtenberg",
+    "lat": 52.505,
+    "lng": 13.52,
+    "status": "active"
+  },
+  {
+    "id": "demo-reinickendorf-doener-23",
+    "name": "Demo Doener Reinickendorf",
+    "address": "Demoallee 23, 13407 Berlin",
+    "district": "Reinickendorf",
+    "borough": "Reinickendorf",
+    "lat": 52.567,
+    "lng": 13.333,
+    "status": "active"
+  },
+  {
+    "id": "demo-tegel-doener-24",
+    "name": "Demo Doener Tegel",
+    "address": "Demoallee 24, 13507 Berlin",
+    "district": "Tegel",
+    "borough": "Reinickendorf",
+    "lat": 52.589,
+    "lng": 13.279,
+    "status": "active"
+  }
+]

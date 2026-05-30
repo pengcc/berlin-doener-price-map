@@ -16,11 +16,11 @@ function MethodSection({ body, title }: { body: string; title: string }) {
   );
 }
 
-export default async function MethodologyPage({ params }: Props) {
+export default async function DemoMethodologyPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const dataMode = "production";
+  const dataMode = "demo";
   const t = await getTranslations({ locale, namespace: "MethodologyPage" });
 
   return (

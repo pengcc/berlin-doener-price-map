@@ -4,6 +4,8 @@ The MVP uses static files under `/data`. These files are public application data
 
 Initial production data is intentionally empty/header-only until verified seed data is added. Use test fixtures for examples in automated tests instead of adding fake public prices.
 
+Generated presentation data is kept separately under `data/demo/`. It is unverified mock data and is loaded only through explicit demo routes or a local development default.
+
 ## Files
 
 ```txt
@@ -11,6 +13,10 @@ data/
   shops.json
   price-records.csv
   districts.json
+  demo/
+    shops.json
+    price-records.csv
+    districts.json
 ```
 
 ## shops.json
@@ -76,6 +82,13 @@ Run:
 pnpm validate:data
 ```
 
+For generated demo data, run:
+
+```bash
+pnpm generate:demo-data
+pnpm validate:demo-data
+```
+
 Validation fails on:
 
 - Duplicate ids.
@@ -125,3 +138,31 @@ District statistics:
 - Group by shop `district`.
 - Calculate average, median, min, max, sample count, and last update.
 - Average and median cents are rounded to the nearest cent.
+
+## Demo Data Mode
+
+Demo data is for local presentations and screenshots while the verified production dataset is still empty. It must remain visibly labeled in the UI and structurally separate from production records.
+
+Use:
+
+```bash
+pnpm dev
+```
+
+Then switch in the page header or open an explicit demo route:
+
+```txt
+/de/demo/prices
+/de/prices
+```
+
+`BERLIN_DOENER_DATA_MODE=demo` is still supported as a local default for code paths that do not pass an explicit mode.
+
+Current demo data rules:
+
+- Generated shops and prices live under `data/demo/`.
+- Production `/data` remains empty/header-only until verified records are added.
+- User-facing pages can switch between real and demo data through static routes.
+- Generated prices use only 600, 650, 700, 750, 800, 850, and 900 cents.
+- Generated records use `sourceType = unknown`, `confidence = 40`, and notes that say they are unverified generated demo records.
+- Demo records must not be represented as real observed shop pricing.
