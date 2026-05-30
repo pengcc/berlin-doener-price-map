@@ -26,6 +26,7 @@ Plan Mode is a collaboration aid for high-impact analysis and confirmation. This
 
 Before creating or revising a saved plan, recommend switching to Plan Mode when the request is project-level or hard to reverse, including:
 
+- New-project foundation setup or reusable foundation prompt changes.
 - Project guideline or workflow changes.
 - Architecture decisions.
 - Project-wide planning, roadmap changes, or multi-stage technical debt planning.
@@ -36,6 +37,8 @@ Do not recommend Plan Mode for every saved plan. Trivial edits, narrow bug fixes
 If already in Plan Mode, still use this skill's context rules and plan format. Plan Mode improves the discussion, but it does not replace the saved plan file.
 
 If not in Plan Mode and the user chooses to continue, perform the same analysis conservatively: inspect the repository, state material tradeoffs, create or update the saved plan, and wait for confirmation before implementing substantial or durable project guidance changes.
+
+For new-project foundation planning, introduce collaboration-mode choices early: Plan Mode threshold, saved-plan memory, explicit Goal usage, code review vs lightweight self-review, browser verification expectations, and publish workflow defaults.
 
 ## Scope Clarification Gate
 

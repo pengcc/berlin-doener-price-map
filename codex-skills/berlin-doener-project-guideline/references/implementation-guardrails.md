@@ -16,6 +16,7 @@ Use the lightest workflow that still protects quality, cost, security, data cont
 - Do not recommend Plan Mode for every saved plan. Trivial edits, narrow bug fixes, simple documentation cleanup, and execution of already confirmed plans should stay lightweight unless the user asks.
 - Use Goal only when the user explicitly asks to create a Goal, requests token-budgeted long-running tracking, or otherwise clearly opts into that mechanism. Do not convert ordinary implementation tasks into Goals.
 - Use code-review stance when the user asks for a review. For normal implementation, use a lightweight self-review gate before substantial commits instead of producing a full formal review every time.
+- Use browser verification for meaningful frontend, UI, responsive layout, map, chart, or interaction changes when the app is runnable. Prefer the in-app Browser or Playwright smoke tests depending on the task.
 - Use `berlin-doener-publish-current-branch` when the user says `publish-current-branch`; that workflow uses `gh` CLI by default for PR creation and auto-merge, scoped to `pengcc/berlin-doener-price-map`.
 
 ## Cost and External Services
