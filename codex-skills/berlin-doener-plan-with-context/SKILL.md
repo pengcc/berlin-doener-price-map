@@ -20,6 +20,26 @@ Before planning:
 3. Inspect the current repository state and existing files affected by the request.
 4. Check official documentation first when the plan depends on current behavior of Next.js, React, Biome, pnpm, next-intl, MapTiler, React Leaflet, shadcn/ui, Zod, Vitest, or Playwright.
 
+## Plan Mode Recommendation Gate
+
+Plan Mode is a collaboration aid for high-impact analysis and confirmation. This skill remains the project planning workflow that grounds the plan in repository facts and saves durable local project memory under `dev_locals/plans/`.
+
+Before creating or revising a saved plan, recommend switching to Plan Mode when the request is project-level or hard to reverse, including:
+
+- New-project foundation setup or reusable foundation prompt changes.
+- Project guideline or workflow changes.
+- Architecture decisions.
+- Project-wide planning, roadmap changes, or multi-stage technical debt planning.
+- Decisions with long-term cost, security, privacy, data-quality, deployment, or public-provenance impact.
+
+Do not recommend Plan Mode for every saved plan. Trivial edits, narrow bug fixes, and execution of an already confirmed plan should continue without extra ceremony unless the user asks.
+
+If already in Plan Mode, still use this skill's context rules and plan format. Plan Mode improves the discussion, but it does not replace the saved plan file.
+
+If not in Plan Mode and the user chooses to continue, perform the same analysis conservatively: inspect the repository, state material tradeoffs, create or update the saved plan, and wait for confirmation before implementing substantial or durable project guidance changes.
+
+For new-project foundation planning, introduce collaboration-mode choices early: Plan Mode threshold, saved-plan memory, explicit Goal usage, code review vs lightweight self-review, browser verification expectations, and publish workflow defaults.
+
 ## Scope Clarification Gate
 
 Before creating a saved plan, decide whether the request is clear enough.
@@ -45,6 +65,7 @@ Persist a plan for:
 
 - App scaffolding or dependency setup.
 - i18n, routing, data schema, validation, ranking, map, table, CI, deployment, or test infrastructure work.
+- Project-wide planning, roadmap changes, workflow/guideline changes, or architecture decisions.
 - Any task likely to span multiple files or sessions.
 - Any task with meaningful risk, sequencing, or rollback concerns.
 
