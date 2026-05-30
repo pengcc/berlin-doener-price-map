@@ -1,13 +1,172 @@
 {
+  "Common": {
+    "emptyValue": "—"
+  },
+  "Labels": {
+    "confidence": {
+      "high": "Hoch",
+      "low": "Niedrig",
+      "medium": "Mittel",
+      "outdated": "Veraltet"
+    },
+    "productTypes": {
+      "chicken_doener": "Hähnchen-Döner",
+      "doener_box": "Dönerbox",
+      "dueruem": "Dürüm",
+      "gemuese_doener": "Gemüse-Döner",
+      "standard_doener": "Standard-Döner",
+      "vegan_doener": "Veganer Döner",
+      "veal_doener": "Kalb-Döner"
+    }
+  },
+  "Navigation": {
+    "brand": "Berlin Döner Price Map",
+    "districts": "Bezirke",
+    "home": "Übersicht",
+    "methodology": "Methodik",
+    "navLabel": "Hauptnavigation",
+    "prices": "Preise",
+    "ranking": "Ranking",
+    "submit": "Einreichen",
+    "tagline": "Community-kuratierte Dönerpreise"
+  },
   "HomePage": {
-    "dataLabel": "Daten",
-    "dataValue": "Statische CSV/JSON-Daten folgen.",
+    "contribute": {
+      "body": "Neue Beobachtungen werden manuell geprüft, bevor sie öffentlich erscheinen. Die ersten Beitragswege bleiben bewusst einfach.",
+      "methodologyLink": "Methodik lesen",
+      "submitLink": "Preis einreichen",
+      "title": "Geprüfte Preise beitragen"
+    },
+    "districtPreview": {
+      "emptyBody": "Bezirksstatistiken erscheinen, sobald geprüfte aktuelle Standard-Dönerpreise vorhanden sind.",
+      "emptyTitle": "Noch keine Bezirksdaten",
+      "samples": "{count} Stichproben",
+      "title": "Bezirksüberblick"
+    },
     "eyebrow": "Berlin Döner Price Map",
-    "intro": "Ein mehrsprachiges, datenorientiertes Next.js-Projekt für community-kuratierte Dönerpreise in Berlin. Die Anwendung ist gerade im Scaffold-Status.",
-    "nextLabel": "Nächster Schritt",
-    "nextValue": "Datenmodell und Validierung.",
-    "statusLabel": "Status",
-    "statusValue": "Scaffold in Arbeit",
+    "intro": "Ein praktisches Berliner Datentool zum Vergleichen von Dönerpreisen nach Laden, Bezirk und Aktualität. Der öffentliche Datensatz bleibt leer, bis geprüfte Beobachtungen ergänzt werden.",
+    "mapPreview": {
+      "body": "Das Karten-MVP folgt später. Diese erste Produktoberfläche bereitet die Datenansichten vor, ohne Kartentiles oder browserabhängigen Kartencode einzubauen.",
+      "title": "Kartenvorschau"
+    },
+    "metrics": {
+      "activeShops": "Aktive Läden",
+      "averagePrice": "Berliner Durchschnitt",
+      "currentPrices": "Aktuelle Preise",
+      "lastUpdated": "Letzte Aktualisierung"
+    },
+    "pricePreview": {
+      "emptyBody": "Die App ist bereit für geprüfte Datensätze, aber es sind noch keine aktuellen öffentlichen Preise veröffentlicht.",
+      "emptyTitle": "Noch keine geprüften Preise",
+      "link": "Ranking öffnen",
+      "meta": "Aktuelle Stichprobe: {count}",
+      "title": "Preisvorschau"
+    },
     "title": "Dönerpreise in Berlin finden und vergleichen"
+  },
+  "PricesPage": {
+    "empty": {
+      "body": "Der Produktionsdatensatz bleibt bewusst leer, bis geprüfte Ladenbeobachtungen verfügbar sind.",
+      "title": "Noch keine aktuellen Preise"
+    },
+    "eyebrow": "Preise",
+    "intro": "Eine serverseitig gerenderte Liste der neuesten nicht veralteten Preise pro Laden und Produkttyp.",
+    "table": {
+      "confidence": "Vertrauen",
+      "district": "Bezirk",
+      "observed": "Beobachtet",
+      "price": "Preis",
+      "product": "Produkt",
+      "shop": "Laden"
+    },
+    "title": "Aktuelle Dönerpreise"
+  },
+  "RankingPage": {
+    "empty": {
+      "body": "Rankings brauchen geprüfte aktuelle Standard-Dönerpreise. Demo-Daten werden später nur klar gekennzeichnet ergänzt.",
+      "title": "Noch keine Rankingdaten"
+    },
+    "eyebrow": "Ranking",
+    "intro": "Günstigste, teuerste, zuletzt aktualisierte und verlässlichste Ansichten nutzen die neuesten nicht veralteten Standard-Dönerpreise.",
+    "notUpdated": "nicht verfügbar",
+    "sections": {
+      "bestConfidence": "Beste Verlässlichkeit",
+      "cheapest": "Günstigste",
+      "mostExpensive": "Teuerste",
+      "recentlyUpdated": "Zuletzt aktualisiert"
+    },
+    "summary": "{count} aktuelle Stichproben für {product}. Letzte Aktualisierung: {updated}.",
+    "title": "Berliner Preisrankings"
+  },
+  "DistrictsPage": {
+    "caveat": "Bezirksstatistiken sind beschreibend. Niedrige Stichprobenzahlen sind ein Vorbehalt, kein endgültiges Ranking.",
+    "empty": {
+      "body": "Bezirkszeilen erscheinen, sobald geprüfte aktuelle Standard-Dönerpreise verfügbar sind.",
+      "title": "Noch keine Bezirksstatistiken"
+    },
+    "eyebrow": "Bezirke",
+    "intro": "Vergleiche Durchschnitt, Median, Minimum und Maximum nach Bezirk oder Kiez, sobald geprüfte Daten existieren.",
+    "table": {
+      "average": "Durchschnitt",
+      "district": "Bezirk",
+      "max": "Max.",
+      "median": "Median",
+      "min": "Min.",
+      "samples": "Stichproben",
+      "updated": "Aktualisiert"
+    },
+    "title": "Preisstatistiken nach Bezirk"
+  },
+  "MethodologyPage": {
+    "eyebrow": "Methodik",
+    "intro": "Wie Preise gesammelt, geprüft, gerankt und als veraltet markiert werden.",
+    "sections": {
+      "districts": {
+        "body": "Bezirksstatistiken nutzen die neuesten nicht veralteten Standard-Dönerpreise und zeigen Durchschnitt, Median, Minimum, Maximum, Stichprobenzahl und letzte Aktualisierung.",
+        "title": "Bezirksstatistiken"
+      },
+      "freshness": {
+        "body": "Preise älter als 180 Tage gelten als veraltet und werden aus Standardrankings ausgeschlossen. Das Vertrauen wird nach Alter angepasst.",
+        "title": "Aktualität und Vertrauen"
+      },
+      "limitations": {
+        "body": "Der Datensatz ist aktuell leer. Falls später generierte Demo-Datensätze ergänzt werden, müssen sie sichtbar als ungeprüft markiert und von geprüften Beobachtungen unterscheidbar bleiben.",
+        "title": "Grenzen"
+      },
+      "rankings": {
+        "body": "Standardrankings nutzen nur Standard-Döner, wählen den neuesten Preis pro Laden und schließen veraltete Beobachtungen aus.",
+        "title": "Rankingregeln"
+      },
+      "review": {
+        "body": "Einreichungen werden vor Veröffentlichung manuell geprüft. Das MVP veröffentlicht keine Echtzeit-Einreichungen.",
+        "title": "Manuelle Prüfung"
+      },
+      "sources": {
+        "body": "Die App liest statische CSV- und JSON-Dateien zur Build- oder Server-Render-Zeit. Öffentliche Daten sollen nur geprüfte und sicher veröffentlichbare Informationen enthalten.",
+        "title": "Statische Quellen"
+      }
+    },
+    "title": "Methodik und Datenhinweise"
+  },
+  "SubmitPage": {
+    "corrections": {
+      "body": "Ein öffentlicher Korrekturkontakt wird später eingerichtet, ohne private Einreicherinformationen offenzulegen.",
+      "status": "Noch nicht eingerichtet",
+      "title": "Korrekturen"
+    },
+    "eyebrow": "Einreichen",
+    "form": {
+      "body": "Ein öffentliches Formular kann später für nicht-technische Beiträge verbunden werden. In diesem Plan wird kein externer Formulardienst eingerichtet.",
+      "status": "Formular später",
+      "title": "Öffentliches Formular"
+    },
+    "github": {
+      "body": "Technische Beitragende können Datenkorrekturen oder Schema-Verbesserungen über GitHub vorschlagen.",
+      "link": "GitHub-Issue öffnen",
+      "title": "GitHub-Issue"
+    },
+    "intro": "Beitragswege bleiben bewusst einfach und werden vor Veröffentlichung manuell geprüft.",
+    "reviewNotice": "Eingereichte Preise sollten Datum, Ladenadresse, Produkttyp und Quellenkontext enthalten. Ohne Prüfung wird nichts öffentlich.",
+    "title": "Dönerpreis einreichen"
   }
 }
