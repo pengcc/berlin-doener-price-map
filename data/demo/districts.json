@@ -1,0 +1,206 @@
+[
+  {
+    "id": "borough-charlottenburg-wilmersdorf",
+    "name": "Charlottenburg-Wilmersdorf",
+    "type": "borough"
+  },
+  {
+    "id": "borough-friedrichshain-kreuzberg",
+    "name": "Friedrichshain-Kreuzberg",
+    "type": "borough"
+  },
+  {
+    "id": "borough-lichtenberg",
+    "name": "Lichtenberg",
+    "type": "borough"
+  },
+  {
+    "id": "borough-marzahn-hellersdorf",
+    "name": "Marzahn-Hellersdorf",
+    "type": "borough"
+  },
+  {
+    "id": "borough-mitte",
+    "name": "Mitte",
+    "type": "borough"
+  },
+  {
+    "id": "borough-neukolln",
+    "name": "Neukölln",
+    "type": "borough"
+  },
+  {
+    "id": "borough-pankow",
+    "name": "Pankow",
+    "type": "borough"
+  },
+  {
+    "id": "borough-reinickendorf",
+    "name": "Reinickendorf",
+    "type": "borough"
+  },
+  {
+    "id": "borough-spandau",
+    "name": "Spandau",
+    "type": "borough"
+  },
+  {
+    "id": "borough-steglitz-zehlendorf",
+    "name": "Steglitz-Zehlendorf",
+    "type": "borough"
+  },
+  {
+    "id": "borough-tempelhof-schoneberg",
+    "name": "Tempelhof-Schöneberg",
+    "type": "borough"
+  },
+  {
+    "id": "borough-treptow-kopenick",
+    "name": "Treptow-Köpenick",
+    "type": "borough"
+  },
+  {
+    "id": "district-alt-treptow",
+    "name": "Alt-Treptow",
+    "type": "district",
+    "borough": "Treptow-Köpenick"
+  },
+  {
+    "id": "district-britz",
+    "name": "Britz",
+    "type": "district",
+    "borough": "Neukölln"
+  },
+  {
+    "id": "district-charlottenburg",
+    "name": "Charlottenburg",
+    "type": "district",
+    "borough": "Charlottenburg-Wilmersdorf"
+  },
+  {
+    "id": "district-friedrichsfelde",
+    "name": "Friedrichsfelde",
+    "type": "district",
+    "borough": "Lichtenberg"
+  },
+  {
+    "id": "district-friedrichshain",
+    "name": "Friedrichshain",
+    "type": "district",
+    "borough": "Friedrichshain-Kreuzberg"
+  },
+  {
+    "id": "district-hellersdorf",
+    "name": "Hellersdorf",
+    "type": "district",
+    "borough": "Marzahn-Hellersdorf"
+  },
+  {
+    "id": "district-kopenick",
+    "name": "Köpenick",
+    "type": "district",
+    "borough": "Treptow-Köpenick"
+  },
+  {
+    "id": "district-kreuzberg",
+    "name": "Kreuzberg",
+    "type": "district",
+    "borough": "Friedrichshain-Kreuzberg"
+  },
+  {
+    "id": "district-lichtenberg",
+    "name": "Lichtenberg",
+    "type": "district",
+    "borough": "Lichtenberg"
+  },
+  {
+    "id": "district-marzahn",
+    "name": "Marzahn",
+    "type": "district",
+    "borough": "Marzahn-Hellersdorf"
+  },
+  {
+    "id": "district-mitte",
+    "name": "Mitte",
+    "type": "district",
+    "borough": "Mitte"
+  },
+  {
+    "id": "district-neukolln",
+    "name": "Neukölln",
+    "type": "district",
+    "borough": "Neukölln"
+  },
+  {
+    "id": "district-pankow",
+    "name": "Pankow",
+    "type": "district",
+    "borough": "Pankow"
+  },
+  {
+    "id": "district-prenzlauer-berg",
+    "name": "Prenzlauer Berg",
+    "type": "district",
+    "borough": "Pankow"
+  },
+  {
+    "id": "district-reinickendorf",
+    "name": "Reinickendorf",
+    "type": "district",
+    "borough": "Reinickendorf"
+  },
+  {
+    "id": "district-schoneberg",
+    "name": "Schöneberg",
+    "type": "district",
+    "borough": "Tempelhof-Schöneberg"
+  },
+  {
+    "id": "district-siemensstadt",
+    "name": "Siemensstadt",
+    "type": "district",
+    "borough": "Spandau"
+  },
+  {
+    "id": "district-spandau",
+    "name": "Spandau",
+    "type": "district",
+    "borough": "Spandau"
+  },
+  {
+    "id": "district-steglitz",
+    "name": "Steglitz",
+    "type": "district",
+    "borough": "Steglitz-Zehlendorf"
+  },
+  {
+    "id": "district-tegel",
+    "name": "Tegel",
+    "type": "district",
+    "borough": "Reinickendorf"
+  },
+  {
+    "id": "district-tempelhof",
+    "name": "Tempelhof",
+    "type": "district",
+    "borough": "Tempelhof-Schöneberg"
+  },
+  {
+    "id": "district-wedding",
+    "name": "Wedding",
+    "type": "district",
+    "borough": "Mitte"
+  },
+  {
+    "id": "district-wilmersdorf",
+    "name": "Wilmersdorf",
+    "type": "district",
+    "borough": "Charlottenburg-Wilmersdorf"
+  },
+  {
+    "id": "district-zehlendorf",
+    "name": "Zehlendorf",
+    "type": "district",
+    "borough": "Steglitz-Zehlendorf"
+  }
+]

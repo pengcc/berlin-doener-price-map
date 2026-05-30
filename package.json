@@ -8,6 +8,7 @@
   "packageManager": "pnpm@10.34.1",
   "scripts": {
     "dev": "next dev",
+    "generate:demo-data": "tsx scripts/generate-demo-data.ts",
     "build": "next build",
     "start": "next start",
     "check": "biome check .",
@@ -18,7 +19,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest",
     "test:run": "vitest run",
-    "validate:data": "tsx scripts/validate-data.ts"
+    "validate:data": "tsx scripts/validate-data.ts",
+    "validate:demo-data": "tsx scripts/validate-demo-data.ts"
   },
   "dependencies": {
     "csv-parse": "^6.2.1",

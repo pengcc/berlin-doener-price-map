@@ -86,12 +86,14 @@ Available scaffold commands:
 
 ```bash
 pnpm dev
+pnpm generate:demo-data
 pnpm check
 pnpm check:fix
 pnpm typecheck
 pnpm test
 pnpm test:run
 pnpm validate:data
+pnpm validate:demo-data
 pnpm build
 ```
 
@@ -101,7 +103,7 @@ Deferred until later phases:
 pnpm test:e2e
 ```
 
-The initial public data files are intentionally empty/header-only until verified seed data is added. See [docs/data-schema.md](./docs/data-schema.md).
+The initial public data files are intentionally empty/header-only until verified seed data is added. Generated presentation data lives under `data/demo/` and can be selected in the UI or through static demo routes such as `/de/demo/prices`; real data remains at routes such as `/de/prices`. See [docs/data-schema.md](./docs/data-schema.md).
 
 Initial localized routes:
 
@@ -122,7 +124,7 @@ Initial localized routes:
 2. Done: data foundation with schemas, empty public data files, CSV loading, Zod validation, tests, and data validation script.
 3. Done: core calculations for latest prices, ranking rules, confidence/freshness labels, district statistics, and summary data.
 4. Done: first product pages without map: homepage, prices, ranking, districts, methodology, submit.
-5. Demo data seed decision: optional generated unverified data, clearly labeled and distinguishable from verified records.
+5. Done: demo data seed with optional generated unverified data, clearly labeled and distinguishable from verified records.
 6. Map MVP: React Leaflet map, MapTiler configuration, price markers, popups, filters.
 7. Contribution flow: external form links, GitHub issue template, review workflow docs.
 8. Quality and deployment: Vitest coverage, basic Playwright smoke tests, GitHub Actions, Vercel deployment.

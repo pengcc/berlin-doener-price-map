@@ -7,11 +7,11 @@ type Props = {
   params: Promise<{ locale: Locale }>;
 };
 
-export default async function SubmitPage({ params }: Props) {
+export default async function DemoSubmitPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const dataMode = "production";
+  const dataMode = "demo";
   const t = await getTranslations({ locale, namespace: "SubmitPage" });
 
   return (

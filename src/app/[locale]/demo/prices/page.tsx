@@ -12,11 +12,11 @@ type Props = {
   params: Promise<{ locale: Locale }>;
 };
 
-export default async function PricesPage({ params }: Props) {
+export default async function DemoPricesPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const dataMode = "production";
+  const dataMode = "demo";
   const t = await getTranslations({ locale, namespace: "PricesPage" });
   const labels = await getTranslations({ locale, namespace: "Labels" });
   const { dataSet } = loadAppDataSet(dataMode);

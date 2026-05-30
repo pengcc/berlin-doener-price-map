@@ -15,11 +15,11 @@ type Props = {
   params: Promise<{ locale: Locale }>;
 };
 
-export default async function HomePage({ params }: Props) {
+export default async function DemoHomePage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const dataMode = "production";
+  const dataMode = "demo";
   const t = await getTranslations({ locale, namespace: "HomePage" });
   const common = await getTranslations({ locale, namespace: "Common" });
   const { dataSet } = loadAppDataSet(dataMode);

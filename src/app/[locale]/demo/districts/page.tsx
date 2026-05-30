@@ -11,11 +11,11 @@ type Props = {
   params: Promise<{ locale: Locale }>;
 };
 
-export default async function DistrictsPage({ params }: Props) {
+export default async function DemoDistrictsPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const dataMode = "production";
+  const dataMode = "demo";
   const t = await getTranslations({ locale, namespace: "DistrictsPage" });
   const { dataSet } = loadAppDataSet(dataMode);
   const districts = calculateDistrictStats(dataSet);

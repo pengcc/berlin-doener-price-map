@@ -65,11 +65,11 @@ function RankingList({
   );
 }
 
-export default async function RankingPage({ params }: Props) {
+export default async function DemoRankingPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const dataMode = "production";
+  const dataMode = "demo";
   const t = await getTranslations({ locale, namespace: "RankingPage" });
   const labels = await getTranslations({ locale, namespace: "Labels" });
   const { dataSet } = loadAppDataSet(dataMode);
