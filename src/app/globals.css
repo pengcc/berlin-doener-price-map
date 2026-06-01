@@ -24,3 +24,28 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.leaflet-container {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.doener-price-marker {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.doener-price-marker span {
+  background: #14532d;
+  border: 2px solid #ffffff;
+  box-shadow: 0 8px 18px rgb(0 0 0 / 18%);
+  color: #ffffff;
+  display: inline-flex;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: 0.45rem 0.55rem;
+  white-space: nowrap;
+}

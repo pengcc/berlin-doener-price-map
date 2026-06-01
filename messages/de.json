@@ -23,6 +23,7 @@
     "brand": "Berlin Döner Price Map",
     "districts": "Bezirke",
     "home": "Übersicht",
+    "map": "Karte",
     "methodology": "Methodik",
     "navLabel": "Hauptnavigation",
     "prices": "Preise",
@@ -57,7 +58,8 @@
     "eyebrow": "Berlin Döner Price Map",
     "intro": "Ein praktisches Berliner Datentool zum Vergleichen von Dönerpreisen nach Laden, Bezirk und Aktualität. Der öffentliche Datensatz bleibt leer, bis geprüfte Beobachtungen ergänzt werden.",
     "mapPreview": {
-      "body": "Das Karten-MVP folgt später. Diese erste Produktoberfläche bereitet die Datenansichten vor, ohne Kartentiles oder browserabhängigen Kartencode einzubauen.",
+      "body": "Öffne die Karte, um aktuelle Preise nach Bezirk, Produkttyp, Vertrauen und Preisbereich zu vergleichen.",
+      "link": "Karte öffnen",
       "title": "Kartenvorschau"
     },
     "metrics": {
@@ -74,6 +76,46 @@
       "title": "Preisvorschau"
     },
     "title": "Dönerpreise in Berlin finden und vergleichen"
+  },
+  "MapPage": {
+    "empty": {
+      "body": "Der Produktionsdatensatz bleibt bewusst leer, bis geprüfte Ladenbeobachtungen verfügbar sind.",
+      "title": "Noch keine kartierbaren Preise"
+    },
+    "eyebrow": "Karte",
+    "filters": {
+      "allConfidence": "Alle Vertrauensstufen",
+      "allDistricts": "Alle Bezirke",
+      "allProducts": "Alle Produkte",
+      "anyMaxPrice": "Kein Maximum",
+      "anyMinPrice": "Kein Minimum",
+      "confidence": "Vertrauen",
+      "district": "Bezirk",
+      "maxPrice": "Höchstpreis",
+      "minPrice": "Mindestpreis",
+      "product": "Produkt",
+      "reset": "Zurücksetzen",
+      "summary": "{shown} von {total} Markern sichtbar",
+      "title": "Kartenfilter"
+    },
+    "intro": "Erkunde die neuesten nicht veralteten Preise als Ladenmarker. Filter laufen im Browser, während die Daten statisch bleiben.",
+    "noResults": {
+      "body": "Keine aktuellen Preise passen zu diesen Filtern. Setze die Filter zurück oder erweitere den Preisbereich.",
+      "title": "Keine passenden Marker"
+    },
+    "popup": {
+      "confidence": "Vertrauen",
+      "district": "Bezirk",
+      "observed": "Beobachtet",
+      "price": "Preis",
+      "product": "Produkt"
+    },
+    "tile": {
+      "localFallback": "Lokale Entwicklung nutzt OpenStreetMap-Tiles, wenn kein MapTiler-Schlüssel konfiguriert ist.",
+      "missingBody": "Setze NEXT_PUBLIC_MAPTILER_API_KEY, um Produktions-Kartentiles zu laden. Ohne diesen Schlüssel werden in Produktion keine externen Fallback-Tiles geladen.",
+      "title": "Kartentiles sind nicht konfiguriert"
+    },
+    "title": "Berliner Dönerpreiskarte"
   },
   "PricesPage": {
     "empty": {

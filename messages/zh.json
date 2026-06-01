@@ -23,6 +23,7 @@
     "brand": "Berlin Döner Price Map",
     "districts": "区域",
     "home": "概览",
+    "map": "地图",
     "methodology": "方法",
     "navLabel": "主导航",
     "prices": "价格",
@@ -57,7 +58,8 @@
     "eyebrow": "Berlin Döner Price Map",
     "intro": "一个实用的柏林本地数据工具，用于按店铺、区域和新鲜度比较 Döner 价格。公开数据集会保持为空，直到加入已审核观察记录。",
     "mapPreview": {
-      "body": "地图 MVP 会在后续阶段实现。当前阶段先准备数据视图，不加入地图瓦片或依赖浏览器的地图代码。",
+      "body": "打开地图，按区域、产品类型、可信度和价格范围比较当前价格。",
+      "link": "打开地图",
       "title": "地图预览"
     },
     "metrics": {
@@ -74,6 +76,46 @@
       "title": "价格预览"
     },
     "title": "在柏林查找并比较 Döner 价格"
+  },
+  "MapPage": {
+    "empty": {
+      "body": "生产数据集会保持为空，直到有已审核的店铺观察记录。",
+      "title": "暂无可显示在地图上的价格"
+    },
+    "eyebrow": "地图",
+    "filters": {
+      "allConfidence": "全部可信度",
+      "allDistricts": "全部区域",
+      "allProducts": "全部产品",
+      "anyMaxPrice": "不限最高价",
+      "anyMinPrice": "不限最低价",
+      "confidence": "可信度",
+      "district": "区域",
+      "maxPrice": "最高价格",
+      "minPrice": "最低价格",
+      "product": "产品",
+      "reset": "重置",
+      "summary": "显示 {shown} / {total} 个标记",
+      "title": "地图筛选"
+    },
+    "intro": "用店铺标记查看最新且未过期的价格。筛选在浏览器中完成，数据仍保持静态。",
+    "noResults": {
+      "body": "没有当前价格匹配这些筛选条件。可以重置筛选或扩大价格范围。",
+      "title": "没有匹配的标记"
+    },
+    "popup": {
+      "confidence": "可信度",
+      "district": "区域",
+      "observed": "观察日期",
+      "price": "价格",
+      "product": "产品"
+    },
+    "tile": {
+      "localFallback": "本地开发在未配置 MapTiler key 时使用 OpenStreetMap 瓦片。",
+      "missingBody": "设置 NEXT_PUBLIC_MAPTILER_API_KEY 后才能加载生产地图瓦片。在生产环境中，如果没有这个 key，不会加载外部备用瓦片。",
+      "title": "地图瓦片尚未配置"
+    },
+    "title": "柏林 Döner 价格地图"
   },
   "PricesPage": {
     "empty": {

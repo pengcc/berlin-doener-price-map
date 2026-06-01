@@ -10,7 +10,7 @@ The project is designed as a practical technical showcase: a low-cost Next.js ap
 
 ## Status
 
-This repository has a runnable Next.js app with locale-prefixed routes for German, English, and Chinese. Static data files, validation, tests, pure read-model utilities, and the first non-map product pages are implemented. Map features and production submission services are planned but not implemented yet.
+This repository has a runnable Next.js app with locale-prefixed routes for German, English, and Chinese. Static data files, validation, tests, pure read-model utilities, first product pages, opt-in demo data, and the Map MVP are implemented. Production submission services are planned but not implemented yet.
 
 Current local project guidance lives in:
 
@@ -111,12 +111,24 @@ Initial localized routes:
 /de
 /en
 /zh
+/de/map
 /de/prices
 /de/ranking
 /de/districts
 /de/methodology
 /de/submit
+/de/demo/map
 ```
+
+## Map Tile Configuration
+
+The map uses React Leaflet. Production tiles require a public MapTiler key:
+
+```bash
+NEXT_PUBLIC_MAPTILER_API_KEY=...
+```
+
+When that key exists, the app loads MapTiler `streets-v4` raster tiles. Without a key, local development can use OpenStreetMap tiles for light manual verification, but production shows a no-key notice instead of loading external fallback tiles.
 
 ## Roadmap
 
@@ -125,7 +137,7 @@ Initial localized routes:
 3. Done: core calculations for latest prices, ranking rules, confidence/freshness labels, district statistics, and summary data.
 4. Done: first product pages without map: homepage, prices, ranking, districts, methodology, submit.
 5. Done: demo data seed with optional generated unverified data, clearly labeled and distinguishable from verified records.
-6. Map MVP: React Leaflet map, MapTiler configuration, price markers, popups, filters.
+6. Done: Map MVP with React Leaflet, MapTiler configuration, price markers, popups, filters, and local-development OSM fallback.
 7. Contribution flow: external form links, GitHub issue template, review workflow docs.
 8. Quality and deployment: Vitest coverage, basic Playwright smoke tests, GitHub Actions, Vercel deployment.
 
