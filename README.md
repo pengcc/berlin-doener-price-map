@@ -10,7 +10,7 @@ The project is designed as a practical technical showcase: a low-cost Next.js ap
 
 ## Status
 
-This repository has a runnable Next.js app with locale-prefixed routes for German, English, and Chinese. Static data files, validation, tests, pure read-model utilities, first product pages, opt-in demo data, and the Map MVP are implemented. Production submission services are planned but not implemented yet.
+This repository has a runnable Next.js app with locale-prefixed routes for German, English, and Chinese. Static data files, validation, tests, pure read-model utilities, first product pages, opt-in demo data, the Map MVP, and a manually reviewed contribution flow are implemented.
 
 Current local project guidance lives in:
 
@@ -28,7 +28,7 @@ The MVP will provide:
 - `/prices` with searchable, sortable, filterable price table.
 - `/ranking` for cheapest, most expensive, recently updated, and high-confidence prices.
 - `/districts` with average, median, min, max, sample count, and last update per district.
-- `/submit` with Tally/Google Form, GitHub Issue, and email contribution paths.
+- `/submit` with optional public form, GitHub issue forms, and optional correction contact paths.
 - `/methodology` explaining sources, manual review, freshness, confidence, ranking rules, and limitations.
 
 Out of scope for MVP:
@@ -130,6 +130,18 @@ NEXT_PUBLIC_MAPTILER_API_KEY=...
 
 When that key exists, the app loads MapTiler `streets-v4` raster tiles. Without a key, local development can use OpenStreetMap tiles for light manual verification, but production shows a no-key notice instead of loading external fallback tiles.
 
+## Contribution Configuration
+
+The submit page always links to structured GitHub issue forms for price observations and data corrections. Optional public channels can be configured without committing private contact details or service credentials:
+
+```bash
+DOENER_PRICE_FORM_URL=...
+DOENER_CORRECTION_EMAIL=...
+DOENER_CORRECTION_URL=...
+```
+
+`DOENER_CORRECTION_URL` takes precedence over `DOENER_CORRECTION_EMAIL` when both are set. Public submissions remain review inputs only; see [docs/contribution-review-workflow.md](./docs/contribution-review-workflow.md).
+
 ## Roadmap
 
 1. Done: project scaffold with Next.js, TypeScript, Tailwind v4, Biome, pnpm, mise, `next-intl`, and base localized routes.
@@ -138,7 +150,7 @@ When that key exists, the app loads MapTiler `streets-v4` raster tiles. Without 
 4. Done: first product pages without map: homepage, prices, ranking, districts, methodology, submit.
 5. Done: demo data seed with optional generated unverified data, clearly labeled and distinguishable from verified records.
 6. Done: Map MVP with React Leaflet, MapTiler configuration, price markers, popups, filters, and local-development OSM fallback.
-7. Contribution flow: external form links, GitHub issue template, review workflow docs.
+7. Done: Contribution flow with optional external form links, GitHub issue forms, and review workflow docs.
 8. Quality and deployment: Vitest coverage, basic Playwright smoke tests, GitHub Actions, Vercel deployment.
 
 ## Development Principles

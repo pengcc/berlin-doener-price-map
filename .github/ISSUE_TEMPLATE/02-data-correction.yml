@@ -1,0 +1,53 @@
+name: Data correction
+description: Report a wrong price, shop status, address, duplicate, or metadata issue.
+title: "[Correction]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to report corrections to already visible data or page content. Do not include private contact details, private upload links, or information that should not be published.
+  - type: dropdown
+    id: correction-type
+    attributes:
+      label: Correction type
+      options:
+        - Wrong price
+        - Outdated price
+        - Wrong shop address
+        - Shop closed or status changed
+        - Duplicate shop
+        - Wrong district or borough
+        - Other metadata issue
+      default: 0
+    validations:
+      required: true
+  - type: input
+    id: affected-shop
+    attributes:
+      label: Affected shop or page
+      description: Include the shop name, address, or page URL if available.
+      placeholder: "Example: Demo Doener Mitte or /de/prices"
+    validations:
+      required: true
+  - type: textarea
+    id: correction-details
+    attributes:
+      label: What should change?
+      description: Explain the current issue and the corrected value.
+      placeholder: "Example: The shop is marked active, but it has been closed since May 2026."
+    validations:
+      required: true
+  - type: textarea
+    id: source-context
+    attributes:
+      label: Source or evidence context
+      description: Public source URLs are okay. Avoid private uploads or personal contact data.
+    validations:
+      required: false
+  - type: checkboxes
+    id: review-policy
+    attributes:
+      label: Manual review
+      options:
+        - label: I understand corrections are manually reviewed before public data files are changed.
+          required: true

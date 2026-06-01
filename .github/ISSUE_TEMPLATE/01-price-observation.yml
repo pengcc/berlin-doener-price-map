@@ -1,0 +1,98 @@
+name: Price observation
+description: Submit a Berlin Döner price observation for manual review.
+title: "[Price]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve Berlin Döner Price Map. Submissions are manually reviewed before they become public data. Do not include private contact details, private upload links, or information that should not be published.
+  - type: input
+    id: shop-name
+    attributes:
+      label: Shop name
+      description: Use the visible shop name if known.
+      placeholder: "Example: Rüyada Gemüse Kebab"
+    validations:
+      required: false
+  - type: input
+    id: shop-address
+    attributes:
+      label: Shop address
+      description: Street address in Berlin. This is required so the observation can be matched or reviewed.
+      placeholder: "Example: Hauptstraße 133, 10827 Berlin"
+    validations:
+      required: true
+  - type: input
+    id: district
+    attributes:
+      label: District or Ortsteil
+      placeholder: "Example: Schöneberg"
+    validations:
+      required: false
+  - type: input
+    id: observed-at
+    attributes:
+      label: Observation date
+      description: Use YYYY-MM-DD if possible.
+      placeholder: "2026-06-01"
+    validations:
+      required: true
+  - type: input
+    id: price
+    attributes:
+      label: Observed price
+      description: Use euros. Store-ready data will be converted to integer cents during review.
+      placeholder: "Example: 7.50 EUR"
+    validations:
+      required: true
+  - type: dropdown
+    id: product-type
+    attributes:
+      label: Product type
+      options:
+        - standard_doener
+        - chicken_doener
+        - veal_doener
+        - gemuese_doener
+        - vegan_doener
+        - dueruem
+        - doener_box
+      default: 0
+    validations:
+      required: true
+  - type: dropdown
+    id: source-type
+    attributes:
+      label: Source type
+      options:
+        - menu_photo
+        - manual_observation
+        - shop_website
+        - user_submission
+        - delivery_platform
+        - unknown
+      default: 3
+    validations:
+      required: true
+  - type: textarea
+    id: source-context
+    attributes:
+      label: Source context
+      description: Describe what you saw and where the price came from. Public source URLs are okay; private upload links are not.
+      placeholder: "Example: observed on the printed menu at the counter."
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes for reviewers
+      description: Optional details such as portion size caveats, delivery-platform caveats, or possible duplicate shop names.
+    validations:
+      required: false
+  - type: checkboxes
+    id: review-policy
+    attributes:
+      label: Manual review
+      options:
+        - label: I understand this submission will be manually reviewed and will not appear publicly until accepted into the static data files.
+          required: true

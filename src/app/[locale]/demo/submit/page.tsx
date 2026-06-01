@@ -1,7 +1,12 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { AppShell } from "@/components/app/app-shell";
 import { PageHeader } from "@/components/app/page-header";
+import {
+  type ContributionCard,
+  ContributionOptions,
+} from "@/components/contribution/contribution-options";
 import type { Locale } from "@/i18n/routing";
+import { getContributionConfig } from "@/lib/contribution/contribution-config";
 
 type Props = {
   params: Promise<{ locale: Locale }>;
@@ -13,6 +18,43 @@ export default async function DemoSubmitPage({ params }: Props) {
 
   const dataMode = "demo";
   const t = await getTranslations({ locale, namespace: "SubmitPage" });
+  const contributionConfig = getContributionConfig();
+  const cards: ContributionCard[] = [
+    {
+      actionLabel: t("form.link"),
+      body: contributionConfig.priceFormUrl
+        ? t("form.bodyAvailable")
+        : t("form.bodyUnavailable"),
+      disabledLabel: t("form.disabled"),
+      href: contributionConfig.priceFormUrl,
+      status: contributionConfig.priceFormUrl
+        ? t("form.statusAvailable")
+        : t("form.statusUnavailable"),
+      title: t("form.title"),
+    },
+    {
+      actionLabel: t("github.link"),
+      body: t("github.body"),
+      href: contributionConfig.githubPriceObservationUrl,
+      status: t("github.status"),
+      title: t("github.title"),
+    },
+    {
+      actionLabel: contributionConfig.correctionContact
+        ? t("corrections.linkContact")
+        : t("corrections.linkGithub"),
+      body: contributionConfig.correctionContact
+        ? t("corrections.bodyContact")
+        : t("corrections.bodyGithub"),
+      href:
+        contributionConfig.correctionContact?.href ??
+        contributionConfig.githubCorrectionIssueUrl,
+      status: contributionConfig.correctionContact
+        ? t("corrections.statusContact")
+        : t("corrections.statusGithub"),
+      title: t("corrections.title"),
+    },
+  ];
 
   return (
     <AppShell activeHref="/submit" dataMode={dataMode} locale={locale}>
@@ -22,46 +64,7 @@ export default async function DemoSubmitPage({ params }: Props) {
         title={t("title")}
       />
 
-      <section className="grid gap-5 lg:grid-cols-3">
-        <div className="border border-neutral-900/10 bg-white p-5">
-          <h2 className="font-semibold text-xl">{t("form.title")}</h2>
-          <p className="mt-3 text-neutral-700 text-sm leading-6">
-            {t("form.body")}
-          </p>
-          <p className="mt-5 inline-flex min-h-10 items-center border border-neutral-900/15 bg-neutral-100 px-3 text-neutral-600 text-sm">
-            {t("form.status")}
-          </p>
-        </div>
-
-        <div className="border border-neutral-900/10 bg-white p-5">
-          <h2 className="font-semibold text-xl">{t("github.title")}</h2>
-          <p className="mt-3 text-neutral-700 text-sm leading-6">
-            {t("github.body")}
-          </p>
-          <a
-            className="mt-5 inline-flex min-h-10 items-center bg-neutral-950 px-3 font-medium text-sm text-white"
-            href="https://github.com/pengcc/berlin-doener-price-map/issues/new"
-            rel="noreferrer"
-            target="_blank"
-          >
-            {t("github.link")}
-          </a>
-        </div>
-
-        <div className="border border-neutral-900/10 bg-white p-5">
-          <h2 className="font-semibold text-xl">{t("corrections.title")}</h2>
-          <p className="mt-3 text-neutral-700 text-sm leading-6">
-            {t("corrections.body")}
-          </p>
-          <p className="mt-5 inline-flex min-h-10 items-center border border-neutral-900/15 bg-neutral-100 px-3 text-neutral-600 text-sm">
-            {t("corrections.status")}
-          </p>
-        </div>
-      </section>
-
-      <section className="border border-amber-700/20 bg-amber-50 p-5 text-amber-950 text-sm leading-6">
-        {t("reviewNotice")}
-      </section>
+      <ContributionOptions cards={cards} reviewNotice={t("reviewNotice")} />
     </AppShell>
   );
 }
