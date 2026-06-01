@@ -203,20 +203,29 @@
   },
   "SubmitPage": {
     "corrections": {
-      "body": "后续会配置公开纠错入口，同时避免公开提交者的私人信息。",
-      "status": "尚未配置",
+      "bodyContact": "使用已配置的公开纠错入口，提交错误价格、停业店铺、地址问题、重复记录或元数据修正。",
+      "bodyGithub": "目前尚未配置单独的纠错入口，因此纠错会使用结构化 GitHub 备用入口。",
+      "linkContact": "提交纠错",
+      "linkGithub": "打开纠错 Issue",
+      "statusContact": "公开入口已配置",
+      "statusGithub": "GitHub 备用入口",
       "title": "纠错"
     },
     "eyebrow": "提交",
     "form": {
-      "body": "后续可以为非技术贡献者接入公开表单。本计划不会配置外部表单服务。",
-      "status": "表单后续处理",
+      "bodyAvailable": "使用已配置的公开表单提交价格，适合非技术贡献者。表单不应要求私有凭据。",
+      "bodyUnavailable": "目前尚未配置公开表单。结构化 GitHub Issue 表单仍然可用。",
+      "disabled": "表单未配置",
+      "link": "打开公开表单",
+      "statusAvailable": "公开表单已配置",
+      "statusUnavailable": "表单不可用",
       "title": "公开表单"
     },
     "github": {
-      "body": "技术贡献者可以通过 GitHub 提出数据修正或 schema 改进。",
-      "link": "打开 GitHub Issue",
-      "title": "GitHub Issue"
+      "body": "使用结构化 GitHub Issue 表单提交价格观察，需要包含店铺、地址、产品、日期、价格和来源说明。",
+      "link": "打开价格 Issue",
+      "status": "始终可用",
+      "title": "GitHub 价格 Issue"
     },
     "intro": "贡献入口保持简单，所有内容公开前都会人工审核。",
     "reviewNotice": "提交价格时应包含日期、店铺地址、产品类型和来源说明。未经审核不会公开。",

@@ -203,20 +203,29 @@
   },
   "SubmitPage": {
     "corrections": {
-      "body": "Ein öffentlicher Korrekturkontakt wird später eingerichtet, ohne private Einreicherinformationen offenzulegen.",
-      "status": "Noch nicht eingerichtet",
+      "bodyContact": "Nutze den konfigurierten öffentlichen Korrekturkontakt für falsche Preise, geschlossene Läden, Adressprobleme, Duplikate oder Metadatenfehler.",
+      "bodyGithub": "Es ist noch kein separater Korrekturkontakt eingerichtet, daher laufen Korrekturen über das strukturierte GitHub-Fallback.",
+      "linkContact": "Korrektur senden",
+      "linkGithub": "Korrektur-Issue öffnen",
+      "statusContact": "Öffentlicher Kontakt aktiv",
+      "statusGithub": "GitHub-Fallback",
       "title": "Korrekturen"
     },
     "eyebrow": "Einreichen",
     "form": {
-      "body": "Ein öffentliches Formular kann später für nicht-technische Beiträge verbunden werden. In diesem Plan wird kein externer Formulardienst eingerichtet.",
-      "status": "Formular später",
+      "bodyAvailable": "Nutze das konfigurierte öffentliche Formular für nicht-technische Preiseinreichungen. Das Formular darf keine privaten Zugangsdaten erfordern.",
+      "bodyUnavailable": "Es ist noch kein öffentliches Formular eingerichtet. Strukturierte GitHub-Issue-Formulare bleiben verfügbar.",
+      "disabled": "Formular nicht eingerichtet",
+      "link": "Öffentliches Formular öffnen",
+      "statusAvailable": "Öffentliches Formular aktiv",
+      "statusUnavailable": "Formular nicht verfügbar",
       "title": "Öffentliches Formular"
     },
     "github": {
-      "body": "Technische Beitragende können Datenkorrekturen oder Schema-Verbesserungen über GitHub vorschlagen.",
-      "link": "GitHub-Issue öffnen",
-      "title": "GitHub-Issue"
+      "body": "Nutze das strukturierte GitHub-Issue-Formular für eine Preisbeobachtung mit Laden, Adresse, Produkt, Datum, Preis und Quellenkontext.",
+      "link": "Preis-Issue öffnen",
+      "status": "Immer verfügbar",
+      "title": "GitHub-Preis-Issue"
     },
     "intro": "Beitragswege bleiben bewusst einfach und werden vor Veröffentlichung manuell geprüft.",
     "reviewNotice": "Eingereichte Preise sollten Datum, Ladenadresse, Produkttyp und Quellenkontext enthalten. Ohne Prüfung wird nichts öffentlich.",

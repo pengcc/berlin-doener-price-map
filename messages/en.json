@@ -203,20 +203,29 @@
   },
   "SubmitPage": {
     "corrections": {
-      "body": "A public correction contact path will be configured later without exposing private submitter details.",
-      "status": "Not configured yet",
+      "bodyContact": "Use the configured public correction contact for wrong prices, closed shops, address issues, duplicates, or metadata fixes.",
+      "bodyGithub": "No separate correction contact is configured yet, so corrections use the structured GitHub fallback.",
+      "linkContact": "Send correction",
+      "linkGithub": "Open correction issue",
+      "statusContact": "Public contact configured",
+      "statusGithub": "GitHub fallback",
       "title": "Corrections"
     },
     "eyebrow": "Submit",
     "form": {
-      "body": "A public form can be connected later for non-technical contributors. No external form service is configured in this plan.",
-      "status": "Form deferred",
+      "bodyAvailable": "Use the configured public form for non-technical price submissions. The form must not require private credentials.",
+      "bodyUnavailable": "No public form is configured yet. GitHub issue forms remain available for structured submissions.",
+      "disabled": "Form not configured",
+      "link": "Open public form",
+      "statusAvailable": "Public form configured",
+      "statusUnavailable": "Form unavailable",
       "title": "Public form"
     },
     "github": {
-      "body": "Technical contributors can suggest data corrections or schema improvements through GitHub.",
-      "link": "Open GitHub issue",
-      "title": "GitHub issue"
+      "body": "Use the structured GitHub issue form for a price observation with shop, address, product, date, price, and source context.",
+      "link": "Open price issue",
+      "status": "Always available",
+      "title": "GitHub price issue"
     },
     "intro": "Contribution paths are intentionally simple and manually reviewed before publication.",
     "reviewNotice": "Submitted prices should include a date, shop address, product type, and source context. Nothing becomes public without review.",
