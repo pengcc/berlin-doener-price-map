@@ -10,7 +10,7 @@ The project is designed as a practical technical showcase: a low-cost Next.js ap
 
 ## Status
 
-This repository has a runnable Next.js app with locale-prefixed routes for German, English, and Chinese. Static data files, validation, tests, pure read-model utilities, first product pages, opt-in demo data, the Map MVP, and a manually reviewed contribution flow are implemented.
+This repository has a runnable Next.js app with locale-prefixed routes for German, English, and Chinese. Static data files, validation, tests, pure read-model utilities, first product pages, opt-in demo data, the Map MVP, a manually reviewed contribution flow, and launch-readiness smoke checks are implemented.
 
 Current local project guidance lives in:
 
@@ -92,15 +92,10 @@ pnpm check:fix
 pnpm typecheck
 pnpm test
 pnpm test:run
+pnpm test:e2e
 pnpm validate:data
 pnpm validate:demo-data
 pnpm build
-```
-
-Deferred until later phases:
-
-```bash
-pnpm test:e2e
 ```
 
 The initial public data files are intentionally empty/header-only until verified seed data is added. Generated presentation data lives under `data/demo/` and can be selected in the UI or through static demo routes such as `/de/demo/prices`; real data remains at routes such as `/de/prices`. See [docs/data-schema.md](./docs/data-schema.md).
@@ -142,6 +137,10 @@ DOENER_CORRECTION_URL=...
 
 `DOENER_CORRECTION_URL` takes precedence over `DOENER_CORRECTION_EMAIL` when both are set. Public submissions remain review inputs only; see [docs/contribution-review-workflow.md](./docs/contribution-review-workflow.md).
 
+## Deployment Readiness
+
+Launch readiness is documented in [docs/deployment-readiness.md](./docs/deployment-readiness.md). The project targets Vercel with Node 24, pnpm 10, static data files, MapTiler production tiles through `NEXT_PUBLIC_MAPTILER_API_KEY`, and Vercel Analytics disabled by default.
+
 ## Roadmap
 
 1. Done: project scaffold with Next.js, TypeScript, Tailwind v4, Biome, pnpm, mise, `next-intl`, and base localized routes.
@@ -151,7 +150,7 @@ DOENER_CORRECTION_URL=...
 5. Done: demo data seed with optional generated unverified data, clearly labeled and distinguishable from verified records.
 6. Done: Map MVP with React Leaflet, MapTiler configuration, price markers, popups, filters, and local-development OSM fallback.
 7. Done: Contribution flow with optional external form links, GitHub issue forms, and review workflow docs.
-8. Quality and deployment: Vitest coverage, basic Playwright smoke tests, GitHub Actions, Vercel deployment.
+8. Done: Quality and deployment readiness with Vitest coverage, Chromium Playwright smoke tests, GitHub Actions, and Vercel readiness docs.
 
 ## Development Principles
 
