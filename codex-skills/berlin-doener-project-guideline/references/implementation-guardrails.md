@@ -154,6 +154,19 @@ For substantial tasks and saved-plan execution, automatically track a work sessi
 - If the session is interrupted and resumed later, record an approximate entry and mark it `estimated` when needed.
 - If the user says not to count a discussion or task, exclude it from the work log.
 
+## Usage Budget Checkpoint Gate
+
+Codex cannot directly inspect the Codex 5h usage meter. Use the user's visible usage information when available, and use continuous work time in `dev_locals/work-log.md` as a rough proxy when planning the next work chunk.
+
+This gate is advisory and user-directed. Do not automatically switch to conservative mode, stop execution, or downgrade work quality only because a time threshold is near.
+
+- Around 90 minutes of continuous work, remind the user to check the remaining Codex 5h usage before starting another substantial chunk.
+- Around 2 hours of continuous work, if the next step is long, high-impact, or hard to interrupt, ask the user to check usage and choose whether to continue, narrow scope, create a coherent checkpoint then pause, or proceed in smaller chunks.
+- Apply the 2-hour check before long analysis, complex planning, broad refactors, publish flow, browser verification, CI debug, rebase/merge, dependency changes, and other work where interruption would create recovery cost.
+- If the user reports enough remaining usage, proceed normally while still using coherent checkpoints.
+- If the user reports low remaining usage, prefer a small coherent slice, a self-contained checkpoint commit, or a pause before the risky step.
+- If the user explicitly continues without usage information, continue in smaller coherent slices and checkpoint more frequently.
+
 ## Git Workflow for Saved Plans
 
 For saved plan execution, the agreed default is:
