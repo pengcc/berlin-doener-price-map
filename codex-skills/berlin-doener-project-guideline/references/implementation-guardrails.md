@@ -21,6 +21,15 @@ Use the lightest workflow that still protects quality, cost, security, data cont
 - Use browser verification for meaningful frontend, UI, responsive layout, map, chart, or interaction changes when the app is runnable. Prefer the in-app Browser or Playwright smoke tests depending on the task.
 - Use `berlin-doener-publish-current-branch` when the user says `publish-current-branch`; that workflow uses `gh` CLI by default for PR creation and auto-merge, scoped to `pengcc/berlin-doener-price-map`.
 
+Reasoning and speed settings are collaboration/runtime choices, not repository state. Codex should recommend adjustments when useful, but it should not block execution if the user keeps the current setting. Recommended defaults:
+
+- Use xhigh reasoning for new-project foundation, architecture, roadmap, workflow/guideline changes, and long-term cost, security, privacy, deployment, or data-quality decisions.
+- Use high reasoning for complex plan execution, cross-module implementation, difficult debugging, and formal code review.
+- Use medium reasoning for normal feature work, documentation sync, and small refactors.
+- Use low or minimal reasoning for simple status checks, mechanical commands, and tiny edits.
+- Use standard speed for planning, architecture, formal review, and risk analysis. Fast mode is acceptable for executing an already decision-complete plan, but switch back to standard speed when tests fail, scope changes, or a design/cost/security/data-quality decision appears.
+- If the user does not adjust reasoning or speed, continue with the current setting and record that assumption in the saved plan or final summary when it materially affects risk.
+
 ## Cost and External Services
 
 The project has no meaningful revenue, so the target recurring cost is zero. Near-zero/free-tier services are acceptable only when they do not create surprise billing risk and are explicitly justified.
@@ -116,6 +125,18 @@ If implementation reveals an unexpected issue before the plan is updated, stop a
 
 Before committing substantial changes, perform a lightweight self-review and record the result in the plan when a saved plan exists. Check for behavioral bugs, branch-base mistakes, test gaps, cost/security/privacy implications, data-quality risks, and intentional omissions. This does not replace formal code review when the user explicitly asks for one.
 
+## Checkpoint Commit Discipline
+
+Usage limits, interruptions, browser/tool blockers, and context transitions are normal execution risks. Reduce recovery risk by committing coherent checkpoints once they are meaningful and reviewable.
+
+- Commit after a completed plan step or tightly related group of steps, not after arbitrary tiny edits.
+- Commit after dependency/setup changes are paired with compiling code and the closest relevant checks.
+- Commit after focused tests pass for a new shared data model, validation rule, route, or UI surface.
+- Prefer a checkpoint before risky or long-running browser verification, publishing, branch reshaping, or other work likely to be interrupted.
+- If a Usage-limit interruption is likely, create a checkpoint once the current state is coherent rather than leaving large uncommitted changes.
+- Do not commit broken or half-applied work unless it is an explicitly marked work-in-progress checkpoint requested by the user.
+- Keep unrelated product and workflow changes in separate commits and, when practical, separate branches.
+
 ## Final Response Discipline
 
 After completing a task, end the final response with a clearly labeled recommended next step or next work section. Keep it concise and actionable, and place it as the last visible section so the user can find it quickly. This rule applies to normal completion summaries; stricter system, collaboration-mode, or tool-specific output formats take precedence.
@@ -139,7 +160,7 @@ For saved plan execution, the agreed default is:
 
 - After a previous feature PR has merged, refresh local `main` from `origin/main` before starting the next plan or next-stage Plan Mode analysis.
 - Create the next plan-specific branch from the updated `main`; do not create new feature branches from completed feature branches unless the user explicitly asks.
-- Commit related changes after successful execution or a coherent checkpoint, unless the user asks not to commit.
+- Commit related changes after successful execution or a coherent checkpoint, unless the user asks not to commit. Prefer these checkpoints before long-running verification, publish, or likely interruption.
 - Do not push to a remote unless the user explicitly asks to push.
 - Do not revert unrelated user changes. Work around them or pause only if they make the plan impossible.
 

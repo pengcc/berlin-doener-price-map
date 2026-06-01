@@ -41,6 +41,13 @@ If not in Plan Mode and the user chooses to continue, perform the same analysis 
 
 For new-project foundation planning, introduce collaboration-mode choices early: Plan Mode threshold, saved-plan memory, explicit Goal usage, code review vs lightweight self-review, browser verification expectations, and publish workflow defaults.
 
+Also recommend reasoning/speed settings when they materially affect planning quality:
+
+- xhigh reasoning for foundation setup, architecture, roadmap, workflow/guideline, and long-term cost/security/privacy/data-quality planning.
+- high reasoning for complex implementation planning, difficult debugging strategy, or formal review planning.
+- standard speed for planning and risk analysis.
+- If the user does not adjust settings, continue with the current setting and record that assumption when relevant.
+
 ## Scope Clarification Gate
 
 Before creating a saved plan, decide whether the request is clear enough.
