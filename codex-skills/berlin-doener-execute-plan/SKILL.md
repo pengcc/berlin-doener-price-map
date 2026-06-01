@@ -73,6 +73,19 @@ Commit coherent checkpoints to reduce interruption and Usage-limit recovery risk
 - Do not commit arbitrary tiny edits or broken half-applied work unless the user explicitly asks for a work-in-progress checkpoint.
 - Keep unrelated product and workflow changes in separate commits and, when practical, separate branches.
 
+## Usage Budget Checkpoint Gate
+
+Codex cannot directly inspect the Codex 5h usage meter. Use the user's visible usage information when available, and use continuous work time in `dev_locals/work-log.md` as a proxy before choosing the next execution chunk.
+
+This gate is advisory, not an automatic conservative-mode switch:
+
+- Around 90 minutes of continuous work, remind the user to check remaining usage before starting another substantial chunk.
+- Around 2 hours of continuous work, ask the user to check usage before starting long or hard-to-interrupt execution work such as publish flow, browser verification, CI debug, broad refactors, dependency changes, rebase/merge, or branch reshaping.
+- Ask whether to continue, narrow the next slice, create a coherent checkpoint then pause, or proceed in smaller chunks.
+- If the user reports enough remaining usage, proceed normally and keep normal checkpoint discipline.
+- If the user reports low remaining usage, prefer a small coherent slice or checkpoint before the risky step.
+- If the user explicitly continues without usage information, continue in smaller coherent slices with more frequent checkpoints.
+
 ## Git Workflow
 
 Use this default workflow for saved plan execution:

@@ -48,6 +48,8 @@ Also recommend reasoning/speed settings when they materially affect planning qua
 - standard speed for planning and risk analysis.
 - If the user does not adjust settings, continue with the current setting and record that assumption when relevant.
 
+Apply a Usage Budget Checkpoint Gate for long planning sessions. Codex cannot directly inspect the Codex 5h usage meter, so use the user's visible usage information when available and `dev_locals/work-log.md` continuous work time as a rough proxy. Around 90 minutes of continuous work, remind the user to check remaining usage. Around 2 hours, before starting long or hard-to-interrupt analysis such as architecture, roadmap, workflow/guideline, cost/security/privacy, or data-quality planning, ask whether to continue, narrow scope, pause after saving the plan, or proceed in smaller chunks. This is advisory; if the user explicitly continues without usage information, keep planning in smaller coherent slices and save the plan state frequently.
+
 ## Scope Clarification Gate
 
 Before creating a saved plan, decide whether the request is clear enough.
