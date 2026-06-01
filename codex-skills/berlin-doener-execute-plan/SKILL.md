@@ -52,6 +52,27 @@ Before committing substantial changes, perform a short self-review and record th
 
 This is not required for trivial edits. If the user explicitly asks for a review, switch to a formal code-review stance with findings first.
 
+## Reasoning And Speed Recommendations
+
+Codex may recommend reasoning/speed settings, but these are user-controlled runtime choices. Do not block execution if the user keeps the current setting.
+
+- Recommend xhigh reasoning for foundation, architecture, roadmap, workflow/guideline, and long-term cost/security/privacy/data-quality decisions.
+- Recommend high reasoning for complex execution, cross-module implementation, difficult debugging, and formal code review.
+- Use medium as the normal default for ordinary feature work, docs sync, and small refactors.
+- Use low or minimal only for simple status checks, mechanical commands, or tiny edits.
+- Recommend standard speed for planning, architecture, review, and risk analysis; fast mode is acceptable for executing an already decision-complete plan.
+- If the user does not adjust settings, continue and record the assumption in the saved plan when it matters.
+
+## Checkpoint Commit Discipline
+
+Commit coherent checkpoints to reduce interruption and Usage-limit recovery risk:
+
+- Commit after a completed plan step or tightly related group of steps, once the closest relevant checks pass.
+- Commit dependency/setup changes only when paired with compiling code or documented validation.
+- Prefer a checkpoint before long-running browser verification, publishing, branch reshaping, or likely Usage-limit interruption.
+- Do not commit arbitrary tiny edits or broken half-applied work unless the user explicitly asks for a work-in-progress checkpoint.
+- Keep unrelated product and workflow changes in separate commits and, when practical, separate branches.
+
 ## Git Workflow
 
 Use this default workflow for saved plan execution:
@@ -60,7 +81,7 @@ Use this default workflow for saved plan execution:
 2. If a previous feature PR has merged, refresh local `main` from `origin/main` and base the next plan-specific branch on that updated `main`. Do this before next-stage planning or execution, even if the planning conversation was started from a completed feature branch.
 3. Create or switch to a plan-specific branch when not already on an appropriate branch; do not branch from a completed feature branch unless the user explicitly asks.
 4. Execute the plan and update the plan file as reality changes.
-5. Commit related changes after successful execution or a coherent checkpoint, unless the user asks not to commit.
+5. Commit related changes after successful execution or a coherent checkpoint, unless the user asks not to commit. Prefer a checkpoint before long-running verification, publishing, branch reshaping, or likely Usage-limit interruption.
 6. Do not push to a remote unless the user explicitly asks to push.
 
 If the working tree contains unrelated user changes, do not revert them. Work around them where possible and mention them in the plan or final summary if they affect execution.
