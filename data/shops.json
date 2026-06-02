@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "id": "pamfilya-wedding",
+    "name": "Pamfilya",
+    "address": "Luxemburger Straße 1, 13353 Berlin",
+    "district": "Wedding",
+    "borough": "Mitte",
+    "lat": 52.546207,
+    "lng": 13.358471,
+    "status": "active"
+  },
+  {
+    "id": "imbiss-koenig-reinickendorf",
+    "name": "Imbiss König",
+    "address": "Eichborndamm 22, 13403 Berlin",
+    "district": "Reinickendorf",
+    "borough": "Reinickendorf",
+    "lat": 52.57014,
+    "lng": 13.31293,
+    "status": "active"
+  }
+]
