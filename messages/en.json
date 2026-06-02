@@ -17,6 +17,14 @@
       "standard_doener": "Standard Döner",
       "vegan_doener": "Vegan Döner",
       "veal_doener": "Veal Döner"
+    },
+    "sourceTypes": {
+      "delivery_platform": "Delivery platform",
+      "manual_observation": "Manual observation",
+      "menu_photo": "Menu photo",
+      "shop_website": "Shop website",
+      "unknown": "Unknown",
+      "user_submission": "User submission"
     }
   },
   "Navigation": {
@@ -226,6 +234,43 @@
       "link": "Open price issue",
       "status": "Always available",
       "title": "GitHub price issue"
+    },
+    "intake": {
+      "addRow": "Add row",
+      "copied": "Copied",
+      "copyMarkdown": "Copy Markdown",
+      "downloadCsv": "Download CSV",
+      "errors": {
+        "invalidDate": "Use YYYY-MM-DD.",
+        "invalidPrice": "Use a price from 1.00 to 50.00 EUR.",
+        "invalidProductType": "Choose a supported product type.",
+        "invalidSourceType": "Choose a supported source type.",
+        "invalidUrl": "Use a public http or https URL.",
+        "required": "This field is required."
+      },
+      "fields": {
+        "district": "District",
+        "notes": "Notes",
+        "observedAt": "Date",
+        "priceEuro": "Price EUR",
+        "productType": "Product",
+        "shopAddress": "Address",
+        "shopName": "Shop name",
+        "sourceContext": "Source context",
+        "sourceType": "Source",
+        "sourceUrl": "Source URL"
+      },
+      "generate": "Validate and generate",
+      "intro": "Add one or more observed prices. The page validates the rows locally and generates a review payload for GitHub.",
+      "manualReview": "This table does not publish data directly. Maintainers review submissions, complete coordinates and confidence, then import approved rows into the static production data files.",
+      "openIssue": "Open bulk issue",
+      "outputLabel": "Generated review payload",
+      "removeRow": "Remove",
+      "rowHeader": "Row",
+      "rowLabel": "Row {number}",
+      "statusInvalid": "Some rows need correction.",
+      "statusValid": "Rows are ready to copy into a bulk review issue.",
+      "title": "Table intake for real price data"
     },
     "intro": "Contribution paths are intentionally simple and manually reviewed before publication.",
     "reviewNotice": "Submitted prices should include a date, shop address, product type, and source context. Nothing becomes public without review.",

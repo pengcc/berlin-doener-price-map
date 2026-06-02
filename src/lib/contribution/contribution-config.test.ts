@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  BULK_PRICE_OBSERVATIONS_TEMPLATE,
   DATA_CORRECTION_TEMPLATE,
   getContributionConfig,
   getGitHubIssueFormUrl,
@@ -9,6 +10,9 @@ import {
 describe("contribution config", () => {
   it("uses GitHub issue forms when no external env is configured", () => {
     expect(getContributionConfig({})).toEqual({
+      githubBulkPriceObservationsUrl: getGitHubIssueFormUrl(
+        BULK_PRICE_OBSERVATIONS_TEMPLATE,
+      ),
       githubCorrectionIssueUrl: getGitHubIssueFormUrl(DATA_CORRECTION_TEMPLATE),
       githubPriceObservationUrl: getGitHubIssueFormUrl(
         PRICE_OBSERVATION_TEMPLATE,
@@ -54,6 +58,9 @@ describe("contribution config", () => {
     );
     expect(getGitHubIssueFormUrl(DATA_CORRECTION_TEMPLATE)).toBe(
       "https://github.com/pengcc/berlin-doener-price-map/issues/new?template=02-data-correction.yml",
+    );
+    expect(getGitHubIssueFormUrl(BULK_PRICE_OBSERVATIONS_TEMPLATE)).toBe(
+      "https://github.com/pengcc/berlin-doener-price-map/issues/new?template=03-bulk-price-observations.yml",
     );
   });
 });

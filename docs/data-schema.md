@@ -166,3 +166,29 @@ Current demo data rules:
 - Generated prices use only 600, 650, 700, 750, 800, 850, and 900 cents.
 - Generated records use `sourceType = unknown`, `confidence = 40`, and notes that say they are unverified generated demo records.
 - Demo records must not be represented as real observed shop pricing.
+
+## Reviewed Data Intake
+
+Public submit pages can generate review payloads for real price observations, but they do not write directly to production data. Submitted rows become publication candidates only after manual review.
+
+The maintainer import CSV uses this canonical header:
+
+```csv
+shopId,priceRecordId,shopName,address,district,borough,lat,lng,status,observedAt,priceCents,productType,sourceType,confidence,sourceUrl,notes
+```
+
+Contributor fields such as address, date, price, product, source type, and source context are not enough for publication by themselves. Before import, maintainers must assign stable ids, verify coordinates, normalize the shop metadata, choose confidence, and remove any private or unsafe notes.
+
+Run a dry import before writing:
+
+```bash
+pnpm import:reviewed-data -- reviewed-data.csv
+```
+
+Then write approved rows:
+
+```bash
+pnpm import:reviewed-data -- reviewed-data.csv --write
+```
+
+After writing, run `pnpm validate:data` and the normal project checks before publishing.

@@ -3,6 +3,8 @@ const GITHUB_ISSUE_BASE_URL =
 
 export const PRICE_OBSERVATION_TEMPLATE = "01-price-observation.yml";
 export const DATA_CORRECTION_TEMPLATE = "02-data-correction.yml";
+export const BULK_PRICE_OBSERVATIONS_TEMPLATE =
+  "03-bulk-price-observations.yml";
 
 type ContributionEnvironment = Record<string, string | undefined> & {
   DOENER_CORRECTION_EMAIL?: string;
@@ -16,6 +18,7 @@ export type CorrectionContact = {
 };
 
 export type ContributionConfig = {
+  githubBulkPriceObservationsUrl: string;
   correctionContact?: CorrectionContact;
   githubCorrectionIssueUrl: string;
   githubPriceObservationUrl: string;
@@ -54,6 +57,9 @@ export function getContributionConfig(
       : correctionEmail
         ? { href: getCorrectionEmailHref(correctionEmail), kind: "email" }
         : undefined,
+    githubBulkPriceObservationsUrl: getGitHubIssueFormUrl(
+      BULK_PRICE_OBSERVATIONS_TEMPLATE,
+    ),
     githubCorrectionIssueUrl: getGitHubIssueFormUrl(DATA_CORRECTION_TEMPLATE),
     githubPriceObservationUrl: getGitHubIssueFormUrl(
       PRICE_OBSERVATION_TEMPLATE,

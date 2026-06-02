@@ -17,6 +17,14 @@
       "standard_doener": "Standard-Döner",
       "vegan_doener": "Veganer Döner",
       "veal_doener": "Kalb-Döner"
+    },
+    "sourceTypes": {
+      "delivery_platform": "Lieferplattform",
+      "manual_observation": "Manuelle Beobachtung",
+      "menu_photo": "Menüfoto",
+      "shop_website": "Laden-Website",
+      "unknown": "Unbekannt",
+      "user_submission": "Nutzereinreichung"
     }
   },
   "Navigation": {
@@ -226,6 +234,43 @@
       "link": "Preis-Issue öffnen",
       "status": "Immer verfügbar",
       "title": "GitHub-Preis-Issue"
+    },
+    "intake": {
+      "addRow": "Zeile hinzufügen",
+      "copied": "Kopiert",
+      "copyMarkdown": "Markdown kopieren",
+      "downloadCsv": "CSV herunterladen",
+      "errors": {
+        "invalidDate": "Nutze YYYY-MM-DD.",
+        "invalidPrice": "Nutze einen Preis von 1,00 bis 50,00 EUR.",
+        "invalidProductType": "Wähle einen unterstützten Produkttyp.",
+        "invalidSourceType": "Wähle einen unterstützten Quellentyp.",
+        "invalidUrl": "Nutze eine öffentliche http- oder https-URL.",
+        "required": "Dieses Feld ist erforderlich."
+      },
+      "fields": {
+        "district": "Bezirk",
+        "notes": "Notizen",
+        "observedAt": "Datum",
+        "priceEuro": "Preis EUR",
+        "productType": "Produkt",
+        "shopAddress": "Adresse",
+        "shopName": "Ladenname",
+        "sourceContext": "Quellenkontext",
+        "sourceType": "Quelle",
+        "sourceUrl": "Quellen-URL"
+      },
+      "generate": "Prüfen und erzeugen",
+      "intro": "Füge eine oder mehrere Preisbeobachtungen hinzu. Die Seite prüft die Zeilen lokal und erzeugt eine Review-Vorlage für GitHub.",
+      "manualReview": "Diese Tabelle veröffentlicht keine Daten direkt. Maintainer prüfen Einreichungen, ergänzen Koordinaten und Vertrauen und importieren freigegebene Zeilen danach in die statischen Produktionsdaten.",
+      "openIssue": "Sammel-Issue öffnen",
+      "outputLabel": "Erzeugte Review-Vorlage",
+      "removeRow": "Entfernen",
+      "rowHeader": "Zeile",
+      "rowLabel": "Zeile {number}",
+      "statusInvalid": "Einige Zeilen müssen korrigiert werden.",
+      "statusValid": "Die Zeilen können in ein Sammel-Review-Issue kopiert werden.",
+      "title": "Tabelleneingabe für echte Preisdaten"
     },
     "intro": "Beitragswege bleiben bewusst einfach und werden vor Veröffentlichung manuell geprüft.",
     "reviewNotice": "Eingereichte Preise sollten Datum, Ladenadresse, Produkttyp und Quellenkontext enthalten. Ohne Prüfung wird nichts öffentlich.",
