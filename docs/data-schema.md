@@ -171,6 +171,31 @@ Current demo data rules:
 
 Public submit pages can generate review payloads for real price observations, but they do not write directly to production data. Submitted rows become publication candidates only after manual review.
 
+## First Seed Source and Provenance Policy
+
+The first production seed must prioritize trust over coverage. Publish a smaller verified batch if necessary rather than weakening the source rules.
+
+Accepted first-seed sources:
+
+- `manual_observation`: A maintainer or reviewed contributor directly observed the in-store menu/counter price within the last 30 days. Default confidence: 85.
+- `menu_photo`: A dated reviewed menu photo or equivalent evidence from the last 30 days, with clear shop/address match. Default confidence: 90.
+- `shop_website`: An official shop-owned website or menu page that appears current and matches the reviewed shop. Default confidence: 85.
+- `user_submission`: Allowed only after maintainer review confirms direct context, date, and shop identity. Default confidence: 65.
+
+Excluded from the first seed:
+
+- `delivery_platform`
+- `unknown`
+- third-party directory pages
+- hearsay
+- undated screenshots
+- old photos
+- private upload links
+- raw private evidence
+- uncertain shop identities or addresses
+
+Production provenance must stay public-safe and concise. Use `sourceUrl` only for stable official/public pages. Leave it empty for manual observations and private evidence. Use short notes such as `Reviewed in-store observation; standard Doener price.` Do not commit reviewer identity, private contact details, private image links, raw evidence files, or private notes.
+
 The maintainer import CSV uses this canonical header:
 
 ```csv
