@@ -23,6 +23,28 @@ Do not commit private form administration URLs, private inbox addresses, service
 6. Assign confidence using the source and evidence quality rules in `docs/data-schema.md`.
 7. Record only public-safe source context in `data/price-records.csv`; never store private contact information.
 
+## First Seed Review Policy
+
+The first production seed uses a stricter policy than future general submissions. It should be small, recent, and directly verified.
+
+Accepted first-seed sources:
+
+- Direct in-store `manual_observation` from the last 30 days.
+- Dated reviewed `menu_photo` evidence from the last 30 days.
+- Official `shop_website` menu or price page that appears current.
+- `user_submission` only after maintainer review confirms direct context, date, and shop identity.
+
+Excluded from the first seed:
+
+- Delivery platform prices.
+- Unknown sources.
+- Third-party directory pages.
+- Hearsay or unclear source context.
+- Undated screenshots, old photos, private upload links, or raw private evidence.
+- Uncertain shop identities, addresses, districts, boroughs, or coordinates.
+
+Use a concise public note such as `Reviewed in-store observation; standard Doener price.` Keep detailed evidence, reviewer identity, private links, and raw photos out of committed files. If detailed review notes are needed, keep them in ignored local files under `dev_locals/data/`.
+
 ## Reviewed CSV Import
 
 For batch imports, prepare a reviewed CSV with this canonical header:

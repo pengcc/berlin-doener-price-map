@@ -149,6 +149,8 @@ pnpm import:reviewed-data -- reviewed-data.csv --write
 
 The import command is a dry run by default. `--write` updates `data/shops.json` and `data/price-records.csv` after the reviewed CSV includes shop ids, price record ids, coordinates, confidence, and public-safe notes.
 
+For the first real seed, publish only direct observations from the last 30 days: in-store manual observations, dated menu photos, or official shop websites. Delivery-platform prices, third-party directory pages, hearsay, undated screenshots, private links, and uncertain addresses are excluded from the first seed. Use concise public-safe provenance notes and keep detailed review evidence in ignored local files.
+
 ## Deployment Readiness
 
 Launch readiness is documented in [docs/deployment-readiness.md](./docs/deployment-readiness.md). The project targets Vercel with Node 24, pnpm 10, static data files, MapTiler production tiles through `NEXT_PUBLIC_MAPTILER_API_KEY`, and Vercel Analytics disabled by default.
