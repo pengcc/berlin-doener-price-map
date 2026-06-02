@@ -93,6 +93,7 @@ pnpm typecheck
 pnpm test
 pnpm test:run
 pnpm test:e2e
+pnpm import:reviewed-data
 pnpm validate:data
 pnpm validate:demo-data
 pnpm build
@@ -127,7 +128,9 @@ When that key exists, the app loads MapTiler `streets-v4` raster tiles. Without 
 
 ## Contribution Configuration
 
-The submit page always links to structured GitHub issue forms for price observations and data corrections. Optional public channels can be configured without committing private contact details or service credentials:
+The submit page includes a zero-cost table intake for multiple price observations. It validates rows locally, generates a Markdown/CSV review payload, and links to a bulk GitHub issue form. It does not publish data directly or write to a backend.
+
+The submit page also links to structured GitHub issue forms for single price observations and data corrections. Optional public channels can be configured without committing private contact details or service credentials:
 
 ```bash
 DOENER_PRICE_FORM_URL=...
@@ -136,6 +139,15 @@ DOENER_CORRECTION_URL=...
 ```
 
 `DOENER_CORRECTION_URL` takes precedence over `DOENER_CORRECTION_EMAIL` when both are set. Public submissions remain review inputs only; see [docs/contribution-review-workflow.md](./docs/contribution-review-workflow.md).
+
+Maintainers can import reviewed, publication-ready CSV rows with:
+
+```bash
+pnpm import:reviewed-data -- reviewed-data.csv
+pnpm import:reviewed-data -- reviewed-data.csv --write
+```
+
+The import command is a dry run by default. `--write` updates `data/shops.json` and `data/price-records.csv` after the reviewed CSV includes shop ids, price record ids, coordinates, confidence, and public-safe notes.
 
 ## Deployment Readiness
 

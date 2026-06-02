@@ -4,6 +4,8 @@ const PRICE_OBSERVATION_ISSUE_URL =
   "https://github.com/pengcc/berlin-doener-price-map/issues/new?template=01-price-observation.yml";
 const DATA_CORRECTION_ISSUE_URL =
   "https://github.com/pengcc/berlin-doener-price-map/issues/new?template=02-data-correction.yml";
+const BULK_PRICE_OBSERVATIONS_ISSUE_URL =
+  "https://github.com/pengcc/berlin-doener-price-map/issues/new?template=03-bulk-price-observations.yml";
 
 async function expectNoHorizontalOverflow(page: Page) {
   const overflow = await page.evaluate(
@@ -80,6 +82,31 @@ test("submit page exposes structured issue form fallbacks", async ({
   await expect(
     page.getByRole("link", { name: "Korrektur-Issue öffnen" }),
   ).toHaveAttribute("href", DATA_CORRECTION_ISSUE_URL);
+
+  await page.getByRole("button", { name: "Prüfen und erzeugen" }).click();
+  await expect(
+    page.getByText("Einige Zeilen müssen korrigiert werden."),
+  ).toBeVisible();
+
+  await page.getByLabel("Zeile 1 Adresse").fill("Hauptstrasse 1, 10827 Berlin");
+  await page.getByLabel("Zeile 1 Datum").fill("2026-06-01");
+  await page.getByLabel("Zeile 1 Preis EUR").fill("7.50");
+  await page
+    .getByLabel("Zeile 1 Quellenkontext")
+    .fill("Counter menu observation");
+  await page.getByRole("button", { name: "Prüfen und erzeugen" }).click();
+
+  await expect(
+    page.getByText(
+      "Die Zeilen können in ein Sammel-Review-Issue kopiert werden.",
+    ),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Sammel-Issue öffnen" }),
+  ).toHaveAttribute("href", BULK_PRICE_OBSERVATIONS_ISSUE_URL);
+  await expect(page.locator("#price-intake-output")).toContainText(
+    "Hauptstrasse 1, 10827 Berlin",
+  );
   await expectNoHorizontalOverflow(page);
 });
 

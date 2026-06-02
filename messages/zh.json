@@ -17,6 +17,14 @@
       "standard_doener": "标准 Döner",
       "vegan_doener": "纯素 Döner",
       "veal_doener": "小牛肉 Döner"
+    },
+    "sourceTypes": {
+      "delivery_platform": "外卖平台",
+      "manual_observation": "人工观察",
+      "menu_photo": "菜单照片",
+      "shop_website": "店铺网站",
+      "unknown": "未知",
+      "user_submission": "用户提交"
     }
   },
   "Navigation": {
@@ -226,6 +234,43 @@
       "link": "打开价格 Issue",
       "status": "始终可用",
       "title": "GitHub 价格 Issue"
+    },
+    "intake": {
+      "addRow": "添加一行",
+      "copied": "已复制",
+      "copyMarkdown": "复制 Markdown",
+      "downloadCsv": "下载 CSV",
+      "errors": {
+        "invalidDate": "请使用 YYYY-MM-DD。",
+        "invalidPrice": "请输入 1.00 到 50.00 EUR 之间的价格。",
+        "invalidProductType": "请选择支持的产品类型。",
+        "invalidSourceType": "请选择支持的来源类型。",
+        "invalidUrl": "请使用公开的 http 或 https URL。",
+        "required": "此字段必填。"
+      },
+      "fields": {
+        "district": "区域",
+        "notes": "备注",
+        "observedAt": "日期",
+        "priceEuro": "价格 EUR",
+        "productType": "产品",
+        "shopAddress": "地址",
+        "shopName": "店名",
+        "sourceContext": "来源说明",
+        "sourceType": "来源",
+        "sourceUrl": "来源 URL"
+      },
+      "generate": "校验并生成",
+      "intro": "添加一条或多条价格观察。页面会在本地校验表格，并生成可提交到 GitHub 的审核内容。",
+      "manualReview": "这个表格不会直接发布数据。维护者会审核提交内容，补齐坐标和可信度，再把通过审核的记录导入静态真实数据文件。",
+      "openIssue": "打开批量 Issue",
+      "outputLabel": "生成的审核内容",
+      "removeRow": "删除",
+      "rowHeader": "行",
+      "rowLabel": "第 {number} 行",
+      "statusInvalid": "部分行需要修改。",
+      "statusValid": "这些行可以复制到批量审核 Issue。",
+      "title": "真实价格数据表格提交"
     },
     "intro": "贡献入口保持简单，所有内容公开前都会人工审核。",
     "reviewNotice": "提交价格时应包含日期、店铺地址、产品类型和来源说明。未经审核不会公开。",
