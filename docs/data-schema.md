@@ -169,7 +169,7 @@ Current demo data rules:
 
 ## Reviewed Data Intake
 
-Public submit pages can generate review payloads for real price observations, but they do not write directly to production data. Submitted rows become publication candidates only after manual review.
+Public submit pages link to structured review channels for real price observations, but they do not write directly to production data. Submitted rows become publication candidates only after manual review.
 
 ## First Seed Source and Provenance Policy
 

@@ -28,6 +28,22 @@ DOENER_CORRECTION_EMAIL
 DOENER_CORRECTION_URL
 ```
 
+Optional local development setting for LAN device testing only:
+
+```txt
+NEXT_ALLOWED_DEV_ORIGINS
+```
+
+Optional Imprint/legal placeholders that must be completed before public deployment:
+
+```txt
+DOENER_LEGAL_OPERATOR_NAME
+DOENER_LEGAL_OPERATOR_ADDRESS
+DOENER_LEGAL_CONTACT_EMAIL
+```
+
+German DDG §5 expects provider information for covered digital services to be easy to recognize, directly reachable, and permanently available. The app can render the route and placeholders, but final legal content and real operator/contact details require user review before public launch.
+
 Do not add private form admin URLs, private inboxes, service credentials, billing-backed API keys, or secrets to the public app. `NEXT_PUBLIC_MAPTILER_API_KEY` is a public browser key; restrict it in the provider dashboard when possible.
 
 ## Pre-Deploy Checks
@@ -52,7 +68,8 @@ After a deployment exists, manually verify:
 
 - `/de`, `/en`, and `/zh` load with localized homepage headings.
 - `/de/demo/prices` shows the unverified demo-data banner and demo rows.
-- `/de/submit` links to the structured GitHub issue forms.
+- `/de/submit` links to the structured GitHub issue forms, and shows the optional public form only when `DOENER_PRICE_FORM_URL` is configured.
+- `/de/imprint` is reachable from the footer and contains real operator/contact details before public launch.
 - `/de/map` uses MapTiler tiles when `NEXT_PUBLIC_MAPTILER_API_KEY` is set.
 - If the key is missing, `/de/map` shows the no-key notice and does not load fallback OSM tiles in production.
 - Mobile widths around 390 px have no horizontal overflow on homepage, demo prices, demo submit, and map.

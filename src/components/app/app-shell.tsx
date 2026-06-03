@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
 import { Link } from "@/i18n/navigation";
-import type { Locale } from "@/i18n/routing";
+import { type Locale, routing } from "@/i18n/routing";
 import { type DataMode, getPathForDataMode } from "@/lib/data/data-source";
 
 type Props = {
@@ -30,18 +30,20 @@ export async function AppShell({
   const t = await getTranslations({ locale, namespace: "Navigation" });
   const dataModeText = await getTranslations({ locale, namespace: "DataMode" });
   const isDemoMode = dataMode === "demo";
+  const currentModePath = getPathForDataMode(activeHref, dataMode);
+  const canSwitchDataMode = navItems.some((item) => item.href === activeHref);
 
   return (
     <main
       className={`min-h-screen text-neutral-950 ${
-        isDemoMode ? "bg-[#fff7ed]" : "bg-[#f7f5ef]"
+        isDemoMode ? "bg-[#f0fdf4]" : "bg-[#fff7ed]"
       }`}
     >
       <header
         className={`border-b ${
           isDemoMode
-            ? "border-amber-800/20 bg-amber-50/90"
-            : "border-neutral-900/10 bg-white/85"
+            ? "border-emerald-800/20 bg-emerald-50/90"
+            : "border-amber-800/20 bg-amber-50/90"
         }`}
       >
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-5 px-5 py-5 sm:px-8 lg:flex-row lg:items-end lg:justify-between">
@@ -82,34 +84,66 @@ export async function AppShell({
               </ul>
             </nav>
 
-            <nav aria-label={dataModeText("selector.label")}>
-              <ul className="inline-flex border border-neutral-900/15 bg-white p-1">
-                {(["production", "demo"] as const).map((mode) => {
-                  const isActive = dataMode === mode;
+            <div className="flex flex-wrap gap-2 lg:justify-end">
+              {canSwitchDataMode ? (
+                <nav aria-label={dataModeText("selector.label")}>
+                  <ul className="inline-flex border border-neutral-900/15 bg-white p-1">
+                    {(["production", "demo"] as const).map((mode) => {
+                      const isActive = dataMode === mode;
 
-                  return (
-                    <li key={mode}>
-                      <Link
-                        aria-current={isActive ? "true" : undefined}
-                        className={`inline-flex min-h-9 items-center px-3 font-medium text-sm transition-colors ${
-                          isActive
-                            ? mode === "demo"
-                              ? "bg-amber-700 text-white"
-                              : "bg-emerald-800 text-white"
-                            : "text-neutral-700 hover:bg-neutral-100"
-                        }`}
-                        href={getPathForDataMode(activeHref, mode)}
-                        locale={locale}
-                      >
-                        {dataModeText(
-                          mode === "demo" ? "selector.demo" : "selector.real",
-                        )}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </nav>
+                      return (
+                        <li key={mode}>
+                          <Link
+                            aria-current={isActive ? "true" : undefined}
+                            className={`inline-flex min-h-9 items-center px-3 font-medium text-sm transition-colors ${
+                              isActive
+                                ? mode === "demo"
+                                  ? "bg-emerald-800 text-white"
+                                  : "bg-amber-700 text-white"
+                                : "text-neutral-700 hover:bg-neutral-100"
+                            }`}
+                            href={getPathForDataMode(activeHref, mode)}
+                            locale={locale}
+                          >
+                            {dataModeText(
+                              mode === "demo"
+                                ? "selector.demo"
+                                : "selector.real",
+                            )}
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </nav>
+              ) : null}
+
+              <nav aria-label={t("languageLabel")}>
+                <ul className="inline-flex border border-neutral-900/15 bg-white p-1">
+                  {routing.locales.map((targetLocale) => {
+                    const isActive = locale === targetLocale;
+
+                    return (
+                      <li key={targetLocale}>
+                        <Link
+                          aria-current={isActive ? "true" : undefined}
+                          className={`inline-flex min-h-9 items-center px-3 font-medium text-sm transition-colors ${
+                            isActive
+                              ? "bg-neutral-950 text-white"
+                              : "text-neutral-700 hover:bg-neutral-100"
+                          }`}
+                          href={currentModePath}
+                          hrefLang={targetLocale}
+                          locale={targetLocale}
+                        >
+                          {t(`locales.${targetLocale}`)}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </nav>
+            </div>
           </div>
         </div>
       </header>
@@ -127,6 +161,34 @@ export async function AppShell({
         ) : null}
         {children}
       </div>
+
+      <footer className="border-neutral-900/10 border-t bg-white/70">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-5 py-5 text-neutral-600 text-sm sm:px-8 md:flex-row md:items-center md:justify-between">
+          <p>{t("footerText")}</p>
+          <nav aria-label={t("footerLabel")}>
+            <ul className="flex flex-wrap gap-4">
+              <li>
+                <Link
+                  className="text-neutral-700 hover:text-neutral-950"
+                  href={getPathForDataMode("/methodology", dataMode)}
+                  locale={locale}
+                >
+                  {t("methodology")}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="text-neutral-700 hover:text-neutral-950"
+                  href="/imprint"
+                  locale={locale}
+                >
+                  {t("imprint")}
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </footer>
     </main>
   );
 }

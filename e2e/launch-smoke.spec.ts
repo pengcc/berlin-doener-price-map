@@ -4,8 +4,6 @@ const PRICE_OBSERVATION_ISSUE_URL =
   "https://github.com/pengcc/berlin-doener-price-map/issues/new?template=01-price-observation.yml";
 const DATA_CORRECTION_ISSUE_URL =
   "https://github.com/pengcc/berlin-doener-price-map/issues/new?template=02-data-correction.yml";
-const BULK_PRICE_OBSERVATIONS_ISSUE_URL =
-  "https://github.com/pengcc/berlin-doener-price-map/issues/new?template=03-bulk-price-observations.yml";
 
 async function expectNoHorizontalOverflow(page: Page) {
   const overflow = await page.evaluate(
@@ -75,38 +73,48 @@ test("submit page exposes structured issue form fallbacks", async ({
 }) => {
   await page.goto("/de/submit");
 
-  await expect(page.getByText("Formular nicht eingerichtet")).toBeVisible();
+  await expect(page.getByText("Formular nicht eingerichtet")).toHaveCount(0);
   await expect(
     page.getByRole("link", { name: "Preis-Issue öffnen" }),
   ).toHaveAttribute("href", PRICE_OBSERVATION_ISSUE_URL);
   await expect(
     page.getByRole("link", { name: "Korrektur-Issue öffnen" }),
   ).toHaveAttribute("href", DATA_CORRECTION_ISSUE_URL);
+  await expect(page.getByRole("table")).toHaveCount(0);
+  await expectNoHorizontalOverflow(page);
+});
 
-  await page.getByRole("button", { name: "Prüfen und erzeugen" }).click();
+test("language switcher preserves demo route context", async ({ page }) => {
+  await page.goto("/de/demo/prices");
+
+  await page.getByRole("link", { name: "English" }).click();
+  await expect(page).toHaveURL(/\/en\/demo\/prices$/);
+  await expect(page.getByText("Unverified demo data")).toBeVisible();
   await expect(
-    page.getByText("Einige Zeilen müssen korrigiert werden."),
+    page.getByRole("heading", { level: 1, name: "Current Döner prices" }),
   ).toBeVisible();
 
-  await page.getByLabel("Zeile 1 Adresse").fill("Hauptstrasse 1, 10827 Berlin");
-  await page.getByLabel("Zeile 1 Datum").fill("2026-06-01");
-  await page.getByLabel("Zeile 1 Preis EUR").fill("7.50");
-  await page
-    .getByLabel("Zeile 1 Quellenkontext")
-    .fill("Counter menu observation");
-  await page.getByRole("button", { name: "Prüfen und erzeugen" }).click();
+  await page.getByRole("link", { name: "中文" }).click();
+  await expect(page).toHaveURL(/\/zh\/demo\/prices$/);
+  await expect(page.getByText("未核实的演示数据")).toBeVisible();
+});
 
+test("imprint is linked from the footer and shows disclaimers", async ({
+  page,
+}) => {
+  await page.goto("/de");
+
+  await page.getByRole("link", { name: "Impressum" }).click();
+  await expect(page).toHaveURL(/\/de\/imprint$/);
   await expect(
-    page.getByText(
-      "Die Zeilen können in ein Sammel-Review-Issue kopiert werden.",
-    ),
+    page.getByRole("heading", {
+      level: 1,
+      name: "Impressum und Haftungsausschluss",
+    }),
   ).toBeVisible();
   await expect(
-    page.getByRole("link", { name: "Sammel-Issue öffnen" }),
-  ).toHaveAttribute("href", BULK_PRICE_OBSERVATIONS_ISSUE_URL);
-  await expect(page.locator("#price-intake-output")).toContainText(
-    "Hauptstrasse 1, 10827 Berlin",
-  );
+    page.getByText("Diese App dient ausschließlich dem Lernen"),
+  ).toBeVisible();
   await expectNoHorizontalOverflow(page);
 });
 
@@ -132,7 +140,14 @@ test("critical mobile routes do not overflow horizontally", async ({
 }) => {
   await page.setViewportSize({ height: 844, width: 390 });
 
-  for (const url of ["/de", "/de/demo/prices", "/de/demo/submit", "/de/map"]) {
+  for (const url of [
+    "/de",
+    "/de/submit",
+    "/de/demo/prices",
+    "/de/demo/submit",
+    "/de/imprint",
+    "/de/map",
+  ]) {
     await page.goto(url);
     await expectNoHorizontalOverflow(page);
   }

@@ -1,11 +1,4 @@
-export type ContributionCard = {
-  actionLabel?: string;
-  body: string;
-  disabledLabel?: string;
-  href?: string;
-  status: string;
-  title: string;
-};
+import type { ContributionCard } from "@/lib/contribution/contribution-cards";
 
 type Props = {
   cards: ContributionCard[];

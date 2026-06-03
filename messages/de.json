@@ -30,7 +30,16 @@
   "Navigation": {
     "brand": "Berlin Döner Price Map",
     "districts": "Bezirke",
+    "footerLabel": "Footer-Navigation",
+    "footerText": "Lokales Datenprojekt. Nur geprüfte Preise.",
     "home": "Übersicht",
+    "imprint": "Impressum",
+    "languageLabel": "Sprache",
+    "locales": {
+      "de": "Deutsch",
+      "en": "English",
+      "zh": "中文"
+    },
     "map": "Karte",
     "methodology": "Methodik",
     "navLabel": "Hauptnavigation",
@@ -235,45 +244,35 @@
       "status": "Immer verfügbar",
       "title": "GitHub-Preis-Issue"
     },
-    "intake": {
-      "addRow": "Zeile hinzufügen",
-      "copied": "Kopiert",
-      "copyMarkdown": "Markdown kopieren",
-      "downloadCsv": "CSV herunterladen",
-      "errors": {
-        "invalidDate": "Nutze YYYY-MM-DD.",
-        "invalidPrice": "Nutze einen Preis von 1,00 bis 50,00 EUR.",
-        "invalidProductType": "Wähle einen unterstützten Produkttyp.",
-        "invalidSourceType": "Wähle einen unterstützten Quellentyp.",
-        "invalidUrl": "Nutze eine öffentliche http- oder https-URL.",
-        "required": "Dieses Feld ist erforderlich."
-      },
-      "fields": {
-        "district": "Bezirk",
-        "notes": "Notizen",
-        "observedAt": "Datum",
-        "priceEuro": "Preis EUR",
-        "productType": "Produkt",
-        "shopAddress": "Adresse",
-        "shopName": "Ladenname",
-        "sourceContext": "Quellenkontext",
-        "sourceType": "Quelle",
-        "sourceUrl": "Quellen-URL"
-      },
-      "generate": "Prüfen und erzeugen",
-      "intro": "Füge eine oder mehrere Preisbeobachtungen hinzu. Die Seite prüft die Zeilen lokal und erzeugt eine Review-Vorlage für GitHub.",
-      "manualReview": "Diese Tabelle veröffentlicht keine Daten direkt. Maintainer prüfen Einreichungen, ergänzen Koordinaten und Vertrauen und importieren freigegebene Zeilen danach in die statischen Produktionsdaten.",
-      "openIssue": "Sammel-Issue öffnen",
-      "outputLabel": "Erzeugte Review-Vorlage",
-      "removeRow": "Entfernen",
-      "rowHeader": "Zeile",
-      "rowLabel": "Zeile {number}",
-      "statusInvalid": "Einige Zeilen müssen korrigiert werden.",
-      "statusValid": "Die Zeilen können in ein Sammel-Review-Issue kopiert werden.",
-      "title": "Tabelleneingabe für echte Preisdaten"
-    },
     "intro": "Beitragswege bleiben bewusst einfach und werden vor Veröffentlichung manuell geprüft.",
     "reviewNotice": "Eingereichte Preise sollten Datum, Ladenadresse, Produkttyp und Quellenkontext enthalten. Ohne Prüfung wird nichts öffentlich.",
     "title": "Dönerpreis einreichen"
+  },
+  "ImprintPage": {
+    "contact": {
+      "email": "E-Mail",
+      "missing": "Kontakt-E-Mail ist noch nicht konfiguriert.",
+      "title": "Kontakt"
+    },
+    "disclaimer": {
+      "accuracy": "Wir können die Richtigkeit, Vollständigkeit oder Zuverlässigkeit der gesammelten Daten nicht garantieren. Preise können veraltet oder falsch sein und dienen nur als Orientierung.",
+      "learning": "Diese App dient ausschließlich dem Lernen, Üben und Demonstrieren von Funktionen.",
+      "store": "Alle Preisangaben stehen unter dem Vorbehalt der endgültigen Festlegung durch den jeweiligen Laden.",
+      "title": "Haftungsausschluss"
+    },
+    "eyebrow": "Rechtlicher Hinweis",
+    "intro": "Anbieterangaben und Datenhinweise für dieses Projekt.",
+    "operator": {
+      "address": "Anschrift",
+      "missingAddress": "Anbieteranschrift ist noch nicht konfiguriert.",
+      "missingName": "Anbietername ist noch nicht konfiguriert.",
+      "name": "Anbieter",
+      "title": "Anbieterinformationen"
+    },
+    "readiness": {
+      "body": "Vor einer öffentlichen Bereitstellung müssen diese Platzhalter durch echte Anbieter- und Kontaktdaten ersetzt und rechtlich geprüft werden. Diese Seite ist keine Rechtsberatung.",
+      "title": "Bereit für Deployment"
+    },
+    "title": "Impressum und Haftungsausschluss"
   }
 }
