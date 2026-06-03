@@ -30,7 +30,16 @@
   "Navigation": {
     "brand": "Berlin Döner Price Map",
     "districts": "区域",
+    "footerLabel": "页脚导航",
+    "footerText": "本地数据项目。仅展示已审核价格。",
     "home": "概览",
+    "imprint": "法律声明",
+    "languageLabel": "语言",
+    "locales": {
+      "de": "Deutsch",
+      "en": "English",
+      "zh": "中文"
+    },
     "map": "地图",
     "methodology": "方法",
     "navLabel": "主导航",
@@ -235,45 +244,35 @@
       "status": "始终可用",
       "title": "GitHub 价格 Issue"
     },
-    "intake": {
-      "addRow": "添加一行",
-      "copied": "已复制",
-      "copyMarkdown": "复制 Markdown",
-      "downloadCsv": "下载 CSV",
-      "errors": {
-        "invalidDate": "请使用 YYYY-MM-DD。",
-        "invalidPrice": "请输入 1.00 到 50.00 EUR 之间的价格。",
-        "invalidProductType": "请选择支持的产品类型。",
-        "invalidSourceType": "请选择支持的来源类型。",
-        "invalidUrl": "请使用公开的 http 或 https URL。",
-        "required": "此字段必填。"
-      },
-      "fields": {
-        "district": "区域",
-        "notes": "备注",
-        "observedAt": "日期",
-        "priceEuro": "价格 EUR",
-        "productType": "产品",
-        "shopAddress": "地址",
-        "shopName": "店名",
-        "sourceContext": "来源说明",
-        "sourceType": "来源",
-        "sourceUrl": "来源 URL"
-      },
-      "generate": "校验并生成",
-      "intro": "添加一条或多条价格观察。页面会在本地校验表格，并生成可提交到 GitHub 的审核内容。",
-      "manualReview": "这个表格不会直接发布数据。维护者会审核提交内容，补齐坐标和可信度，再把通过审核的记录导入静态真实数据文件。",
-      "openIssue": "打开批量 Issue",
-      "outputLabel": "生成的审核内容",
-      "removeRow": "删除",
-      "rowHeader": "行",
-      "rowLabel": "第 {number} 行",
-      "statusInvalid": "部分行需要修改。",
-      "statusValid": "这些行可以复制到批量审核 Issue。",
-      "title": "真实价格数据表格提交"
-    },
     "intro": "贡献入口保持简单，所有内容公开前都会人工审核。",
     "reviewNotice": "提交价格时应包含日期、店铺地址、产品类型和来源说明。未经审核不会公开。",
     "title": "提交 Döner 价格"
+  },
+  "ImprintPage": {
+    "contact": {
+      "email": "电子邮箱",
+      "missing": "尚未配置联系邮箱。",
+      "title": "联系方式"
+    },
+    "disclaimer": {
+      "accuracy": "我们无法保证所收集数据的准确性、完整性或可靠性。价格可能已经过期或有误，仅供参考。",
+      "learning": "本应用仅用于学习、练习和功能展示。",
+      "store": "所有价格信息以对应店铺的最终决定为准。",
+      "title": "免责声明"
+    },
+    "eyebrow": "法律声明",
+    "intro": "本项目的提供者信息和数据说明。",
+    "operator": {
+      "address": "地址",
+      "missingAddress": "尚未配置运营者地址。",
+      "missingName": "尚未配置运营者名称。",
+      "name": "运营者",
+      "title": "提供者信息"
+    },
+    "readiness": {
+      "body": "公开部署前，需要用真实的运营者和联系方式替换这些占位内容，并进行法律审核。本页面不构成法律建议。",
+      "title": "部署准备"
+    },
+    "title": "法律声明与免责声明"
   }
 }

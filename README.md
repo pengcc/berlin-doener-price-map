@@ -28,8 +28,9 @@ The MVP will provide:
 - `/prices` with searchable, sortable, filterable price table.
 - `/ranking` for cheapest, most expensive, recently updated, and high-confidence prices.
 - `/districts` with average, median, min, max, sample count, and last update per district.
-- `/submit` with optional public form, GitHub issue forms, and optional correction contact paths.
+- `/submit` with GitHub issue forms, optional public form, and optional correction contact paths.
 - `/methodology` explaining sources, manual review, freshness, confidence, ranking rules, and limitations.
+- `/imprint` with provider placeholders and data disclaimers that must be completed before public deployment.
 
 Out of scope for MVP:
 
@@ -113,8 +114,19 @@ Initial localized routes:
 /de/districts
 /de/methodology
 /de/submit
+/de/imprint
 /de/demo/map
 ```
+
+## Local LAN Development
+
+Next.js development resources such as `/_next/webpack-hmr` are protected from unexpected cross-origin access. This can appear during LAN testing when opening the dev server through a local IP address. Configure only the local origins you need:
+
+```bash
+NEXT_ALLOWED_DEV_ORIGINS=192.168.178.113
+```
+
+This setting is for local development only. It is not expected to be needed on Vercel preview or production deployments.
 
 ## Map Tile Configuration
 
@@ -128,9 +140,16 @@ When that key exists, the app loads MapTiler `streets-v4` raster tiles. Without 
 
 ## Contribution Configuration
 
-The submit page includes a zero-cost table intake for multiple price observations. It validates rows locally, generates a Markdown/CSV review payload, and links to a bulk GitHub issue form. It does not publish data directly or write to a backend.
+The public submit page links to structured GitHub issue forms for price observations and data corrections. Public submissions remain review inputs only and do not publish data directly or write to a backend.
 
-The submit page also links to structured GitHub issue forms for single price observations and data corrections. Optional public channels can be configured without committing private contact details or service credentials:
+An optional public form can be added by creating a Tally, Google Form, or similar no-cost form manually and configuring only its public URL. The form should collect the same review inputs as the GitHub price issue: shop name if known, address, district if known, observation date, price, product type, source type, source context, optional public source URL, and optional reviewer notes. It should include a clear note that submissions are manually reviewed before publication and should not request private credentials or unnecessary contact details.
+
+After creating the form:
+
+1. Copy the public respondent URL, not the admin/edit URL.
+2. Set `DOENER_PRICE_FORM_URL` in the local or Vercel environment.
+3. Rebuild/redeploy so `/submit` shows the public form card.
+4. Keep GitHub issue forms enabled as the always-available fallback.
 
 ```bash
 DOENER_PRICE_FORM_URL=...
@@ -139,6 +158,8 @@ DOENER_CORRECTION_URL=...
 ```
 
 `DOENER_CORRECTION_URL` takes precedence over `DOENER_CORRECTION_EMAIL` when both are set. Public submissions remain review inputs only; see [docs/contribution-review-workflow.md](./docs/contribution-review-workflow.md).
+
+If a maintainer bulk-entry tool becomes useful later, re-plan it as a shadcn/ui form-card workflow rather than a wide table, and keep it separate from the normal public submit experience.
 
 Maintainers can import reviewed, publication-ready CSV rows with:
 
@@ -154,6 +175,16 @@ For the first real seed, publish only direct observations from the last 30 days:
 ## Deployment Readiness
 
 Launch readiness is documented in [docs/deployment-readiness.md](./docs/deployment-readiness.md). The project targets Vercel with Node 24, pnpm 10, static data files, MapTiler production tiles through `NEXT_PUBLIC_MAPTILER_API_KEY`, and Vercel Analytics disabled by default.
+
+Before public deployment, configure or review the Imprint fields:
+
+```bash
+DOENER_LEGAL_OPERATOR_NAME=...
+DOENER_LEGAL_OPERATOR_ADDRESS=...
+DOENER_LEGAL_CONTACT_EMAIL=...
+```
+
+The `/imprint` page includes learning/demo and data-accuracy disclaimers, but final legal content and real operator details require user review.
 
 ## Roadmap
 
