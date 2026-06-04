@@ -21,6 +21,7 @@
     "test:run": "vitest run",
     "test:e2e": "playwright test",
     "convert:form-responses": "tsx scripts/convert-form-responses.ts",
+    "process:form-export": "tsx scripts/process-form-export.ts",
     "import:reviewed-data": "tsx scripts/import-reviewed-data.ts",
     "validate:data": "tsx scripts/validate-data.ts",
     "validate:demo-data": "tsx scripts/validate-demo-data.ts"

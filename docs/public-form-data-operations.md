@@ -81,25 +81,55 @@ Google Forms exports should stay local and ignored by git.
 dev_locals/data/form-submission/
 ```
 
-3. Create reviewed import draft files under:
-
-```txt
-dev_locals/data/reviewed-imports/
-```
-
-Use the local converter for the current Google Forms CSV shape:
+3. Process the export with the one-line local pipeline:
 
 ```bash
-mise exec -- corepack pnpm convert:form-responses -- dev_locals/data/form-submission/2026-06-04-google-form-responses.csv dev_locals/data/reviewed-imports/2026-06-04-reviewed-draft.csv
+pnpm process:form-export
 ```
 
-The converter creates a canonical-header draft and fills the fields that can be safely derived from the public form. It does not make the data publication-ready. A maintainer still needs to review and complete fields such as `borough`, `lat`, `lng`, `status`, `confidence`, and public-safe `notes` before running the reviewed import.
+This command picks the newest `.csv` under `dev_locals/data/form-submission/`, creates a reviewed draft under `dev_locals/data/reviewed-imports/`, checks local review overrides, runs the reviewed import dry run, and updates production data only when every required publication field is complete.
+
+If your local Node or pnpm version is uncertain, use:
+
+```bash
+mise exec -- corepack pnpm process:form-export
+```
+
+You can pass a specific raw export when needed:
+
+```bash
+pnpm process:form-export -- dev_locals/data/form-submission/2026-06-04-google-form-responses.csv
+```
+
+Use `--dry-run` to prevent production writes even when all checks pass, and `--force` to overwrite an existing generated reviewed draft.
+
+The generated draft filename is based on the raw export filename, for example:
+
+```txt
+dev_locals/data/reviewed-imports/2026-06-04-google-form-responses.reviewed-draft.csv
+```
+
+The pipeline only fills fields that can be safely derived from the public form, existing production shop data, or approved local overrides. It does not geocode or guess publication fields.
 
 Create the local folders if they do not exist:
 
 ```bash
-mkdir -p dev_locals/data/form-submission dev_locals/data/reviewed-imports
+mkdir -p dev_locals/data/form-submission dev_locals/data/reviewed-imports dev_locals/data/review-overrides
 ```
+
+Optional local review overrides live at:
+
+```txt
+dev_locals/data/review-overrides/form-export-overrides.csv
+```
+
+Use this header:
+
+```csv
+address,shopId,shopName,district,borough,lat,lng,status,confidence,sourceUrl,notes,approved
+```
+
+Rows match raw submissions by normalized `address`. Use `approved=yes` only after you have reviewed the address, coordinates, status, confidence, source URL, and public-safe notes. Without `approved=yes`, the pipeline may write a draft CSV, but it will not update production data for new shops.
 
 If the form header changes or you need to work manually, create a new CSV in a spreadsheet editor or text editor and start with this header:
 
@@ -114,11 +144,11 @@ dev_locals/data/form-submission/2026-06-04-google-form-responses.csv
 dev_locals/data/reviewed-imports/2026-06-04-reviewed-data.csv
 ```
 
-Do not commit either raw form exports or private review notes. `dev_locals/` is ignored by git for this purpose.
+Do not commit raw form exports, generated reviewed drafts, local overrides, or private review notes. `dev_locals/` is ignored by git for this purpose.
 
 ## Reviewed Import CSV
 
-The import script accepts only publication-ready reviewed CSV with this exact header:
+The import script and one-line pipeline accept only publication-ready reviewed CSV with this exact header:
 
 ```csv
 shopId,priceRecordId,shopName,address,district,borough,lat,lng,status,observedAt,priceCents,productType,sourceType,confidence,sourceUrl,notes

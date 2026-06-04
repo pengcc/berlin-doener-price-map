@@ -164,12 +164,14 @@ If a maintainer bulk-entry tool becomes useful later, re-plan it as a shadcn/ui 
 Maintainers can import reviewed, publication-ready CSV rows with:
 
 ```bash
+pnpm process:form-export
 pnpm import:reviewed-data -- reviewed-data.csv
 pnpm import:reviewed-data -- reviewed-data.csv --write
 ```
 
-The import command is a dry run by default. `--write` updates `data/shops.json` and `data/price-records.csv` after the reviewed CSV includes shop ids, price record ids, coordinates, confidence, and public-safe notes.
-Raw Google Forms exports should stay under ignored `dev_locals/data/form-submission/`; reviewed import files should be prepared under ignored `dev_locals/data/reviewed-imports/`.
+`process:form-export` is the preferred local one-line flow for Google Forms exports. It picks the newest raw CSV under ignored `dev_locals/data/form-submission/`, writes a reviewed draft, and updates production data only when required fields are complete and the reviewed import dry run passes. If local Node or pnpm versions are uncertain, use `mise exec -- corepack pnpm process:form-export`.
+
+The lower-level import command is a dry run by default. `--write` updates `data/shops.json` and `data/price-records.csv` after the reviewed CSV includes shop ids, price record ids, coordinates, confidence, and public-safe notes. Raw Google Forms exports, reviewed drafts, and review overrides should stay under ignored `dev_locals/data/`.
 
 For the first real seed, publish only direct observations from the last 30 days: in-store manual observations, dated menu photos, or official shop websites. Delivery-platform prices, third-party directory pages, hearsay, undated screenshots, private links, and uncertain addresses are excluded from the first seed. Use concise public-safe provenance notes and keep detailed review evidence in ignored local files.
 
