@@ -53,6 +53,12 @@ Current data foundation modules:
 
 Use `csv-parse/sync` for price CSV ingestion with explicit header validation. Header-only price CSV files are valid and should load as an empty record array.
 
+## Local Review Tooling Pattern
+
+For public form exports and other manually reviewed inputs, keep raw private files and generated review artifacts under ignored `dev_locals/`. Converter scripts may create draft reviewed data, but must not bypass maintainer review. One-line pipelines and browser-based local review tools are acceptable when they preserve the same publication gates: canonical reviewed headers, complete required fields, approved new-shop metadata, dry-run validation, and no production write when blockers remain.
+
+Local review tools must not be public app routes or deployed admin surfaces. If address enrichment or geocoding is added later, it must be opt-in, documented for privacy/provider constraints, cached locally where possible, and confirmed by the user before implementation.
+
 ## Required Shop Fields
 
 - `id`: stable slug, unique.

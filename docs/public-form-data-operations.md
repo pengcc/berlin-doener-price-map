@@ -81,7 +81,23 @@ Google Forms exports should stay local and ignored by git.
 dev_locals/data/form-submission/
 ```
 
-3. Process the export with the one-line local pipeline:
+3. If the CSV is hard to review directly, start the local browser review tool:
+
+```bash
+pnpm review:form-export
+```
+
+This starts a local-only server on `127.0.0.1`, prints a one-time URL token, and opens no public app route. Use it to inspect raw form rows, edit local review overrides, save `dev_locals/data/review-overrides/form-export-overrides.csv`, run the dry-run gate, and confirm import only after the page shows that production write is ready.
+
+You can pass a specific raw export when needed:
+
+```bash
+pnpm review:form-export -- dev_locals/data/form-submission/2026-06-04-google-form-responses.csv
+```
+
+The v1 review tool does not geocode and does not send addresses to external services. Address mistakes should be fixed in the raw export before review; the address field in the tool is the local matching key for overrides.
+
+4. Process the export with the one-line local pipeline when you prefer CLI review:
 
 ```bash
 pnpm process:form-export
@@ -137,7 +153,7 @@ If the form header changes or you need to work manually, create a new CSV in a s
 shopId,priceRecordId,shopName,address,district,borough,lat,lng,status,observedAt,priceCents,productType,sourceType,confidence,sourceUrl,notes
 ```
 
-4. Keep raw response and reviewed import filenames dated, for example:
+5. Keep raw response and reviewed import filenames dated, for example:
 
 ```txt
 dev_locals/data/form-submission/2026-06-04-google-form-responses.csv

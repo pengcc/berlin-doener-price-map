@@ -165,11 +165,14 @@ Maintainers can import reviewed, publication-ready CSV rows with:
 
 ```bash
 pnpm process:form-export
+pnpm review:form-export
 pnpm import:reviewed-data -- reviewed-data.csv
 pnpm import:reviewed-data -- reviewed-data.csv --write
 ```
 
 `process:form-export` is the preferred local one-line flow for Google Forms exports. It picks the newest raw CSV under ignored `dev_locals/data/form-submission/`, writes a reviewed draft, and updates production data only when required fields are complete and the reviewed import dry run passes. If local Node or pnpm versions are uncertain, use `mise exec -- corepack pnpm process:form-export`.
+
+`review:form-export` starts a local-only browser tool on `127.0.0.1` for maintainers who prefer reviewing and editing overrides in a page instead of a CSV editor. It uses the same write gates as `process:form-export` and does not add a public route or deployed admin UI.
 
 The lower-level import command is a dry run by default. `--write` updates `data/shops.json` and `data/price-records.csv` after the reviewed CSV includes shop ids, price record ids, coordinates, confidence, and public-safe notes. Raw Google Forms exports, reviewed drafts, and review overrides should stay under ignored `dev_locals/data/`.
 
