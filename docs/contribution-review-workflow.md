@@ -22,7 +22,7 @@ If a Tally, Google Form, or similar form is created manually, configure only the
 DOENER_PRICE_FORM_URL=https://...
 ```
 
-Use fields that map cleanly to the review workflow: shop name if known, shop address, district if known, observation date, observed price in EUR, product type, source type, source context, optional public source URL, and optional notes. Include a visible manual-review notice and avoid collecting private contact details unless there is a clear reviewed-data need.
+Use fields that map cleanly to the review workflow: shop name if known, shop address, district if known, observation date, observed price in EUR, product type, source type, optional public source URL, and optional notes. Include a visible manual-review notice and avoid collecting private contact details unless there is a clear reviewed-data need.
 
 Detailed Google Form setup, CSV staging, field mapping, normalization, and reviewed import instructions live in `docs/public-form-data-operations.md`.
 
@@ -30,13 +30,13 @@ Future idea: if batch maintainer entry becomes useful again, re-plan it as a sha
 
 ## Triage
 
-1. Confirm the submission contains enough context: shop or address, product type, observed date, price, and source context.
+1. Confirm the submission contains enough context: shop or address, product type, observed date, price, and source/evidence type.
 2. Reject or request clarification for entries that are anonymous hearsay, lack a usable date, or cannot identify a Berlin shop.
 3. Normalize prices to integer cents and product types to the documented enum values.
 4. Check whether the shop already exists in `data/shops.json`; avoid creating duplicates.
 5. Verify address, district, borough, and coordinates before adding or changing shop records.
 6. Assign confidence using the source and evidence quality rules in `docs/data-schema.md`.
-7. Record only public-safe source context in `data/price-records.csv`; never store private contact information.
+7. Record only public-safe source notes in `data/price-records.csv`; never store private contact information.
 
 ## First Seed Review Policy
 
@@ -54,7 +54,7 @@ Excluded from the first seed:
 - Delivery platform prices.
 - Unknown sources.
 - Third-party directory pages.
-- Hearsay or unclear source context.
+- Hearsay or unclear source evidence.
 - Undated screenshots, old photos, private upload links, or raw private evidence.
 - Uncertain shop identities, addresses, districts, boroughs, or coordinates.
 

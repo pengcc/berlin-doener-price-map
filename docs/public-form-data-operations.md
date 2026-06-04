@@ -33,7 +33,6 @@ Use public-friendly fields. Do not ask submitters for internal IDs, coordinates,
 | Observed price in EUR | Short answer | Yes | `7`, `7.00`, or `7,00` | Convert to integer `priceCents`, for example `700`. |
 | Product type | Dropdown | Yes | See product choices below | Map to internal `productType`. |
 | Evidence/source type | Dropdown | Yes | See source choices below | Map to internal `sourceType` after review. |
-| Source context | Paragraph | Yes | `Saw it on the in-store menu today.` | Review evidence; may inform `notes`, but keep private detail out. |
 | Public source URL | Short answer | No | Official menu/page URL if public | Use only stable public URLs for `sourceUrl`. |
 | Notes | Paragraph | No | Extra context | Review-only by default; publish only public-safe summaries. |
 
@@ -70,8 +69,6 @@ Use public labels that describe the evidence, then choose the final internal val
 | Other or unsure | `unknown` | `40` |
 
 For the first real seed, keep the stricter source policy from `docs/contribution-review-workflow.md`: prefer recent direct observations, dated menu evidence, and official shop websites; exclude delivery platforms, hearsay, private links, and uncertain shop identities.
-
-`Evidence/source type` is only the category of evidence. `Source context` is required because it explains what was actually seen or checked, for example whether the price was on an in-store menu, a photo, a website menu, or a delivery listing. That context lets the maintainer reject unclear reports, choose the right final `sourceType`, assign confidence, and write a concise public-safe note without publishing private details.
 
 ## CSV Staging Workflow
 
@@ -216,3 +213,5 @@ This failure is correct. It protects production data from raw, incomplete, or pr
 ## Future Idea
 
 If manual normalization becomes repetitive, plan a separate converter script that reads a known Google Forms header and writes a reviewed CSV draft. That script should still require maintainer review for IDs, coordinates, confidence, and public-safe notes before import.
+
+If submissions are too hard to verify later, consider adding an optional source-context field. Keep it optional unless review quality clearly requires more evidence detail.
