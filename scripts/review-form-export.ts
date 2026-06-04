@@ -14,6 +14,20 @@ import {
 } from "node:http";
 import { join, resolve } from "node:path";
 import {
+  buildBerlinOfficialWfsUrl,
+  buildNominatimSearchUrl,
+  canQueryBerlinOfficialAddress,
+  GEOCODE_CACHE_DIR,
+  type GeocodeLookupResult,
+  type GeocodeProvider,
+  getGeocodeCacheKey,
+  getNominatimDelayMs,
+  NOMINATIM_USER_AGENT,
+  parseBerlinAddress,
+  parseBerlinOfficialFeatureCollection,
+  parseNominatimResults,
+} from "../src/lib/data/form-geocoding";
+import {
   buildReviewToolState,
   FORM_SUBMISSION_DIR,
   type FormExportOverrideHeader,
@@ -53,6 +67,7 @@ function printUsage() {
 
 function ensureLocalDirectories() {
   mkdirSync(FORM_SUBMISSION_DIR, { recursive: true });
+  mkdirSync(GEOCODE_CACHE_DIR, { recursive: true });
   mkdirSync(REVIEWED_IMPORTS_DIR, { recursive: true });
   mkdirSync(REVIEW_OVERRIDES_DIR, { recursive: true });
 }
@@ -74,6 +89,30 @@ function readOverrideCsv() {
   return existsSync(REVIEW_OVERRIDES_PATH)
     ? readFileSync(REVIEW_OVERRIDES_PATH, "utf8")
     : undefined;
+}
+
+function getGeocodeCachePath(provider: GeocodeProvider, address: string) {
+  return join(GEOCODE_CACHE_DIR, getGeocodeCacheKey({ address, provider }));
+}
+
+function readGeocodeCache(provider: GeocodeProvider, address: string) {
+  const cachePath = getGeocodeCachePath(provider, address);
+
+  if (!existsSync(cachePath)) {
+    return undefined;
+  }
+
+  return {
+    ...(JSON.parse(readFileSync(cachePath, "utf8")) as GeocodeLookupResult),
+    cached: true,
+  };
+}
+
+function writeGeocodeCache(result: GeocodeLookupResult, address: string) {
+  writeFileSync(
+    getGeocodeCachePath(result.provider, address),
+    `${JSON.stringify({ ...result, cached: false }, null, 2)}\n`,
+  );
 }
 
 function toClientState(state: ReviewToolState): ClientState {
@@ -205,6 +244,136 @@ function getWriteRequested(value: unknown) {
   return isRecord(value) && value.write === true;
 }
 
+function needsGeocoding(
+  row: Partial<Record<FormExportOverrideHeader, unknown>>,
+) {
+  return !row.district || !row.borough || !row.lat || !row.lng;
+}
+
+function getAddressPayload(value: unknown) {
+  if (!isRecord(value) || typeof value.address !== "string") {
+    throw new Error("Request body must include address.");
+  }
+
+  const address = value.address.trim();
+
+  if (!address) {
+    throw new Error("Address must not be blank.");
+  }
+
+  return address;
+}
+
+async function fetchJson(url: string, init?: RequestInit) {
+  const response = await fetch(url, {
+    ...init,
+    headers: {
+      accept: "application/json",
+      ...(init?.headers ?? {}),
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Provider request failed with ${response.status}.`);
+  }
+
+  return response.json() as Promise<unknown>;
+}
+
+async function lookupBerlinOfficialAddress(
+  address: string,
+): Promise<GeocodeLookupResult> {
+  const cached = readGeocodeCache("berlin-official", address);
+
+  if (cached) {
+    return cached;
+  }
+
+  const parsedAddress = parseBerlinAddress(address);
+  const warnings = [...parsedAddress.warnings];
+
+  if (!canQueryBerlinOfficialAddress(parsedAddress)) {
+    return {
+      cached: false,
+      parsedAddress,
+      provider: "berlin-official",
+      suggestions: [],
+      warnings,
+    };
+  }
+
+  const payload = await fetchJson(buildBerlinOfficialWfsUrl(parsedAddress));
+  const suggestions = parseBerlinOfficialFeatureCollection(
+    payload as Parameters<typeof parseBerlinOfficialFeatureCollection>[0],
+  );
+
+  if (suggestions.length === 0) {
+    warnings.push("Official Berlin address lookup returned no candidates.");
+  }
+
+  const result: GeocodeLookupResult = {
+    cached: false,
+    parsedAddress,
+    provider: "berlin-official",
+    suggestions,
+    warnings,
+  };
+  writeGeocodeCache(result, address);
+
+  return result;
+}
+
+let lastNominatimRequestAt = 0;
+
+async function waitForNominatimRateLimit() {
+  const delayMs = getNominatimDelayMs({
+    lastRequestAt: lastNominatimRequestAt,
+    now: Date.now(),
+  });
+
+  if (delayMs > 0) {
+    await new Promise((resolveDelay) => setTimeout(resolveDelay, delayMs));
+  }
+
+  lastNominatimRequestAt = Date.now();
+}
+
+async function lookupNominatimAddress(
+  address: string,
+): Promise<GeocodeLookupResult> {
+  const cached = readGeocodeCache("nominatim", address);
+
+  if (cached) {
+    return cached;
+  }
+
+  await waitForNominatimRateLimit();
+
+  const payload = await fetchJson(buildNominatimSearchUrl(address), {
+    headers: {
+      "user-agent": NOMINATIM_USER_AGENT,
+    },
+  });
+  const suggestions = parseNominatimResults(
+    Array.isArray(payload) ? payload : [],
+  );
+  const warnings =
+    suggestions.length === 0
+      ? ["Nominatim returned no candidates."]
+      : [
+          "Nominatim is a manual fallback. Verify coordinates, district, and borough before approval.",
+        ];
+  const result: GeocodeLookupResult = {
+    cached: false,
+    provider: "nominatim",
+    suggestions,
+    warnings,
+  };
+  writeGeocodeCache(result, address);
+
+  return result;
+}
+
 function createPageHtml() {
   return `<!doctype html>
 <html lang="en">
@@ -327,6 +496,31 @@ function createPageHtml() {
       gap: 10px;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     }
+    .geo-panel {
+      border-top: 1px solid #e2d8ca;
+      display: grid;
+      gap: 10px;
+      padding-top: 12px;
+    }
+    .geo-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .geo-results {
+      display: grid;
+      gap: 8px;
+    }
+    .suggestion {
+      border: 1px solid #d6cdc0;
+      border-radius: 7px;
+      display: grid;
+      gap: 8px;
+      padding: 10px;
+    }
+    .suggestion strong {
+      overflow-wrap: anywhere;
+    }
     .raw-item {
       min-width: 0;
     }
@@ -359,6 +553,7 @@ function createPageHtml() {
       main { padding: 16px; }
       h1 { font-size: 23px; }
       .toolbar button { flex: 1 1 100%; }
+      .geo-actions button { flex: 1 1 100%; }
     }
   </style>
 </head>
@@ -371,6 +566,7 @@ function createPageHtml() {
     <section class="toolbar">
       <button class="secondary" id="reload">Reload</button>
       <button class="secondary" id="save">Save overrides</button>
+      <button class="secondary" id="geocode-missing">Official lookup missing geo fields</button>
       <button id="dry-run">Process dry run</button>
       <button class="danger" id="confirm" disabled>Confirm import</button>
     </section>
@@ -379,6 +575,7 @@ function createPageHtml() {
   </main>
   <script>
     const token = new URLSearchParams(location.search).get("token") || "";
+    const geocodeResultsByRow = new Map();
     let latestState = null;
 
     function escapeHtml(value) {
@@ -451,12 +648,41 @@ function createPageHtml() {
       }).join("") + '</select></label>';
     }
 
+    function renderGeocodeResult(rowNumber) {
+      const result = geocodeResultsByRow.get(Number(rowNumber));
+
+      if (!result) {
+        return '<p class="muted">No lookup has run for this row.</p>';
+      }
+
+      const warnings = result.warnings || [];
+      const suggestions = result.suggestions || [];
+      const warningHtml = warnings.length
+        ? '<ul>' + warnings.map((item) => '<li>' + escapeHtml(item) + '</li>').join("") + '</ul>'
+        : "";
+      const suggestionHtml = suggestions.length
+        ? suggestions.map((suggestion, index) => {
+            return '<div class="suggestion">' +
+              '<strong>' + escapeHtml(suggestion.label) + '</strong>' +
+              '<span class="muted">' + escapeHtml(suggestion.provider) + (result.cached ? " - cached" : "") + '</span>' +
+              '<span>District: <strong>' + escapeHtml(suggestion.district || "missing") + '</strong> - Borough: <strong>' + escapeHtml(suggestion.borough || "missing") + '</strong></span>' +
+              '<span>Lat/Lng: <code>' + escapeHtml(suggestion.lat) + ', ' + escapeHtml(suggestion.lng) + '</code></span>' +
+              '<span class="muted">' + escapeHtml(suggestion.quality || "") + '</span>' +
+              '<span class="muted">' + escapeHtml(suggestion.attribution || "") + '</span>' +
+              '<button class="secondary" data-apply-geocode="' + escapeHtml(rowNumber) + '" data-suggestion-index="' + escapeHtml(index) + '">Apply suggestion</button>' +
+            '</div>';
+          }).join("")
+        : '<p class="error">No suggestions found.</p>';
+
+      return warningHtml + suggestionHtml;
+    }
+
     function renderRows(state) {
       document.getElementById("rows").innerHTML = state.rows.map((row) => {
         const override = row.override;
         const reviewed = row.reviewed;
         const rawEntries = Object.entries(row.raw || {});
-        return '<article class="review-card" data-review-row>' +
+        return '<article class="review-card" data-review-row="' + escapeHtml(row.rowNumber) + '">' +
           '<h2>Row ' + escapeHtml(row.rowNumber) + '</h2>' +
           '<div class="raw-grid">' + rawEntries.map(([key, value]) => rawItem(key, value)).join("") + '</div>' +
           '<div class="readonly-grid">' +
@@ -479,19 +705,100 @@ function createPageHtml() {
             select("Approved", "approved", override.approved, ["", "yes", "no"]) +
             textarea("Public-safe notes", "notes", override.notes) +
           '</div>' +
+          '<div class="geo-panel">' +
+            '<div>' +
+              '<strong>Geocoding assist</strong>' +
+              '<p class="muted">Suggestions fill only district, borough, latitude, and longitude. They do not approve the row.</p>' +
+            '</div>' +
+            '<div class="geo-actions">' +
+              '<button class="secondary" data-geocode="official">Official Berlin lookup</button>' +
+              '<button class="secondary" data-geocode="nominatim">OSM/Nominatim fallback</button>' +
+            '</div>' +
+            '<div class="geo-results" data-geo-results="' + escapeHtml(row.rowNumber) + '">' + renderGeocodeResult(row.rowNumber) + '</div>' +
+          '</div>' +
           '<p class="muted">Address is the local matching key for this v1 tool. Correct raw address mistakes in the form export before review.</p>' +
         '</article>';
       }).join("");
     }
 
-    function collectRows() {
-      return [...document.querySelectorAll("[data-review-row]")].map((card) => {
-        const row = {};
-        card.querySelectorAll("[data-field]").forEach((field) => {
-          row[field.dataset.field] = field.value;
-        });
-        return row;
+    function collectRow(card) {
+      const row = {};
+      card.querySelectorAll("[data-field]").forEach((field) => {
+        row[field.dataset.field] = field.value;
       });
+      return row;
+    }
+
+    function collectRows() {
+      return [...document.querySelectorAll("[data-review-row]")].map(collectRow);
+    }
+
+    function refreshGeocodeResult(rowNumber) {
+      const target = document.querySelector('[data-geo-results="' + rowNumber + '"]');
+
+      if (target) {
+        target.innerHTML = renderGeocodeResult(rowNumber);
+      }
+    }
+
+    async function lookupGeocode(rowNumber, provider) {
+      const card = document.querySelector('[data-review-row="' + rowNumber + '"]');
+
+      if (!card) {
+        return;
+      }
+
+      const row = collectRow(card);
+
+      if (provider === "nominatim" && !confirm("Send this address to Nominatim/OpenStreetMap for manual fallback lookup?")) {
+        return;
+      }
+
+      geocodeResultsByRow.set(Number(rowNumber), {
+        cached: false,
+        provider,
+        suggestions: [],
+        warnings: ["Lookup in progress..."],
+      });
+      refreshGeocodeResult(rowNumber);
+
+      const endpoint = provider === "nominatim" ? "/api/geocode/nominatim" : "/api/geocode/official";
+      const payload = await api(endpoint, {
+        method: "POST",
+        body: JSON.stringify({ address: row.address }),
+      });
+      geocodeResultsByRow.set(Number(rowNumber), payload.result);
+      refreshGeocodeResult(rowNumber);
+    }
+
+    async function lookupMissingOfficial() {
+      const payload = await api("/api/geocode/official/missing", {
+        method: "POST",
+        body: JSON.stringify({ rows: collectRows() }),
+      });
+
+      for (const item of payload.results || []) {
+        geocodeResultsByRow.set(Number(item.rowNumber), item.result);
+        refreshGeocodeResult(item.rowNumber);
+      }
+    }
+
+    function applyGeocodeSuggestion(rowNumber, suggestionIndex) {
+      const result = geocodeResultsByRow.get(Number(rowNumber));
+      const suggestion = result?.suggestions?.[Number(suggestionIndex)];
+      const card = document.querySelector('[data-review-row="' + rowNumber + '"]');
+
+      if (!suggestion || !card) {
+        return;
+      }
+
+      for (const field of ["district", "borough", "lat", "lng"]) {
+        const input = card.querySelector('[data-field="' + field + '"]');
+
+        if (input && suggestion[field]) {
+          input.value = suggestion[field];
+        }
+      }
     }
 
     async function loadState() {
@@ -523,10 +830,25 @@ function createPageHtml() {
 
     document.getElementById("reload").addEventListener("click", () => loadState().catch(showError));
     document.getElementById("save").addEventListener("click", () => saveOverrides().catch(showError));
+    document.getElementById("geocode-missing").addEventListener("click", () => lookupMissingOfficial().catch(showError));
     document.getElementById("dry-run").addEventListener("click", () => process(false).catch(showError));
     document.getElementById("confirm").addEventListener("click", () => {
       if (latestState?.result?.canWrite && confirm("Write reviewed rows to production data files?")) {
         process(true).catch(showError);
+      }
+    });
+    document.getElementById("rows").addEventListener("click", (event) => {
+      const geocodeButton = event.target.closest("[data-geocode]");
+      const applyButton = event.target.closest("[data-apply-geocode]");
+
+      if (geocodeButton) {
+        const card = geocodeButton.closest("[data-review-row]");
+        lookupGeocode(card.dataset.reviewRow, geocodeButton.dataset.geocode).catch(showError);
+        return;
+      }
+
+      if (applyButton) {
+        applyGeocodeSuggestion(applyButton.dataset.applyGeocode, applyButton.dataset.suggestionIndex);
       }
     });
 
@@ -625,6 +947,48 @@ try {
           200,
           runPipeline(inputPath, getWriteRequested(body)),
         );
+        return;
+      }
+
+      if (
+        request.method === "POST" &&
+        url.pathname === "/api/geocode/official"
+      ) {
+        const body = await readJson(request);
+        sendJson(response, 200, {
+          result: await lookupBerlinOfficialAddress(getAddressPayload(body)),
+        });
+        return;
+      }
+
+      if (
+        request.method === "POST" &&
+        url.pathname === "/api/geocode/official/missing"
+      ) {
+        const body = await readJson(request);
+        const results = [];
+
+        for (const [index, row] of getRowsPayload(body).entries()) {
+          if (typeof row.address === "string" && needsGeocoding(row)) {
+            results.push({
+              result: await lookupBerlinOfficialAddress(row.address),
+              rowNumber: index + 1,
+            });
+          }
+        }
+
+        sendJson(response, 200, { results });
+        return;
+      }
+
+      if (
+        request.method === "POST" &&
+        url.pathname === "/api/geocode/nominatim"
+      ) {
+        const body = await readJson(request);
+        sendJson(response, 200, {
+          result: await lookupNominatimAddress(getAddressPayload(body)),
+        });
         return;
       }
 

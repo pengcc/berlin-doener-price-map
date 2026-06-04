@@ -82,6 +82,7 @@ When implementation depends on library behavior, consult official docs first. Th
 - Keep raw form exports, local review overrides, geocoding caches, and private review notes under ignored `dev_locals/`.
 - Use converters and one-line import pipelines only as review aids; they must preserve dry-run validation and required-field gates before production data writes.
 - Browser-based maintainer tools may be built for painful CSV review workflows, but they must stay local-only, outside public/deployed routes, bound to loopback hosts, and protected from accidental LAN exposure.
+- For Berlin address geocoding, prefer official Berlin open data sources before generic public geocoders. Generic geocoders such as Nominatim must be manual, cached, attributed, rate-limited, and not used for automatic bulk workflows unless their current provider terms explicitly allow it.
 - Treat delivery platform prices as lower confidence because they may differ from in-store prices.
 - Avoid scraping or republishing third-party content without checking terms.
 - Make uncertainty visible through confidence labels, outdated states, and methodology text.

@@ -95,7 +95,24 @@ You can pass a specific raw export when needed:
 pnpm review:form-export -- dev_locals/data/form-submission/2026-06-04-google-form-responses.csv
 ```
 
-The v1 review tool does not geocode and does not send addresses to external services. Address mistakes should be fixed in the raw export before review; the address field in the tool is the local matching key for overrides.
+The review tool includes a geocoding assist for maintainer review. It is not automatic production data. Suggestions can fill only `district`, `borough`, `lat`, and `lng`; they do not set `status`, `confidence`, or `approved`.
+
+Use the geocoding controls this way:
+
+1. Try `Official Berlin lookup` first. It sends the row address to Berlin's official no-key WFS for `Adressen Berlin`, which returns address coordinates plus `bez_name` and `ort_name`.
+2. Use `Official lookup missing geo fields` when several rows are missing only district/borough/coordinates. This batch action uses only the official Berlin source.
+3. Use `OSM/Nominatim fallback` only row by row when the official source cannot find a useful candidate. This sends the address to Nominatim/OpenStreetMap, uses a project-identifying User-Agent, is cached locally, and is rate-limited.
+4. Click `Apply suggestion` only after checking the result. Then finish the remaining review fields manually and save overrides.
+
+Address mistakes should still be fixed in the raw export before review; the address field in the tool is the local matching key for overrides.
+
+Geocoding cache files are stored under:
+
+```txt
+dev_locals/data/geocode-cache/
+```
+
+Do not commit geocoding caches. They may contain raw submitted addresses and provider results.
 
 4. Process the export with the one-line local pipeline when you prefer CLI review:
 
@@ -125,12 +142,12 @@ The generated draft filename is based on the raw export filename, for example:
 dev_locals/data/reviewed-imports/2026-06-04-google-form-responses.reviewed-draft.csv
 ```
 
-The pipeline only fills fields that can be safely derived from the public form, existing production shop data, or approved local overrides. It does not geocode or guess publication fields.
+The CLI pipeline only fills fields that can be safely derived from the public form, existing production shop data, or approved local overrides. It does not contact geocoding providers or guess publication fields.
 
 Create the local folders if they do not exist:
 
 ```bash
-mkdir -p dev_locals/data/form-submission dev_locals/data/reviewed-imports dev_locals/data/review-overrides
+mkdir -p dev_locals/data/form-submission dev_locals/data/reviewed-imports dev_locals/data/review-overrides dev_locals/data/geocode-cache
 ```
 
 Optional local review overrides live at:

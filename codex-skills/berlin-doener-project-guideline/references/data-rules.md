@@ -57,7 +57,7 @@ Use `csv-parse/sync` for price CSV ingestion with explicit header validation. He
 
 For public form exports and other manually reviewed inputs, keep raw private files and generated review artifacts under ignored `dev_locals/`. Converter scripts may create draft reviewed data, but must not bypass maintainer review. One-line pipelines and browser-based local review tools are acceptable when they preserve the same publication gates: canonical reviewed headers, complete required fields, approved new-shop metadata, dry-run validation, and no production write when blockers remain.
 
-Local review tools must not be public app routes or deployed admin surfaces. If address enrichment or geocoding is added later, it must be opt-in, documented for privacy/provider constraints, cached locally where possible, and confirmed by the user before implementation.
+Local review tools must not be public app routes or deployed admin surfaces. Address enrichment and geocoding helpers are review aids only: keep them opt-in, document privacy/provider constraints, cache results under ignored `dev_locals/`, and never let suggestions bypass required-field, approval, dry-run, or explicit import gates. Geocoding suggestions may help fill `district`, `borough`, `lat`, and `lng`, but they must not auto-set review-only publication decisions such as `status`, `confidence`, or `approved`.
 
 ## Required Shop Fields
 
