@@ -81,13 +81,27 @@ Google Forms exports should stay local and ignored by git.
 dev_locals/data/form-submissions/
 ```
 
-3. Create reviewed import files under:
+3. Create reviewed import files manually under:
 
 ```txt
 dev_locals/data/reviewed-imports/
 ```
 
-4. Keep raw response filenames dated, for example:
+There is no converter script yet. For now, create a new CSV in a spreadsheet editor or text editor, paste the canonical reviewed header from the next section, then fill one reviewed row per accepted raw form response. The import script only validates and imports an already prepared reviewed CSV; it does not convert Google Forms exports.
+
+Create the local folders if they do not exist:
+
+```bash
+mkdir -p dev_locals/data/form-submissions dev_locals/data/reviewed-imports
+```
+
+Starter reviewed CSV:
+
+```csv
+shopId,priceRecordId,shopName,address,district,borough,lat,lng,status,observedAt,priceCents,productType,sourceType,confidence,sourceUrl,notes
+```
+
+4. Keep raw response and reviewed import filenames dated, for example:
 
 ```txt
 dev_locals/data/form-submissions/2026-06-04-google-form-responses.csv
