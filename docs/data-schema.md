@@ -202,7 +202,8 @@ The maintainer import CSV uses this canonical header:
 shopId,priceRecordId,shopName,address,district,borough,lat,lng,status,observedAt,priceCents,productType,sourceType,confidence,sourceUrl,notes
 ```
 
-Contributor fields such as address, date, price, product, source type, and source context are not enough for publication by themselves. Before import, maintainers must assign stable ids, verify coordinates, normalize the shop metadata, choose confidence, and remove any private or unsafe notes.
+Contributor fields such as address, date, price, product, and source type are not enough for publication by themselves. Before import, maintainers must assign stable ids, verify coordinates, normalize the shop metadata, choose confidence, and remove any private or unsafe notes.
+For public Google Form setup, raw CSV staging, field mapping, and manual normalization instructions, see `docs/public-form-data-operations.md`.
 
 Run a dry import before writing:
 

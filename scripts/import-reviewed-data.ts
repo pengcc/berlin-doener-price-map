@@ -6,6 +6,7 @@ import {
   importReviewedData,
   ReviewedDataImportError,
 } from "../src/lib/data/import-reviewed-data";
+import { parseReviewedDataImportArgs } from "../src/lib/data/import-reviewed-data-cli";
 import { loadDataSet } from "../src/lib/data/load-data";
 
 function printUsage() {
@@ -14,9 +15,7 @@ function printUsage() {
   );
 }
 
-const args = process.argv.slice(2);
-const write = args.includes("--write");
-const inputPath = args.find((arg) => arg !== "--write");
+const { inputPath, write } = parseReviewedDataImportArgs(process.argv.slice(2));
 
 if (!inputPath) {
   printUsage();

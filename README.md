@@ -142,7 +142,7 @@ When that key exists, the app loads MapTiler `streets-v4` raster tiles. Without 
 
 The public submit page links to structured GitHub issue forms for price observations and data corrections. Public submissions remain review inputs only and do not publish data directly or write to a backend.
 
-An optional public form can be added by creating a Tally, Google Form, or similar no-cost form manually and configuring only its public URL. The form should collect the same review inputs as the GitHub price issue: shop name if known, address, district if known, observation date, price, product type, source type, source context, optional public source URL, and optional reviewer notes. It should include a clear note that submissions are manually reviewed before publication and should not request private credentials or unnecessary contact details.
+An optional public form can be added by creating a Tally, Google Form, or similar no-cost form manually and configuring only its public URL. The form should collect public-friendly review inputs, while internal ids, coordinates, confidence, and publication-safe notes are added later by a maintainer. See [docs/public-form-data-operations.md](./docs/public-form-data-operations.md) for the recommended form fields, CSV staging workflow, reviewed CSV format, and import commands.
 
 After creating the form:
 
@@ -164,11 +164,17 @@ If a maintainer bulk-entry tool becomes useful later, re-plan it as a shadcn/ui 
 Maintainers can import reviewed, publication-ready CSV rows with:
 
 ```bash
+pnpm process:form-export
+pnpm review:form-export
 pnpm import:reviewed-data -- reviewed-data.csv
 pnpm import:reviewed-data -- reviewed-data.csv --write
 ```
 
-The import command is a dry run by default. `--write` updates `data/shops.json` and `data/price-records.csv` after the reviewed CSV includes shop ids, price record ids, coordinates, confidence, and public-safe notes.
+`process:form-export` is the preferred local one-line flow for Google Forms exports. It picks the newest raw CSV under ignored `dev_locals/data/form-submission/`, writes a reviewed draft, and updates production data only when required fields are complete and the reviewed import dry run passes. If local Node or pnpm versions are uncertain, use `mise exec -- corepack pnpm process:form-export`.
+
+`review:form-export` starts a local-only browser tool on `127.0.0.1` for maintainers who prefer reviewing and editing overrides in a page instead of a CSV editor. It uses the same write gates as `process:form-export` and does not add a public route or deployed admin UI.
+
+The lower-level import command is a dry run by default. `--write` updates `data/shops.json` and `data/price-records.csv` after the reviewed CSV includes shop ids, price record ids, coordinates, confidence, and public-safe notes. Raw Google Forms exports, reviewed drafts, and review overrides should stay under ignored `dev_locals/data/`.
 
 For the first real seed, publish only direct observations from the last 30 days: in-store manual observations, dated menu photos, or official shop websites. Delivery-platform prices, third-party directory pages, hearsay, undated screenshots, private links, and uncertain addresses are excluded from the first seed. Use concise public-safe provenance notes and keep detailed review evidence in ignored local files.
 

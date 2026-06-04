@@ -245,7 +245,7 @@
       "title": "GitHub price issue"
     },
     "intro": "Contribution paths are intentionally simple and manually reviewed before publication.",
-    "reviewNotice": "Submitted prices should include a date, shop address, product type, and source context. Nothing becomes public without review.",
+    "reviewNotice": "Submitted prices should include a date, shop address, product type, and source or evidence type. Nothing becomes public without review.",
     "title": "Submit a Döner price"
   },
   "ImprintPage": {
