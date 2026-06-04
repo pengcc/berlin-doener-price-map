@@ -28,7 +28,7 @@ Use public-friendly fields. Do not ask submitters for internal IDs, coordinates,
 | --- | --- | --- | --- | --- |
 | Shop name | Short answer | No | `Douran Döner` | Helps identify or create `shopName`; maintainer verifies. |
 | Shop address | Short answer | Yes | `Example Straße 1, 10115 Berlin` | Required basis for `address`, district, borough, and coordinates. |
-| District or neighborhood | Short answer | No | `Mitte`, `Wedding`, `Kreuzberg` | Hint for `district`; maintainer verifies. |
+| District or neighborhood | Dropdown | No | `Mitte`, `Wedding`, `Kreuzberg`, or `Unsure / not listed` | Reduces spelling variants and makes CSV review easier; maintainer still verifies against the address. |
 | Observation date | Date | Yes | Date when the price was seen | Normalize to `observedAt` as `YYYY-MM-DD`. |
 | Observed price in EUR | Short answer | Yes | `7`, `7.00`, or `7,00` | Convert to integer `priceCents`, for example `700`. |
 | Product type | Dropdown | Yes | See product choices below | Map to internal `productType`. |
@@ -38,6 +38,8 @@ Use public-friendly fields. Do not ask submitters for internal IDs, coordinates,
 | Notes | Paragraph | No | Extra context | Review-only by default; publish only public-safe summaries. |
 
 Optional contact details are not recommended for the public form. Add them only if there is a clear reviewed-data need, and never publish them.
+
+Use a dropdown for district or neighborhood because free text quickly creates duplicates such as `Kreuzberg`, `Berlin Kreuzberg`, and `Xberg`. Keep an `Unsure / not listed` option so users are not blocked when they only know the address.
 
 ## Product Type Choices
 
@@ -68,6 +70,8 @@ Use public labels that describe the evidence, then choose the final internal val
 | Other or unsure | `unknown` | `40` |
 
 For the first real seed, keep the stricter source policy from `docs/contribution-review-workflow.md`: prefer recent direct observations, dated menu evidence, and official shop websites; exclude delivery platforms, hearsay, private links, and uncertain shop identities.
+
+`Evidence/source type` is only the category of evidence. `Source context` is required because it explains what was actually seen or checked, for example whether the price was on an in-store menu, a photo, a website menu, or a delivery listing. That context lets the maintainer reject unclear reports, choose the right final `sourceType`, assign confidence, and write a concise public-safe note without publishing private details.
 
 ## CSV Staging Workflow
 
