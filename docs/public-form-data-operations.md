@@ -78,24 +78,30 @@ Google Forms exports should stay local and ignored by git.
 2. Place raw exports under:
 
 ```txt
-dev_locals/data/form-submissions/
+dev_locals/data/form-submission/
 ```
 
-3. Create reviewed import files manually under:
+3. Create reviewed import draft files under:
 
 ```txt
 dev_locals/data/reviewed-imports/
 ```
 
-There is no converter script yet. For now, create a new CSV in a spreadsheet editor or text editor, paste the canonical reviewed header from the next section, then fill one reviewed row per accepted raw form response. The import script only validates and imports an already prepared reviewed CSV; it does not convert Google Forms exports.
+Use the local converter for the current Google Forms CSV shape:
+
+```bash
+mise exec -- corepack pnpm convert:form-responses -- dev_locals/data/form-submission/2026-06-04-google-form-responses.csv dev_locals/data/reviewed-imports/2026-06-04-reviewed-draft.csv
+```
+
+The converter creates a canonical-header draft and fills the fields that can be safely derived from the public form. It does not make the data publication-ready. A maintainer still needs to review and complete fields such as `borough`, `lat`, `lng`, `status`, `confidence`, and public-safe `notes` before running the reviewed import.
 
 Create the local folders if they do not exist:
 
 ```bash
-mkdir -p dev_locals/data/form-submissions dev_locals/data/reviewed-imports
+mkdir -p dev_locals/data/form-submission dev_locals/data/reviewed-imports
 ```
 
-Starter reviewed CSV:
+If the form header changes or you need to work manually, create a new CSV in a spreadsheet editor or text editor and start with this header:
 
 ```csv
 shopId,priceRecordId,shopName,address,district,borough,lat,lng,status,observedAt,priceCents,productType,sourceType,confidence,sourceUrl,notes
@@ -104,7 +110,7 @@ shopId,priceRecordId,shopName,address,district,borough,lat,lng,status,observedAt
 4. Keep raw response and reviewed import filenames dated, for example:
 
 ```txt
-dev_locals/data/form-submissions/2026-06-04-google-form-responses.csv
+dev_locals/data/form-submission/2026-06-04-google-form-responses.csv
 dev_locals/data/reviewed-imports/2026-06-04-reviewed-data.csv
 ```
 
@@ -225,7 +231,5 @@ Reviewed data CSV header must be: shopId,priceRecordId,shopName,address,district
 This failure is correct. It protects production data from raw, incomplete, or private form responses.
 
 ## Future Idea
-
-If manual normalization becomes repetitive, plan a separate converter script that reads a known Google Forms header and writes a reviewed CSV draft. That script should still require maintainer review for IDs, coordinates, confidence, and public-safe notes before import.
 
 If submissions are too hard to verify later, consider adding an optional source-context field. Keep it optional unless review quality clearly requires more evidence detail.

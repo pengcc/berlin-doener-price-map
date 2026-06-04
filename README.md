@@ -169,7 +169,7 @@ pnpm import:reviewed-data -- reviewed-data.csv --write
 ```
 
 The import command is a dry run by default. `--write` updates `data/shops.json` and `data/price-records.csv` after the reviewed CSV includes shop ids, price record ids, coordinates, confidence, and public-safe notes.
-Raw Google Forms exports should stay under ignored `dev_locals/data/form-submissions/`; reviewed import files should be prepared under ignored `dev_locals/data/reviewed-imports/`.
+Raw Google Forms exports should stay under ignored `dev_locals/data/form-submission/`; reviewed import files should be prepared under ignored `dev_locals/data/reviewed-imports/`.
 
 For the first real seed, publish only direct observations from the last 30 days: in-store manual observations, dated menu photos, or official shop websites. Delivery-platform prices, third-party directory pages, hearsay, undated screenshots, private links, and uncertain addresses are excluded from the first seed. Use concise public-safe provenance notes and keep detailed review evidence in ignored local files.
 

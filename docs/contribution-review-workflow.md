@@ -69,7 +69,7 @@ shopId,priceRecordId,shopName,address,district,borough,lat,lng,status,observedAt
 ```
 
 Contributor-submitted rows are not enough for publication until a maintainer completes the publication fields: stable ids, district, borough, latitude, longitude, shop status, confidence, and public-safe notes.
-Raw public form exports should stay under ignored `dev_locals/data/form-submissions/`. Prepare publication-ready reviewed CSV files under ignored `dev_locals/data/reviewed-imports/`.
+Raw public form exports should stay under ignored `dev_locals/data/form-submission/`. Prepare publication-ready reviewed CSV files under ignored `dev_locals/data/reviewed-imports/`.
 
 Dry-run the import first:
 
