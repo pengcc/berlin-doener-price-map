@@ -142,7 +142,7 @@ When that key exists, the app loads MapTiler `streets-v4` raster tiles. Without 
 
 The public submit page links to structured GitHub issue forms for price observations and data corrections. Public submissions remain review inputs only and do not publish data directly or write to a backend.
 
-An optional public form can be added by creating a Tally, Google Form, or similar no-cost form manually and configuring only its public URL. The form should collect the same review inputs as the GitHub price issue: shop name if known, address, district if known, observation date, price, product type, source type, source context, optional public source URL, and optional reviewer notes. It should include a clear note that submissions are manually reviewed before publication and should not request private credentials or unnecessary contact details.
+An optional public form can be added by creating a Tally, Google Form, or similar no-cost form manually and configuring only its public URL. The form should collect public-friendly review inputs, while internal ids, coordinates, confidence, and publication-safe notes are added later by a maintainer. See [docs/public-form-data-operations.md](./docs/public-form-data-operations.md) for the recommended form fields, CSV staging workflow, reviewed CSV format, and import commands.
 
 After creating the form:
 
@@ -169,6 +169,7 @@ pnpm import:reviewed-data -- reviewed-data.csv --write
 ```
 
 The import command is a dry run by default. `--write` updates `data/shops.json` and `data/price-records.csv` after the reviewed CSV includes shop ids, price record ids, coordinates, confidence, and public-safe notes.
+Raw Google Forms exports should stay under ignored `dev_locals/data/form-submissions/`; reviewed import files should be prepared under ignored `dev_locals/data/reviewed-imports/`.
 
 For the first real seed, publish only direct observations from the last 30 days: in-store manual observations, dated menu photos, or official shop websites. Delivery-platform prices, third-party directory pages, hearsay, undated screenshots, private links, and uncertain addresses are excluded from the first seed. Use concise public-safe provenance notes and keep detailed review evidence in ignored local files.
 

@@ -24,6 +24,8 @@ DOENER_PRICE_FORM_URL=https://...
 
 Use fields that map cleanly to the review workflow: shop name if known, shop address, district if known, observation date, observed price in EUR, product type, source type, source context, optional public source URL, and optional notes. Include a visible manual-review notice and avoid collecting private contact details unless there is a clear reviewed-data need.
 
+Detailed Google Form setup, CSV staging, field mapping, normalization, and reviewed import instructions live in `docs/public-form-data-operations.md`.
+
 Future idea: if batch maintainer entry becomes useful again, re-plan it as a shadcn/ui form-card workflow with responsive inputs and custom select components. Do not restore the old wide table intake.
 
 ## Triage
@@ -67,6 +69,7 @@ shopId,priceRecordId,shopName,address,district,borough,lat,lng,status,observedAt
 ```
 
 Contributor-submitted rows are not enough for publication until a maintainer completes the publication fields: stable ids, district, borough, latitude, longitude, shop status, confidence, and public-safe notes.
+Raw public form exports should stay under ignored `dev_locals/data/form-submissions/`. Prepare publication-ready reviewed CSV files under ignored `dev_locals/data/reviewed-imports/`.
 
 Dry-run the import first:
 
