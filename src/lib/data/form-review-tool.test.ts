@@ -65,6 +65,7 @@ describe("local form review tool helpers", () => {
         {
           address: "Lipschitzallee 27, 12351 Berlin",
           approved: "yes",
+          action: "",
           borough: "Neukölln",
           confidence: "65",
           district: "Neukölln",
@@ -75,10 +76,12 @@ describe("local form review tool helpers", () => {
           shopName: "Douran Döner",
           sourceUrl: "",
           status: "active",
+          targetPriceRecordId: "",
+          targetShopId: "",
         },
       ]),
     ).toBe(
-      'address,shopId,shopName,district,borough,lat,lng,status,confidence,sourceUrl,notes,approved\n"Lipschitzallee 27, 12351 Berlin",douran-doener-neukoelln,Douran Döner,Neukölln,Neukölln,52.42658,13.45676,active,65,,Reviewed,yes\n',
+      'address,shopId,shopName,district,borough,lat,lng,status,confidence,sourceUrl,notes,approved,action,targetPriceRecordId,targetShopId\n"Lipschitzallee 27, 12351 Berlin",douran-doener-neukoelln,Douran Döner,Neukölln,Neukölln,52.42658,13.45676,active,65,,Reviewed,yes,,,\n',
     );
   });
 
@@ -106,7 +109,7 @@ describe("local form review tool helpers", () => {
     expect(result.wroteProduction).toBe(false);
     expect(result.dataSetToWrite).toBeUndefined();
     expect(result.state.result.blockers).toContain(
-      "Row 1 (Lipschitzallee 27, 12351 Berlin): complete borough, lat, lng.",
+      "Row 1 (Lipschitzallee 27, 12351 Berlin): missing required publication fields: borough, lat, lng. Open pnpm review:form-export, fill these fields in the local review page, save overrides, then rerun pnpm process:form-export --force.",
     );
   });
 

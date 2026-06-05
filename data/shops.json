@@ -18,5 +18,25 @@
     "lat": 52.57014,
     "lng": 13.31293,
     "status": "active"
+  },
+  {
+    "id": "douran-doener-neukoelln",
+    "name": "Douran Döner",
+    "address": "Lipschitzallee 27, 12351 Berlin",
+    "district": "Gropiusstadt",
+    "borough": "Neukölln",
+    "lat": 52.42968172,
+    "lng": 13.47157734,
+    "status": "unknown"
+  },
+  {
+    "id": "dueruemcue-baba-tempelhof-schoeneberg",
+    "name": "Dürümcü Baba",
+    "address": "Bahnhofstr. 39, 12307 Berlin",
+    "district": "Lichtenrade",
+    "borough": "Tempelhof-Schöneberg",
+    "lat": 52.3865073,
+    "lng": 13.3994254,
+    "status": "unknown"
   }
 ]

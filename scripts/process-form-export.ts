@@ -7,17 +7,22 @@ import {
   writeFileSync,
 } from "node:fs";
 import { basename, join, parse, resolve } from "node:path";
+import {
+  archiveSuccessfulFormImport,
+  ensureImportHistoryDirectories,
+} from "../src/lib/data/form-import-history";
+import {
+  FORM_SUBMISSION_DIR,
+  REVIEW_OVERRIDES_DIR,
+  REVIEW_OVERRIDES_PATH,
+  REVIEWED_IMPORTS_DIR,
+} from "../src/lib/data/form-review-tool";
 import { formatPriceRecordsCsv } from "../src/lib/data/import-reviewed-data";
 import { loadDataSet } from "../src/lib/data/load-data";
 import {
   processFormExportData,
   selectNewestCsv,
 } from "../src/lib/data/process-form-export";
-
-const FORM_SUBMISSION_DIR = "dev_locals/data/form-submission";
-const REVIEWED_IMPORTS_DIR = "dev_locals/data/reviewed-imports";
-const REVIEW_OVERRIDES_DIR = "dev_locals/data/review-overrides";
-const REVIEW_OVERRIDES_PATH = `${REVIEW_OVERRIDES_DIR}/form-export-overrides.csv`;
 
 type Args = {
   dryRun: boolean;
@@ -61,6 +66,7 @@ function ensureLocalDirectories() {
   mkdirSync(FORM_SUBMISSION_DIR, { recursive: true });
   mkdirSync(REVIEWED_IMPORTS_DIR, { recursive: true });
   mkdirSync(REVIEW_OVERRIDES_DIR, { recursive: true });
+  ensureImportHistoryDirectories();
 }
 
 function findNewestRawCsv() {
@@ -148,9 +154,19 @@ try {
       join(process.cwd(), "data", "price-records.csv"),
       formatPriceRecordsCsv(result.updatedDataSet.priceRecords),
     );
+    const historyEntry = archiveSuccessfulFormImport({
+      draftPath: outputPath,
+      rowResults: result.rowResults,
+      sourcePath: inputPath,
+    });
     console.log(
       "Production data updated: data/shops.json and data/price-records.csv.",
     );
+    console.log(`Raw export archived to ${historyEntry.archivedSourcePath}.`);
+    console.log(
+      `Reviewed draft archived to ${historyEntry.archivedDraftPath}.`,
+    );
+    console.log(`Import history updated: ${historyEntry.id}.`);
   }
 } catch (error) {
   console.error("Form export processing failed.");
