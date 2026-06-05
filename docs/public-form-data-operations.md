@@ -202,6 +202,49 @@ dev_locals/data/import-history/form-import-history.json
 
 The history records the source file, reviewed draft, row classifications, actions, shop IDs, price record IDs, target IDs, and write timestamp. Failed runs, dry runs, and blocked runs do not archive files and do not update the history.
 
+## Reprocess A Changed Export
+
+Reprocessing is common when you notice a wrong shop name, address, or review field after an initial dry run or local import test. There are three separate local states to understand:
+
+| State | Path | When to change it |
+| --- | --- | --- |
+| Raw form export | `dev_locals/data/form-submission/*.csv` | Edit or replace this when the submitted human-readable form data is wrong, for example shop name or address typo. |
+| Generated reviewed draft | `dev_locals/data/reviewed-imports/*.reviewed-draft.csv` | Usually do not edit by hand. Regenerate it with `pnpm process:form-export --force`. |
+| Local review overrides | `dev_locals/data/review-overrides/form-export-overrides.csv` | Update this when maintainer-only fields are wrong, for example `district`, `borough`, `lat`, `lng`, `status`, `confidence`, `approved`, `action`, or target IDs. |
+
+The override file matches rows by normalized `address`. If you change a row's address in the raw CSV, the old override row no longer matches. Update the override row's `address` to the new address, or save the row again from `pnpm review:form-export`.
+
+For a clean reprocess before production publish:
+
+1. Edit or replace the raw CSV under `dev_locals/data/form-submission/`.
+2. If the address changed, update the matching `address` in `dev_locals/data/review-overrides/form-export-overrides.csv`, or use the review UI to save a fresh override for that row.
+3. Regenerate the draft:
+
+```bash
+pnpm process:form-export --force
+```
+
+4. If rows are missing `borough`, `lat`, or `lng`, run:
+
+```bash
+pnpm review:form-export
+```
+
+Then use the geocoding assist, apply suggestions, finish `status`, `confidence`, `approved`, and save overrides.
+
+5. Run `pnpm process:form-export --force` again, or use the review UI dry run.
+
+If a previous run already wrote production data and the changes are still uncommitted, the simplest reset is to discard only the local production file changes in `data/shops.json` and `data/price-records.csv`, then reprocess from the raw CSV. Do not delete archive/history files for normal reprocessing; they are local audit history. If the data was already committed or published, do not reset files manually. Use explicit actions instead:
+
+| Need | Action |
+| --- | --- |
+| Same row already imported and should be ignored | `skip` |
+| Previously imported price was wrong | `correct_price` with `targetPriceRecordId` |
+| Existing shop name, address, district, borough, coordinates, or status should change | `update_shop` with `targetShopId` |
+| Incorrectly imported price should be removed | `delete_price` with `targetPriceRecordId` |
+
+The local review UI can edit the reviewed shop name and maintainer fields. The `Address key` field is read-only because it is the matching key for overrides; fix address typos in the raw CSV, then save a new matching override.
+
 If the form header changes or you need to work manually, create a new CSV in a spreadsheet editor or text editor and start with this header:
 
 ```csv
