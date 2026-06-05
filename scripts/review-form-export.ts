@@ -385,8 +385,8 @@ function createPageHtml() {
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      background: #f6f2ea;
-      color: #261f18;
+      background: #f8fafc;
+      color: #1f2933;
       font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.45;
     }
@@ -407,12 +407,12 @@ function createPageHtml() {
     }
     p {
       margin: 0;
-      color: #5f564c;
+      color: #53606d;
     }
     button {
-      border: 1px solid #241f18;
+      border: 1px solid #1f2933;
       border-radius: 6px;
-      background: #241f18;
+      background: #1f2933;
       color: #fff;
       cursor: pointer;
       font: inherit;
@@ -421,11 +421,26 @@ function createPageHtml() {
     }
     button.secondary {
       background: #fff;
-      color: #241f18;
+      color: #1f2933;
+    }
+    button.official {
+      background: #0f766e;
+      border-color: #0f766e;
+      color: #fff;
+    }
+    button.fallback {
+      background: #fff7ed;
+      border-color: #c2410c;
+      color: #9a3412;
+      font-weight: 700;
+    }
+    button.fallback.attention {
+      background: #c2410c;
+      color: #fff;
     }
     button.danger {
-      background: #8b2f24;
-      border-color: #8b2f24;
+      background: #b42318;
+      border-color: #b42318;
     }
     button:disabled {
       cursor: not-allowed;
@@ -434,10 +449,10 @@ function createPageHtml() {
     input, select, textarea {
       width: 100%;
       min-width: 0;
-      border: 1px solid #c8bfb2;
+      border: 1px solid #cbd5e1;
       border-radius: 6px;
       background: #fff;
-      color: #261f18;
+      color: #1f2933;
       font: inherit;
       padding: 8px 10px;
     }
@@ -449,9 +464,18 @@ function createPageHtml() {
       display: grid;
       gap: 5px;
       min-width: 0;
-      color: #51483f;
+      color: #374151;
       font-size: 13px;
       font-weight: 650;
+    }
+    label.field-alert select,
+    label.field-alert input,
+    label.field-alert textarea {
+      border-color: #dc2626;
+      box-shadow: 0 0 0 2px #fee2e2;
+    }
+    label.field-alert span {
+      color: #b42318;
     }
     .toolbar {
       align-items: center;
@@ -461,22 +485,75 @@ function createPageHtml() {
       margin: 18px 0;
     }
     .status, .review-card {
-      border: 1px solid #d6cdc0;
+      border: 1px solid #d9e2ec;
       border-radius: 8px;
-      background: #fffdfa;
+      background: #fff;
       padding: 16px;
     }
     .status {
       display: grid;
-      gap: 8px;
+      gap: 12px;
       margin-bottom: 16px;
     }
     .status strong {
-      color: #241f18;
+      color: #1f2933;
     }
     .status ul {
       margin: 0;
       padding-left: 20px;
+    }
+    .status-summary {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+    .status-metric {
+      border: 1px solid #e2e8f0;
+      border-radius: 7px;
+      display: grid;
+      gap: 3px;
+      padding: 10px;
+    }
+    .status-metric span {
+      color: #64748b;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .status-metric strong,
+    .status-metric code {
+      overflow-wrap: anywhere;
+    }
+    .alert {
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      display: grid;
+      gap: 6px;
+      padding: 12px;
+    }
+    .alert.success {
+      background: #ecfdf3;
+      border-color: #16a34a;
+      color: #166534;
+    }
+    .alert.warning {
+      background: #fffbeb;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+    .alert.danger {
+      background: #fef2f2;
+      border-color: #dc2626;
+      color: #991b1b;
+    }
+    .alert.info {
+      background: #eff6ff;
+      border-color: #60a5fa;
+      color: #1d4ed8;
+    }
+    .alert strong,
+    .alert p {
+      color: inherit;
     }
     .rows {
       display: grid;
@@ -497,7 +574,7 @@ function createPageHtml() {
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     }
     .geo-panel {
-      border-top: 1px solid #e2d8ca;
+      border-top: 1px solid #e2e8f0;
       display: grid;
       gap: 10px;
       padding-top: 12px;
@@ -512,7 +589,7 @@ function createPageHtml() {
       gap: 8px;
     }
     .suggestion {
-      border: 1px solid #d6cdc0;
+      border: 1px solid #d9e2ec;
       border-radius: 7px;
       display: grid;
       gap: 8px;
@@ -525,13 +602,13 @@ function createPageHtml() {
       min-width: 0;
     }
     .raw-item span {
-      color: #6f6559;
+      color: #64748b;
       display: block;
       font-size: 12px;
       font-weight: 700;
     }
     .raw-item code {
-      color: #2f2922;
+      color: #1f2933;
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
       overflow-wrap: anywhere;
       white-space: pre-wrap;
@@ -540,14 +617,17 @@ function createPageHtml() {
       grid-column: 1 / -1;
     }
     .muted {
-      color: #6f6559;
+      color: #64748b;
       font-size: 13px;
     }
     .success {
-      color: #17633a;
+      color: #166534;
+    }
+    .warning {
+      color: #92400e;
     }
     .error {
-      color: #8b2f24;
+      color: #991b1b;
     }
     @media (max-width: 640px) {
       main { padding: 16px; }
@@ -611,21 +691,27 @@ function createPageHtml() {
       const blockers = result.blockers || [];
       const warnings = result.warnings || [];
       const writeText = payload.wroteProduction
-        ? '<p class="success"><strong>Production data was updated.</strong></p>'
+        ? '<div class="alert success"><strong>Production data was updated.</strong><p>The reviewed rows were written to production data files.</p></div>'
         : "";
       const draftText = payload.draftWrittenPath
-        ? '<p><strong>Draft written:</strong> <code>' + escapeHtml(payload.draftWrittenPath) + '</code></p>'
+        ? '<div class="alert info"><strong>Draft written</strong><p><code>' + escapeHtml(payload.draftWrittenPath) + '</code></p></div>'
         : "";
+      const readinessText = result.canWrite
+        ? '<div class="alert success"><strong>Production write ready</strong><p>All current safety gates passed. Confirm import is enabled.</p></div>'
+        : '<div class="alert danger"><strong>Production write blocked</strong><p>Fix the blockers below before importing.</p></div>';
 
       document.getElementById("confirm").disabled = !result.canWrite;
       document.getElementById("status").innerHTML = [
-        '<p><strong>Input:</strong> <code>' + escapeHtml(state.inputPath || "none") + '</code></p>',
-        '<p><strong>Rows:</strong> ' + escapeHtml(result.summary.rowsConverted) + '</p>',
-        '<p><strong>Production write ready:</strong> ' + (result.canWrite ? '<span class="success">yes</span>' : '<span class="error">no</span>') + '</p>',
+        '<div class="status-summary">' +
+          '<div class="status-metric"><span>Input</span><code>' + escapeHtml(state.inputPath || "none") + '</code></div>' +
+          '<div class="status-metric"><span>Rows</span><strong>' + escapeHtml(result.summary.rowsConverted) + '</strong></div>' +
+          '<div class="status-metric"><span>Write ready</span><strong class="' + (result.canWrite ? "success" : "error") + '">' + (result.canWrite ? "yes" : "no") + '</strong></div>' +
+        '</div>',
+        readinessText,
         draftText,
         writeText,
-        warnings.length ? '<div><strong>Warnings</strong><ul>' + warnings.map((item) => '<li>' + escapeHtml(item) + '</li>').join("") + '</ul></div>' : "",
-        blockers.length ? '<div><strong>Blockers</strong><ul>' + blockers.map((item) => '<li>' + escapeHtml(item) + '</li>').join("") + '</ul></div>' : "",
+        warnings.length ? '<div class="alert warning"><strong>Warnings</strong><ul>' + warnings.map((item) => '<li>' + escapeHtml(item) + '</li>').join("") + '</ul></div>' : "",
+        blockers.length ? '<div class="alert danger"><strong>Blockers</strong><ul>' + blockers.map((item) => '<li>' + escapeHtml(item) + '</li>').join("") + '</ul></div>' : "",
       ].join("");
     }
 
@@ -633,19 +719,30 @@ function createPageHtml() {
       return '<div class="raw-item"><span>' + escapeHtml(label) + '</span><code>' + escapeHtml(value || "") + '</code></div>';
     }
 
-    function input(label, field, value, extra = "") {
-      return '<label>' + escapeHtml(label) + '<input data-field="' + escapeHtml(field) + '" value="' + escapeHtml(value || "") + '" ' + extra + '></label>';
+    function input(label, field, value, extra = "", className = "") {
+      return '<label class="' + escapeHtml(className) + '"><span>' + escapeHtml(label) + '</span><input data-field="' + escapeHtml(field) + '" value="' + escapeHtml(value || "") + '" ' + extra + '></label>';
     }
 
-    function textarea(label, field, value) {
-      return '<label class="full">' + escapeHtml(label) + '<textarea data-field="' + escapeHtml(field) + '">' + escapeHtml(value || "") + '</textarea></label>';
+    function textarea(label, field, value, className = "") {
+      return '<label class="full ' + escapeHtml(className) + '"><span>' + escapeHtml(label) + '</span><textarea data-field="' + escapeHtml(field) + '">' + escapeHtml(value || "") + '</textarea></label>';
     }
 
-    function select(label, field, value, options) {
-      return '<label>' + escapeHtml(label) + '<select data-field="' + escapeHtml(field) + '">' + options.map((option) => {
+    function select(label, field, value, options, className = "") {
+      return '<label class="' + escapeHtml(className) + '"><span>' + escapeHtml(label) + '</span><select data-field="' + escapeHtml(field) + '">' + options.map((option) => {
         const selected = option === value ? " selected" : "";
         return '<option value="' + escapeHtml(option) + '"' + selected + '>' + escapeHtml(option || "blank") + '</option>';
       }).join("") + '</select></label>';
+    }
+
+    function rowBlockers(row) {
+      const blockers = latestState?.result?.blockers || [];
+      const prefix = 'Row ' + row.rowNumber + ' (' + row.reviewed.address;
+
+      return blockers.filter((item) => item.startsWith(prefix));
+    }
+
+    function hasApprovalBlocker(row) {
+      return rowBlockers(row).some((item) => item.includes("approved=yes"));
     }
 
     function renderGeocodeResult(rowNumber) {
@@ -658,7 +755,11 @@ function createPageHtml() {
       const warnings = result.warnings || [];
       const suggestions = result.suggestions || [];
       const warningHtml = warnings.length
-        ? '<ul>' + warnings.map((item) => '<li>' + escapeHtml(item) + '</li>').join("") + '</ul>'
+        ? '<div class="alert warning"><strong>Lookup notice</strong><ul>' + warnings.map((item) => '<li>' + escapeHtml(item) + '</li>').join("") + '</ul></div>'
+        : "";
+      const showFallbackPrompt = result.provider === "berlin-official" && suggestions.length === 0;
+      const fallbackPrompt = showFallbackPrompt
+        ? '<div class="alert warning"><strong>Official lookup found no candidate.</strong><p>Verify the address spelling, then use the highlighted OSM/Nominatim fallback if needed.</p></div>'
         : "";
       const suggestionHtml = suggestions.length
         ? suggestions.map((suggestion, index) => {
@@ -674,7 +775,7 @@ function createPageHtml() {
           }).join("")
         : '<p class="error">No suggestions found.</p>';
 
-      return warningHtml + suggestionHtml;
+      return warningHtml + fallbackPrompt + suggestionHtml;
     }
 
     function renderRows(state) {
@@ -682,8 +783,16 @@ function createPageHtml() {
         const override = row.override;
         const reviewed = row.reviewed;
         const rawEntries = Object.entries(row.raw || {});
+        const blockers = rowBlockers(row);
+        const approvalBlocked = hasApprovalBlocker(row);
+        const geocodeResult = geocodeResultsByRow.get(Number(row.rowNumber));
+        const highlightFallback = geocodeResult?.provider === "berlin-official" && (geocodeResult.suggestions || []).length === 0;
+        const rowBlockerHtml = blockers.length
+          ? '<div class="alert danger"><strong>Row blockers</strong><ul>' + blockers.map((item) => '<li>' + escapeHtml(item) + '</li>').join("") + '</ul></div>'
+          : "";
         return '<article class="review-card" data-review-row="' + escapeHtml(row.rowNumber) + '">' +
           '<h2>Row ' + escapeHtml(row.rowNumber) + '</h2>' +
+          rowBlockerHtml +
           '<div class="raw-grid">' + rawEntries.map(([key, value]) => rawItem(key, value)).join("") + '</div>' +
           '<div class="readonly-grid">' +
             rawItem("Observed at", reviewed.observedAt) +
@@ -702,7 +811,7 @@ function createPageHtml() {
             select("Status", "status", override.status, ["unknown", "active", "closed"]) +
             input("Confidence", "confidence", override.confidence, 'inputmode="numeric"') +
             input("Source URL", "sourceUrl", override.sourceUrl) +
-            select("Approved", "approved", override.approved, ["", "yes", "no"]) +
+            select(approvalBlocked ? "Approved (required to import)" : "Approved", "approved", override.approved, ["", "yes", "no"], approvalBlocked ? "field-alert" : "") +
             textarea("Public-safe notes", "notes", override.notes) +
           '</div>' +
           '<div class="geo-panel">' +
@@ -711,8 +820,8 @@ function createPageHtml() {
               '<p class="muted">Suggestions fill only district, borough, latitude, and longitude. They do not approve the row.</p>' +
             '</div>' +
             '<div class="geo-actions">' +
-              '<button class="secondary" data-geocode="official">Official Berlin lookup</button>' +
-              '<button class="secondary" data-geocode="nominatim">OSM/Nominatim fallback</button>' +
+              '<button class="official" data-geocode="official">Official Berlin lookup</button>' +
+              '<button class="fallback' + (highlightFallback ? " attention" : "") + '" data-geocode="nominatim">OSM/Nominatim fallback</button>' +
             '</div>' +
             '<div class="geo-results" data-geo-results="' + escapeHtml(row.rowNumber) + '">' + renderGeocodeResult(row.rowNumber) + '</div>' +
           '</div>' +
@@ -735,9 +844,19 @@ function createPageHtml() {
 
     function refreshGeocodeResult(rowNumber) {
       const target = document.querySelector('[data-geo-results="' + rowNumber + '"]');
+      const result = geocodeResultsByRow.get(Number(rowNumber));
+      const fallbackButton = document.querySelector('[data-review-row="' + rowNumber + '"] [data-geocode="nominatim"]');
 
       if (target) {
         target.innerHTML = renderGeocodeResult(rowNumber);
+      }
+
+      if (fallbackButton) {
+        fallbackButton.classList.toggle(
+          "attention",
+          result?.provider === "berlin-official" &&
+            (result.suggestions || []).length === 0,
+        );
       }
     }
 

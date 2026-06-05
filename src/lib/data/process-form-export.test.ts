@@ -101,4 +101,47 @@ describe("process form export", () => {
     expect(result.updatedDataSet?.shops[0]?.borough).toBe("Neukölln");
     expect(result.updatedDataSet?.priceRecords[0]?.priceCents).toBe(700);
   });
+
+  it("shows reviewed import dry-run details when final import validation fails", () => {
+    const result = processFormExportData({
+      currentDataSet: {
+        districts: [],
+        priceRecords: [
+          {
+            confidence: 65,
+            id: "price-douran-doener-neukoelln-2026-06-03-standard-doener",
+            notes: "Existing record",
+            observedAt: "2026-06-03",
+            priceCents: 700,
+            productType: "standard_doener",
+            shopId: "douran-doener-neukoelln",
+            sourceType: "user_submission",
+            sourceUrl: undefined,
+          },
+        ],
+        shops: [
+          {
+            address: "Lipschitzallee 27, 12351 Berlin",
+            borough: "Neukölln",
+            district: "Neukölln",
+            id: "douran-doener-neukoelln",
+            lat: 52.42658,
+            lng: 13.45676,
+            name: "Douran Döner",
+            status: "active",
+          },
+        ],
+      },
+      overrideCsv: approvedOverrideCsv,
+      rawCsv,
+    });
+
+    expect(result.canWrite).toBe(false);
+    expect(result.blockers).toContain(
+      "Reviewed import dry run failed with 1 error(s).",
+    );
+    expect(result.blockers).toContain(
+      'Import error: Price record "price-douran-doener-neukoelln-2026-06-03-standard-doener" already exists.',
+    );
+  });
 });

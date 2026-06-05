@@ -279,6 +279,7 @@ export function parseBerlinOfficialFeatureCollection(
 
 export function parseNominatimResults(payload: NominatimResult[]) {
   const suggestions: GeocodeSuggestion[] = [];
+  const seenSuggestionKeys = new Set<string>();
 
   for (const result of payload) {
     const lat = Number(result.lat);
@@ -301,7 +302,7 @@ export function parseNominatimResults(payload: NominatimResult[]) {
       "county",
     ]);
 
-    suggestions.push({
+    const suggestion: GeocodeSuggestion = {
       attribution: "OpenStreetMap contributors, ODbL 1.0",
       borough,
       district,
@@ -314,7 +315,17 @@ export function parseNominatimResults(payload: NominatimResult[]) {
       provider: "nominatim",
       quality: "OSM/Nominatim result; maintainer must verify",
       sourceUrl: NOMINATIM_SEARCH_URL,
-    });
+    };
+    const suggestionKey = [
+      suggestion.label.toLowerCase(),
+      suggestion.lat,
+      suggestion.lng,
+    ].join("|");
+
+    if (!seenSuggestionKeys.has(suggestionKey)) {
+      suggestions.push(suggestion);
+      seenSuggestionKeys.add(suggestionKey);
+    }
   }
 
   return suggestions;

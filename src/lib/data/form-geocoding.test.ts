@@ -95,6 +95,23 @@ describe("form geocoding helpers", () => {
     });
   });
 
+  it("deduplicates repeated Nominatim fallback candidates", () => {
+    const suggestions = parseNominatimResults([
+      {
+        display_name: "Lipschitzallee 27, Gropiusstadt, Berlin",
+        lat: "52.42968172",
+        lon: "13.47157734",
+      },
+      {
+        display_name: "Lipschitzallee 27, Gropiusstadt, Berlin",
+        lat: "52.42968172",
+        lon: "13.47157734",
+      },
+    ]);
+
+    expect(suggestions).toHaveLength(1);
+  });
+
   it("calculates cache keys and Nominatim rate-limit delays", () => {
     expect(
       getGeocodeCacheKey({

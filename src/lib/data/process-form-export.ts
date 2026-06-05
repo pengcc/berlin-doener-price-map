@@ -3,6 +3,7 @@ import { convertGoogleFormResponsesToReviewedDraftCsv } from "./convert-form-res
 import {
   importReviewedData,
   REVIEWED_DATA_HEADERS,
+  ReviewedDataImportError,
 } from "./import-reviewed-data";
 import type { DataSet } from "./load-data";
 
@@ -235,6 +236,16 @@ function collectImportBlockers(dataSet: DataSet, draftCsv: string) {
       updatedDataSet: importReviewedData(dataSet, draftCsv).dataSet,
     };
   } catch (error) {
+    if (error instanceof ReviewedDataImportError) {
+      return {
+        blockers: [
+          `Reviewed import dry run failed with ${error.errors.length} error(s).`,
+          ...error.errors.map((message) => `Import error: ${message}`),
+        ],
+        updatedDataSet: undefined,
+      };
+    }
+
     if (error instanceof Error) {
       return {
         blockers: [`Reviewed import dry run failed: ${error.message}`],
