@@ -92,7 +92,7 @@ describe("process form export", () => {
 
     expect(result.canWrite).toBe(false);
     expect(result.blockers).toContain(
-      "Row 1 (Lipschitzallee 27, 12351 Berlin): complete borough, lat, lng.",
+      "Row 1 (Lipschitzallee 27, 12351 Berlin): missing required publication fields: borough, lat, lng. Open pnpm review:form-export, fill these fields in the local review page, save overrides, then rerun pnpm process:form-export --force.",
     );
     expect(result.draftCsv).toContain("douran-doener-neukoelln");
   });

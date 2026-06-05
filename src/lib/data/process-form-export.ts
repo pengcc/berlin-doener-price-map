@@ -277,6 +277,18 @@ function getMissingRequiredFields(row: ReviewedRow) {
   return REQUIRED_REVIEWED_FIELDS.filter((field) => !row[field]);
 }
 
+function getMissingRequiredFieldsBlocker({
+  address,
+  missingFields,
+  rowNumber,
+}: {
+  address: string;
+  missingFields: ReviewedHeader[];
+  rowNumber: number;
+}) {
+  return `Row ${rowNumber} (${address || "missing address"}): missing required publication fields: ${missingFields.join(", ")}. Open pnpm review:form-export, fill these fields in the local review page, save overrides, then rerun pnpm process:form-export --force.`;
+}
+
 function getShopFromReviewedRow(row: ReviewedRow): Shop {
   return shopSchema.parse({
     address: row.address,
@@ -598,7 +610,11 @@ function collectRowProcessingResult({
 
   if (missingFields.length > 0) {
     blockers.push(
-      `Row ${rowNumber} (${row.address || "missing address"}): complete ${missingFields.join(", ")}.`,
+      getMissingRequiredFieldsBlocker({
+        address: row.address,
+        missingFields,
+        rowNumber,
+      }),
     );
   }
 
