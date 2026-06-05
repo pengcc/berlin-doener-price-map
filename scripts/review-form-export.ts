@@ -28,6 +28,11 @@ import {
   parseNominatimResults,
 } from "../src/lib/data/form-geocoding";
 import {
+  archiveSuccessfulFormImport,
+  ensureImportHistoryDirectories,
+  type FormImportHistoryEntry,
+} from "../src/lib/data/form-import-history";
+import {
   buildReviewToolState,
   FORM_SUBMISSION_DIR,
   type FormExportOverrideHeader,
@@ -54,6 +59,7 @@ type ClientState = {
     summary: {
       rowsConverted: number;
     };
+    rowResults: ReviewToolState["result"]["rowResults"];
     warnings: string[];
   };
   rows: ReviewToolState["rows"];
@@ -70,6 +76,7 @@ function ensureLocalDirectories() {
   mkdirSync(GEOCODE_CACHE_DIR, { recursive: true });
   mkdirSync(REVIEWED_IMPORTS_DIR, { recursive: true });
   mkdirSync(REVIEW_OVERRIDES_DIR, { recursive: true });
+  ensureImportHistoryDirectories();
 }
 
 function findInputPath(requestedInputPath: string | undefined) {
@@ -122,6 +129,7 @@ function toClientState(state: ReviewToolState): ClientState {
     result: {
       blockers: state.result.blockers,
       canWrite: state.result.canWrite,
+      rowResults: state.result.rowResults,
       summary: state.result.summary,
       warnings: state.result.warnings,
     },
@@ -180,7 +188,17 @@ function runPipeline(inputPath: string, writeRequested: boolean) {
     );
   }
 
+  const historyEntry: FormImportHistoryEntry | undefined =
+    result.dataSetToWrite && draftWrittenPath
+      ? archiveSuccessfulFormImport({
+          draftPath: draftWrittenPath,
+          rowResults: result.state.result.rowResults,
+          sourcePath: inputPath,
+        })
+      : undefined;
+
   return {
+    historyEntry,
     draftWrittenPath,
     state: toClientState(result.state),
     wroteProduction: result.wroteProduction,
@@ -601,6 +619,39 @@ function createPageHtml() {
     .raw-item {
       min-width: 0;
     }
+    .classification {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .chip {
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      background: #f8fafc;
+      color: #334155;
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+      padding: 7px 9px;
+      text-transform: uppercase;
+    }
+    .chip.safe {
+      background: #ecfdf3;
+      border-color: #16a34a;
+      color: #166534;
+    }
+    .chip.blocked {
+      background: #fef2f2;
+      border-color: #dc2626;
+      color: #991b1b;
+    }
+    .chip.explicit {
+      background: #eff6ff;
+      border-color: #60a5fa;
+      color: #1d4ed8;
+    }
     .raw-item span {
       color: #64748b;
       display: block;
@@ -693,6 +744,9 @@ function createPageHtml() {
       const writeText = payload.wroteProduction
         ? '<div class="alert success"><strong>Production data was updated.</strong><p>The reviewed rows were written to production data files.</p></div>'
         : "";
+      const historyText = payload.historyEntry
+        ? '<div class="alert info"><strong>Archived local input</strong><p>Raw export: <code>' + escapeHtml(payload.historyEntry.archivedSourcePath) + '</code></p><p>Reviewed draft: <code>' + escapeHtml(payload.historyEntry.archivedDraftPath) + '</code></p></div>'
+        : "";
       const draftText = payload.draftWrittenPath
         ? '<div class="alert info"><strong>Draft written</strong><p><code>' + escapeHtml(payload.draftWrittenPath) + '</code></p></div>'
         : "";
@@ -710,6 +764,7 @@ function createPageHtml() {
         readinessText,
         draftText,
         writeText,
+        historyText,
         warnings.length ? '<div class="alert warning"><strong>Warnings</strong><ul>' + warnings.map((item) => '<li>' + escapeHtml(item) + '</li>').join("") + '</ul></div>' : "",
         blockers.length ? '<div class="alert danger"><strong>Blockers</strong><ul>' + blockers.map((item) => '<li>' + escapeHtml(item) + '</li>').join("") + '</ul></div>' : "",
       ].join("");
@@ -735,10 +790,31 @@ function createPageHtml() {
     }
 
     function rowBlockers(row) {
-      const blockers = latestState?.result?.blockers || [];
-      const prefix = 'Row ' + row.rowNumber + ' (' + row.reviewed.address;
+      const rowResult = rowResultFor(row);
 
-      return blockers.filter((item) => item.startsWith(prefix));
+      return rowResult?.blockers || [];
+    }
+
+    function rowResultFor(row) {
+      return (latestState?.result?.rowResults || []).find((item) => item.rowNumber === row.rowNumber);
+    }
+
+    function classificationHtml(row) {
+      const rowResult = rowResultFor(row);
+
+      if (!rowResult) {
+        return "";
+      }
+
+      const blocked = (rowResult.blockers || []).length > 0;
+      const explicit = !["append", "skip"].includes(rowResult.action);
+
+      return '<div class="classification">' +
+        '<span class="chip ' + (blocked ? "blocked" : "safe") + '">' + escapeHtml(rowResult.classification) + '</span>' +
+        '<span class="chip ' + (explicit ? "explicit" : "") + '">action: ' + escapeHtml(rowResult.action) + '</span>' +
+        (rowResult.targetPriceRecordId ? '<span class="chip">target price: ' + escapeHtml(rowResult.targetPriceRecordId) + '</span>' : "") +
+        (rowResult.targetShopId ? '<span class="chip">target shop: ' + escapeHtml(rowResult.targetShopId) + '</span>' : "") +
+      '</div>';
     }
 
     function hasApprovalBlocker(row) {
@@ -792,6 +868,7 @@ function createPageHtml() {
           : "";
         return '<article class="review-card" data-review-row="' + escapeHtml(row.rowNumber) + '">' +
           '<h2>Row ' + escapeHtml(row.rowNumber) + '</h2>' +
+          classificationHtml(row) +
           rowBlockerHtml +
           '<div class="raw-grid">' + rawEntries.map(([key, value]) => rawItem(key, value)).join("") + '</div>' +
           '<div class="readonly-grid">' +
@@ -812,6 +889,9 @@ function createPageHtml() {
             input("Confidence", "confidence", override.confidence, 'inputmode="numeric"') +
             input("Source URL", "sourceUrl", override.sourceUrl) +
             select(approvalBlocked ? "Approved (required to import)" : "Approved", "approved", override.approved, ["", "yes", "no"], approvalBlocked ? "field-alert" : "") +
+            select("Action", "action", override.action, ["", "append", "skip", "correct_price", "update_shop", "delete_price"]) +
+            input("Target price record ID", "targetPriceRecordId", override.targetPriceRecordId) +
+            input("Target shop ID", "targetShopId", override.targetShopId) +
             textarea("Public-safe notes", "notes", override.notes) +
           '</div>' +
           '<div class="geo-panel">' +

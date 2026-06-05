@@ -89,6 +89,17 @@ pnpm review:form-export
 
 This starts a local-only server on `127.0.0.1`, prints a one-time URL token, and opens no public app route. Use it to inspect raw form rows, edit local review overrides, save `dev_locals/data/review-overrides/form-export-overrides.csv`, run the dry-run gate, and confirm import only after the page shows that production write is ready.
 
+The review tool shows a classification for each row:
+
+| Classification | Meaning | Maintainer response |
+| --- | --- | --- |
+| `new_shop_new_price` | New shop and new price record. | Complete required fields and approve after review. |
+| `existing_shop_new_price` | Existing shop, new observation date/product. | Usually safe to append after fields pass validation. |
+| `duplicate_price_record` | The same generated price record already exists. | Set `action=skip` if it is intentionally already imported. |
+| `possible_correction` | Same shop/product/date exists but reviewed price fields differ. | Use `action=correct_price` with a target price record ID only if the previous import was wrong. |
+| `shop_metadata_change` | Reviewed shop fields differ from current production shop data. | Use `action=update_shop` with a target shop ID after review. |
+| `shop_status_update` | The shop status is changing, for example `active` to `closed`. | Use `action=update_shop`; keep historical price records. |
+
 You can pass a specific raw export when needed:
 
 ```bash
@@ -120,7 +131,7 @@ Do not commit geocoding caches. They may contain raw submitted addresses and pro
 pnpm process:form-export
 ```
 
-This command picks the newest `.csv` under `dev_locals/data/form-submission/`, creates a reviewed draft under `dev_locals/data/reviewed-imports/`, checks local review overrides, runs the reviewed import dry run, and updates production data only when every required publication field is complete.
+This command picks the newest `.csv` under `dev_locals/data/form-submission/`, creates a reviewed draft under `dev_locals/data/reviewed-imports/`, checks local review overrides, classifies each row against current production data, runs the reviewed import dry run, and updates production data only when every row is safe or explicitly handled.
 
 If your local Node or pnpm version is uncertain, use:
 
@@ -147,7 +158,7 @@ The CLI pipeline only fills fields that can be safely derived from the public fo
 Create the local folders if they do not exist:
 
 ```bash
-mkdir -p dev_locals/data/form-submission dev_locals/data/reviewed-imports dev_locals/data/review-overrides dev_locals/data/geocode-cache
+mkdir -p dev_locals/data/form-submission dev_locals/data/reviewed-imports dev_locals/data/review-overrides dev_locals/data/geocode-cache dev_locals/data/import-history
 ```
 
 Optional local review overrides live at:
@@ -159,10 +170,37 @@ dev_locals/data/review-overrides/form-export-overrides.csv
 Use this header:
 
 ```csv
-address,shopId,shopName,district,borough,lat,lng,status,confidence,sourceUrl,notes,approved
+address,shopId,shopName,district,borough,lat,lng,status,confidence,sourceUrl,notes,approved,action,targetPriceRecordId,targetShopId
 ```
 
 Rows match raw submissions by normalized `address`. Use `approved=yes` only after you have reviewed the address, coordinates, status, confidence, source URL, and public-safe notes. Without `approved=yes`, the pipeline may write a draft CSV, but it will not update production data for new shops.
+
+Action fields are optional. Leave `action` blank for normal append behavior.
+
+| Action | Target fields | Meaning |
+| --- | --- | --- |
+| blank or `append` | none | Append a new price record, and create the shop if it is new and approved. |
+| `skip` | none | Intentionally ignore this row, for example an already imported duplicate. |
+| `correct_price` | `targetPriceRecordId` | Update an existing price record because a previous import was wrong. |
+| `update_shop` | `targetShopId` | Update existing shop metadata or status. This does not append a price. |
+| `delete_price` | `targetPriceRecordId` | Remove an incorrectly imported price record. This never deletes a shop. |
+
+Destructive and corrective actions require an explicit valid target ID and `approved=yes`. Duplicate detection never deletes or corrects data automatically.
+
+After a successful production write, the pipeline moves the processed files into ignored local archive folders:
+
+```txt
+dev_locals/data/form-submission/archive/
+dev_locals/data/reviewed-imports/archive/
+```
+
+It also appends an ignored local history entry here:
+
+```txt
+dev_locals/data/import-history/form-import-history.json
+```
+
+The history records the source file, reviewed draft, row classifications, actions, shop IDs, price record IDs, target IDs, and write timestamp. Failed runs, dry runs, and blocked runs do not archive files and do not update the history.
 
 If the form header changes or you need to work manually, create a new CSV in a spreadsheet editor or text editor and start with this header:
 
@@ -208,7 +246,21 @@ Field rules:
 | `sourceUrl` | URL text | No | Only stable public URLs. Leave empty for manual observation or private evidence. |
 | `notes` | Text | No | Concise public-safe provenance only. |
 
-The script appends new price records and creates new shops when needed. It rejects duplicate price record ids and conflicting metadata for existing shops.
+The low-level reviewed import script appends new price records and creates new shops when needed. It rejects duplicate price record ids and conflicting metadata for existing shops. Use `pnpm process:form-export` or the local review tool when you need duplicate detection, skip/correction actions, archive handling, or local import history.
+
+## Update And Delete Semantics
+
+Use these rules when deciding whether a row is a new observation or a correction:
+
+| Situation | Correct action |
+| --- | --- |
+| The shop has a new observed price on a new date. | Append a new price record. |
+| The price changed since the last observation. | Append a new price record with the new `observedAt` date. |
+| A previously imported price was wrong. | Use `correct_price` with the existing `targetPriceRecordId`. |
+| A shop closed. | Use `update_shop` and set `status=closed`; keep historical prices. |
+| Shop name, coordinates, district, borough, or status changed. | Use `update_shop` after maintainer review. |
+| An incorrectly imported price record should be removed. | Use `delete_price` with the target price record ID. |
+| A shop should disappear from current listings. | Set `status=closed` or `unknown`; deleting shops is out of scope for v1. |
 
 ## Normalize A Raw Response
 

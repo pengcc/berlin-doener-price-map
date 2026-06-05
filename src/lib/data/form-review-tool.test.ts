@@ -65,6 +65,7 @@ describe("local form review tool helpers", () => {
         {
           address: "Lipschitzallee 27, 12351 Berlin",
           approved: "yes",
+          action: "",
           borough: "Neukölln",
           confidence: "65",
           district: "Neukölln",
@@ -75,10 +76,12 @@ describe("local form review tool helpers", () => {
           shopName: "Douran Döner",
           sourceUrl: "",
           status: "active",
+          targetPriceRecordId: "",
+          targetShopId: "",
         },
       ]),
     ).toBe(
-      'address,shopId,shopName,district,borough,lat,lng,status,confidence,sourceUrl,notes,approved\n"Lipschitzallee 27, 12351 Berlin",douran-doener-neukoelln,Douran Döner,Neukölln,Neukölln,52.42658,13.45676,active,65,,Reviewed,yes\n',
+      'address,shopId,shopName,district,borough,lat,lng,status,confidence,sourceUrl,notes,approved,action,targetPriceRecordId,targetShopId\n"Lipschitzallee 27, 12351 Berlin",douran-doener-neukoelln,Douran Döner,Neukölln,Neukölln,52.42658,13.45676,active,65,,Reviewed,yes,,,\n',
     );
   });
 

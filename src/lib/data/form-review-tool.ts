@@ -3,6 +3,7 @@ import { parse } from "csv-parse/sync";
 import { REVIEWED_DATA_HEADERS } from "./import-reviewed-data";
 import type { DataSet } from "./load-data";
 import {
+  FORM_EXPORT_ACTIONS,
   normalizeAddressForReview,
   type ProcessFormExportResult,
   processFormExportData,
@@ -15,6 +16,10 @@ export const FORM_SUBMISSION_DIR = "dev_locals/data/form-submission";
 export const REVIEWED_IMPORTS_DIR = "dev_locals/data/reviewed-imports";
 export const REVIEW_OVERRIDES_DIR = "dev_locals/data/review-overrides";
 export const REVIEW_OVERRIDES_PATH = `${REVIEW_OVERRIDES_DIR}/form-export-overrides.csv`;
+export const FORM_SUBMISSION_ARCHIVE_DIR = `${FORM_SUBMISSION_DIR}/archive`;
+export const REVIEWED_IMPORTS_ARCHIVE_DIR = `${REVIEWED_IMPORTS_DIR}/archive`;
+export const IMPORT_HISTORY_DIR = "dev_locals/data/import-history";
+export const IMPORT_HISTORY_PATH = `${IMPORT_HISTORY_DIR}/form-import-history.json`;
 
 export const FORM_EXPORT_OVERRIDE_HEADERS = [
   "address",
@@ -29,6 +34,9 @@ export const FORM_EXPORT_OVERRIDE_HEADERS = [
   "sourceUrl",
   "notes",
   "approved",
+  "action",
+  "targetPriceRecordId",
+  "targetShopId",
 ] as const;
 
 export type FormExportOverrideHeader =
@@ -131,6 +139,13 @@ function buildEditableOverride(
     shopName: override?.shopName || reviewed.shopName,
     sourceUrl: override?.sourceUrl || reviewed.sourceUrl,
     status: override?.status || reviewed.status,
+    action: FORM_EXPORT_ACTIONS.includes(
+      override?.action as (typeof FORM_EXPORT_ACTIONS)[number],
+    )
+      ? (override?.action ?? "")
+      : "",
+    targetPriceRecordId: override?.targetPriceRecordId ?? "",
+    targetShopId: override?.targetShopId ?? "",
   };
 }
 

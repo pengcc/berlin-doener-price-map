@@ -128,6 +128,7 @@ describe("form geocoding helpers", () => {
     const override: FormExportOverrideRow = {
       address: "Lipschitzallee 27, 12351 Berlin",
       approved: "",
+      action: "",
       borough: "",
       confidence: "65",
       district: "",
@@ -138,6 +139,8 @@ describe("form geocoding helpers", () => {
       shopName: "Douran Döner",
       sourceUrl: "",
       status: "unknown",
+      targetPriceRecordId: "",
+      targetShopId: "",
     };
 
     expect(
